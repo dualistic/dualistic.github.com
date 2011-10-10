@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title>Dualistic :: Pol Llovet</title>
+  <title><![CDATA[Dualistic]]></title>
   <link href="http://dualistic.com/atom.xml" rel="self"/>
   <link href="http://dualistic.com/"/>
-  <updated>2011-10-09T20:22:24-06:00</updated>
+  <updated>2011-10-09T23:45:26-06:00</updated>
   <id>http://dualistic.com/</id>
   <author>
-    <name>Pol Llovet</name>
+    <name><![CDATA[Pol Llovet]]></name>
     
   </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
 </feed>
