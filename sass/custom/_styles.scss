@@ -1,2 +1,16 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
+.heading {
+  font-family: "Cardo", "Georgia", "Helvetica Neue", Arial, serif;
+}
+.sans { font-family: "Cardo", "Helvetica Neue", Arial, sans-serif; text-transform: lowercase;}
+.serif { font-family: "Cardo", Georgia, Times, "Times New Roman", serif; }
+
+body > header {
+  padding-left: 140px;
+  background: {
+    image: url('/images/logo-100x100.png');
+    repeat: no-repeat;
+    position: 1em;
+  }
+}
