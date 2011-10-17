@@ -19,51 +19,55 @@ subversion installed
 
 If apache2 is not yet configured with mod_rails, do the following:
 
-* Create /etc/apache2/mods-available/mod_rails.conf and put the following in it:
+* Create `/etc/apache2/mods-available/mod_rails.conf` and put the following in it:
 
 ```
  # Ruby Passenger Config
  LoadModule passenger_module /usr/lib/ruby/gems/1.8/gems/passenger-2.0.3/ext/apache2/mod_passenger.so
  PassengerRoot /usr/lib/ruby/gems/1.8/gems/passenger-2.0.3
  PassengerRuby /usr/bin/ruby1.8
- ```
+```
 
 * Symlink it into enabled:  ln -s /etc/apache2/mods-available/mod_rails.conf /etc/apache2/mods-enabled/mod_rails.conf
 * Restart apache2
 
 Optionally make Ubuntu's username policy more sensible (allow underscores)
 
-<code>$ echo "NAME_REGEX=\"[a-z_][a-z0-9_-]*[$]?\"" >> /etc/adduser.conf</code>
+```
+$ echo "NAME_REGEX=\"[a-z_][a-z0-9_-]*[$]?\"" >> /etc/adduser.conf
+```                     
 
 h3. Creating a ModRails Application @http://some.host.name/appname
 
 p. create the user, the appname will be the username:
 
-<code>$ adduser <username> (use pwgen or something for the password)</code>
+```
+$ adduser <username> (use pwgen or something for the password)
+```
 
 p. create a stub rails app:
 
-<code>$ rails /home/<username>/rails/testapp</code>
+```$ rails /home/<username>/rails/testapp```
 
 p. Link the testapp to the "static" application location
 
-<code>$ ln -s /home/<username>/rails/testapp /home/<username>/rails/app</code>
+```$ ln -s /home/<username>/rails/testapp /home/<username>/rails/app```
 
 p. Link the "static" application location into the servers webroot
 
-<code>$ ln -s /home/<username>/rails/app/public /var/www/<username></code>
+```$ ln -s /home/<username>/rails/app/public /var/www/<username>```
 
 p. Create the apache2 conf for the rails app
 
-<code>$ echo "RailsBaseURI /<username>" > /etc/apache2/sites-available/<username></code>
+```$ echo "RailsBaseURI /<username>" > /etc/apache2/sites-available/<username>```
 
 p. Tell apache2 to actually use the app
 
-<code>$ ln -s /etc/apache2/sites-available/<username> /etc/apache2/sites-enabled/<username></code>
+```$ ln -s /etc/apache2/sites-available/<username> /etc/apache2/sites-enabled/<username>```
 
 p. Make sure that the new user has ownership of the files
 
-<code>$ chown -R /home/<username>/rails <username>.<username></code>
+```$ chown -R /home/<username>/rails <username>.<username>```
 
 p. Restart apache2 and check to see if it works
 

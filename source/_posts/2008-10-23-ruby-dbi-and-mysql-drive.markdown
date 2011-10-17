@@ -8,7 +8,7 @@ footer: true
 ---
 If you want to do direct access to mysql (or other databse) you can use the dbi gem to do it.  But what the docs don't tell you is that you need to gem install a database driver also.  So if you want to use mysql, you do:
 
-```
+``` bash
 $ sudo gem install dbi dbd-mysql
 ```
 
