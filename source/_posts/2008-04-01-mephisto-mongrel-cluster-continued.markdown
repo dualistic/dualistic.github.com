@@ -12,15 +12,15 @@ Here's what I did:
 
 I had to install two packages:
 
-<macro:code>
+```
 root@pol:/# apt-get install mysql-client libmysqlclient15-dev
-</macro:code>
+```
 
 Then I was able to install the mysql gem with the config parameter:
 
-<macro:code>
+```
 root@pol:/# gem install mysql -- --mysql-config=/etc/mysql/my.cnf
-</macro:code>
+```
 
 You do have to be root (or use sudo) to run those commands. 
 

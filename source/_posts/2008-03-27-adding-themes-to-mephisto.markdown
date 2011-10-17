@@ -27,10 +27,10 @@ Once you have the theme, navigate to the *themes/site-1* directory in your mephi
 
 Inside the theme directory there should now be something that looks like this:
 
-<macro:code>
+```
 mongrel@pol:/var/rails/mephisto/themes/site-1/sharp000$ ls
 about.yml  images  javascripts  layouts  preview.png  stylesheets  templates
-</macro:code>
+```
 
 Then you open up your Mephisto admin and in the settings page, change your theme to the name of the directory for your theme.  In my case it was "sharp000".  I also had to delete the cache files (in the settings area also, click the 'caches' button) in order for the theme to show up.
 

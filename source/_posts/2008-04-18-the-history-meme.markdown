@@ -8,7 +8,7 @@ footer: true
 ---
 "See Here.":http://diveintomark.org/archives/2008/04/15/history-meme
 
-<macro:code>
+```
 chem69:ipm pol$ history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head
 123 cd
 118 ls
@@ -20,4 +20,4 @@ chem69:ipm pol$ history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | so
 12 cp
 8 ssh
 7 script/plugin
-</macro:code>
+```

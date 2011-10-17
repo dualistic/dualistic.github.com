@@ -10,7 +10,7 @@ I am working with a new developer who has Ruby experience, but no Rails experien
 
 When it has you create your database, it has you run the following sql code:
 
-<macro:code>
+```
 CREATE TABLE `categories` ( 
   `id` smallint(5) unsigned NOT NULL auto_increment, 
   `category` varchar(20) NOT NULL default '', 
@@ -19,13 +19,13 @@ CREATE TABLE `categories` (
   PRIMARY KEY  (`id`), 
   UNIQUE KEY `category_key` (`category`) 
 ) TYPE=MyISAM COMMENT='List of categories'; 
-</macro:code>
+```
 
 What I don't get is: how is that any better/easier than giving a quick run through the migration process?  The above code could just as easily been replaced with:
 
 After creating your database, and setting your database.yml connection variables, we will be building a table to hod our To Do list categories.  We will need a model definition for a Category, and using a generator, we get a place to define both the database table for the Categories and the model for a Category.
 
-<macro:code>
+```
 $ script/generate model category
       exists  app/models/
       exists  test/unit/
@@ -35,11 +35,11 @@ $ script/generate model category
       create  test/fixtures/categories.yml
       create  db/migrate
       create  db/migrate/001_create_categories.rb
-</macro:code>
+```
 
 Edit the migration so that it looks like this:
 
-<macro:code>
+```
 class CreateCategories < ActiveRecord::Migration
   def self.up
     create_table "categories", :force => true do |t|
@@ -53,7 +53,7 @@ class CreateCategories < ActiveRecord::Migration
     drop_table "categories"
   end
 end
-</macro:code>
+```
 
 Then run @rake db:migrate@ and you have your table and you are now ready to edit the model.  
 

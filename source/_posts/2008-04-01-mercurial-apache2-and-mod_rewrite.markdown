@@ -14,19 +14,18 @@ h3. Tell mod_rewrite to ignore your hg directory
 
 I had to add this directive at the beginning of my mod_rewrite declarations to ignore the hg directory:
 
-<macro:code>
+```
         RewriteRule ^/hg(.*) - [PT]
-</macro:code>
+```
 
 My  apache conf blok looks like this (not dissimilar to the examples):
 
-<macro:code>
+```
         # Setup HG (mercurial) location
         ScriptAliasMatch ^/hg(.*) /replicated/hg/hgwebdir.cgi$1
         <Directory /replicated/hg>
                 Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
                 AllowOverride None
-
                 AuthUserFile /replicated/hg/.htpasswd
                 AuthGroupFile /dev/null
                 AuthName "MSU Forge Mercurial Repository"
@@ -35,6 +34,6 @@ My  apache conf blok looks like this (not dissimilar to the examples):
                         Require valid-user
                 </Limit>
         </Directory>
-</macro:code>
+```
 
 So, it's working now, and that's lovely. :)  Now, i just wish I could tie the htaccess to the Redmine user tables and use that to Auth against...  Another day, another project...

@@ -8,15 +8,15 @@ footer: true
 ---
 Ok, so I have been bitten several times when I do something like:
 
-<macro:code>
+```
 Your username is: <% username %>
-</macro:code>
+```
 
 Why is my username blank?  This is a simple example, but I have run into this a number of times.  It's like a missing semicolon problem, but ERB instead of PHP or C.  Strangely enough, even if you specify a puts method, you still get no output:
 
-<macro:code>
+```
 Your username is: <% puts username %>
-</macro:code>
+```
 
 (This also will give you nothing)
 
@@ -24,7 +24,7 @@ You need a <%= opening in order to print out anything.  So, it would be nice if 
 
 Ultimately I ended up in the #textmate channel on freenode.  They were very helpful and pointed me to "this replacement grammar for textmate":http://rafb.net/p/DVN7Qh27.html, which for the sake of being complete, I've included Right here:  
 
-<macro:code>
+```
 {   scopeName = 'text.html.ruby';
     fileTypes = ( 'rhtml', 'erb', 'html.erb' );
     foldingStartMarker = '(?x)
@@ -70,7 +70,7 @@ Ultimately I ended up in the #textmate channel on freenode.  They were very help
         {   include = 'text.html.basic'; },
     );
 }
-</macro:code>
+```
 
 So, here's how to do it:
 

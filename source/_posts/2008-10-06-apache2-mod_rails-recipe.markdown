@@ -21,12 +21,12 @@ If apache2 is not yet configured with mod_rails, do the following:
 
 * Create /etc/apache2/mods-available/mod_rails.conf and put the following in it:
 
-<code>
+```
  # Ruby Passenger Config
  LoadModule passenger_module /usr/lib/ruby/gems/1.8/gems/passenger-2.0.3/ext/apache2/mod_passenger.so
  PassengerRoot /usr/lib/ruby/gems/1.8/gems/passenger-2.0.3
  PassengerRuby /usr/bin/ruby1.8
-</code>
+ ```
 
 * Symlink it into enabled:  ln -s /etc/apache2/mods-available/mod_rails.conf /etc/apache2/mods-enabled/mod_rails.conf
 * Restart apache2
@@ -67,16 +67,16 @@ p. Make sure that the new user has ownership of the files
 
 p. Restart apache2 and check to see if it works
 
-<code>
+```
 $ apache2ctl graceful
 $ wget http://localhost/<username> --server-response --spider # this should return 200 OK
-</code>
+```
 
 p. Create a mysql user and databases for the app
 
-<code>
+```
  $ for db in production test development; do mysql -u root -pMYSQLPASS -e "grant all privileges on <username>_$db.* to '<username>'@'localhost' identified by '<userpassword>'; create database <username>_$db;"  done
-</code>
+```
 
 p. Copy template capistrano deployment files into their home/<username>/rails directory
 
