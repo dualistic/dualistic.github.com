@@ -47,27 +47,39 @@ $ adduser <username> (use pwgen or something for the password)
 
 p. create a stub rails app:
 
-```$ rails /home/<username>/rails/testapp```
+```
+$ rails /home/<username>/rails/testapp 
+```
 
 p. Link the testapp to the "static" application location
 
-```$ ln -s /home/<username>/rails/testapp /home/<username>/rails/app```
+```
+$ ln -s /home/<username>/rails/testapp /home/<username>/rails/app
+```
 
 p. Link the "static" application location into the servers webroot
 
-```$ ln -s /home/<username>/rails/app/public /var/www/<username>```
+```
+$ ln -s /home/<username>/rails/app/public /var/www/<username>
+```
 
 p. Create the apache2 conf for the rails app
 
-```$ echo "RailsBaseURI /<username>" > /etc/apache2/sites-available/<username>```
+```
+$ echo "RailsBaseURI /<username>" > /etc/apache2/sites-available/<username>
+```
 
 p. Tell apache2 to actually use the app
 
-```$ ln -s /etc/apache2/sites-available/<username> /etc/apache2/sites-enabled/<username>```
+```
+$ ln -s /etc/apache2/sites-available/<username> /etc/apache2/sites-enabled/<username>
+```
 
 p. Make sure that the new user has ownership of the files
 
-```$ chown -R /home/<username>/rails <username>.<username>```
+```
+$ chown -R /home/<username>/rails <username>.<username>
+```
 
 p. Restart apache2 and check to see if it works
 
