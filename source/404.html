@@ -1,0 +1,18 @@
+---
+title: "OMG 404"
+comments: false
+sharing: false
+footer: false
+sidebar: false
+---
+
+{% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
+{% include head.html %}
+<body {% if page.body_id %} id="{{ page.body_id }}" {% endif %} {% if page.sidebar == false %} class="no-sidebar" {% endif %} {% if page.sidebar == 'collapse' or site.sidebar == 'collapse' %} class="collapse-sidebar sidebar-footer" {% endif %}>
+  <img src='/images/tb_sign1.png' alt='OMG 404' style='display: block; margin: 3em auto;'>
+  
+  <footer role="contentinfo" style='text-align: right'>
+    <span class="credit">Tumbeast care of <a href="http://theoatmeal.com/comics/state_web_summer">Matthew Inman</a></span>
+  </footer>
+</body>
+</html>
