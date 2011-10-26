@@ -16,20 +16,23 @@ body > header {
 }
 
 body article {
-  ul, ol {
+  ul {
     margin: 0;
     padding: 0 0 0 .2em;
     list-style: none;
     text-indent: -1.2em;
-  }
-  li {
-    margin: 0 0 0 1em;
-  }
-  ul li:before {
-    content: "\27AB \0020 \0020";
+    li {
+      margin: 0 0 0 1em;
+    }
+    li:before {
+      content: "\27AB \0020 \0020";
+    }
   }
   ol {
     list-style-type: decimal-leading-zero;
+    li {
+      margin: 0 0 0 1.7em;
+    }
   }
 }
 
