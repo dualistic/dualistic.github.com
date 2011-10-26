@@ -6,7 +6,7 @@ comments: true
 sharing: true
 footer: true
 ---
-"See Here.":http://diveintomark.org/archives/2008/04/15/history-meme
+[See Here.](http://diveintomark.org/archives/2008/04/15/history-meme)
 
 ```
 chem69:ipm pol$ history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head
