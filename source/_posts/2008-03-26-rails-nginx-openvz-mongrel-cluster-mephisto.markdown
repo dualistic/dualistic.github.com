@@ -31,6 +31,6 @@ At this point, I have a VM that I can copy to create more rails apps in the futu
 
 But for this VM, I want a blog, so I will lastly:
 
-6. Install Mephisto
+* Install Mephisto
 
 I need to make sure that all of this works, so I am going to post a series of articles and then link to them from this article. Hopefully, at the end of it, it will take you less time than it took me.  Yay for the internet!

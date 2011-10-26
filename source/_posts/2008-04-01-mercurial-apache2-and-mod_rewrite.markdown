@@ -6,11 +6,11 @@ comments: true
 sharing: true
 footer: true
 ---
-So, "as previously mentioned":http://pol.llovet.name/2008/4/1/redmine-and-mercurial, I had gotten mercurial working in Redmine, but I was having trouble getting mercurial to work with apache2.  Part of the issue is that unlike most webserver environments, most RoR Apache2 -> Mongrel Cluster (Let's call this RAM from now on) setups are using mod_rewrite and mod_proxy to do URL jujitsu.  This can (and did) cause a bit of problem for me.
+So, [as previously mentioned](/blog/2008/04/01/redmine-and-mercurial/), I had gotten mercurial working in Redmine, but I was having trouble getting mercurial to work with apache2.  Part of the issue is that unlike most webserver environments, most RoR Apache2 -> Mongrel Cluster (Let's call this RAM from now on) setups are using mod_rewrite and mod_proxy to do URL jujitsu.  This can (and did) cause a bit of problem for me.
 
-There are a bunch of tutorials online ("like this one":http://www.selenic.com/mercurial/wiki/index.cgi/PublishingRepositories) about how to publish your mercurial repos.  But if you are mod_rewriting all over the place, you need a couple extra steps.
+There are a bunch of tutorials online ([like this one](http://www.selenic.com/mercurial/wiki/index.cgi/PublishingRepositories)) about how to publish your mercurial repos.  But if you are mod_rewriting all over the place, you need a couple extra steps.
 
-h3. Tell mod_rewrite to ignore your hg directory
+### Tell mod_rewrite to ignore your hg directory ###
 
 I had to add this directive at the beginning of my mod_rewrite declarations to ignore the hg directory:
 

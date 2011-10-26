@@ -11,7 +11,7 @@ So, this site has only been up for a couple days, but I've had to restart the mo
 
 Nginx seems to be motoring along just fine with no problems.
 
-I am going to implement a change recommended "by this google code post":http://groups.google.com/group/MephistoBlog/browse_thread/thread/38d8db08beef1444.  The fix is to re-install the mysql gem with this option:
+I am going to implement a change recommended [by this google code post](http://groups.google.com/group/MephistoBlog/browse_thread/thread/38d8db08beef1444).  The fix is to re-install the mysql gem with this option:
 
 ``` bash
  gem install mysql -- --mysql-config=/path/to/mysql_config
@@ -23,9 +23,9 @@ However, I don't have mysql installed on my virtual machine, since I have a cent
 root@pol:/# apt-get install mysql-client
 ```
 
-This added 23M of extra stuff to the VM, but it also threw a my.cnf into the /etc/mysql dir.  
+This added 23M of extra stuff to the VM, but it also threw a `my.cnf` into the `/etc/mysql` dir.  
 
 The next step was installing the mysql gem.  The hitch here is that I don't have a mysql server or dev stuff installed, so the gem doesn't want to compile.  I'm also curious how active record can work at all without the mysql gem installed...  I'm going to ask around for some more information and post it here when I've figure out where to proceed.
 
-UPDATE: [I may have solved the problem here.](/blog/mephisto-mongrel-cluster-continued)
+UPDATE: [I may have solved the problem here.](/blog/2008/04/01/mephisto-mongrel-cluster-continued/)
 

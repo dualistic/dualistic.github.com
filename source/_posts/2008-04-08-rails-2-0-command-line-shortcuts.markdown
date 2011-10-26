@@ -24,7 +24,7 @@ As you can see, it went ahead and created the model, test, fixture and migration
 
 This is really cool, but it has some limitations.  If you are doing anything more complicated than it won't work for you.  For example, if we wanted to do a many-to-many relationship with a toppings table, you would have to set that up manually (as far as I know).
 
-The confusion that I referred to earlier has to do with generating a migration.  Let's say that I already created my topping model manually by creating an app/model/topping.rb file.  Then it occurs to me that I also need a migration, so I run the following:
+The confusion that I referred to earlier has to do with generating a migration.  Let's say that I already created my topping model manually by creating an `app/model/topping.rb` file.  Then it occurs to me that I also need a migration, so I run the following:
 
 ```
 $ script/generate migration CreateTopping name:string price:float
@@ -38,7 +38,7 @@ Let's say, instead, I created the toppings model with the following command:
 $ script/generate model topping
 ```
 
-This would have generated an empty ###_create_toppings.rb migration.  Then I decide to add the columns to it like so:
+This would have generated an empty `###_create_toppings.rb` migration.  Then I decide to add the columns to it like so:
 
 ```
 $ script/generate migration AddNamePriceToToppings name:string price:float

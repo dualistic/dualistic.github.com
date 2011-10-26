@@ -6,7 +6,7 @@ comments: true
 sharing: true
 footer: true
 ---
-I am working with a new developer who has Ruby experience, but no Rails experience.  I pointed him at the Rails site and told him to run though some of the tutorials.  I was surprised that the "Four Days on Rails":http://rails.homelinux.org/ tutorial had such a weird introduction to database stuff.  
+I am working with a new developer who has Ruby experience, but no Rails experience.  I pointed him at the Rails site and told him to run though some of the tutorials.  I was surprised that the [Four Days on Rails](http://rails.homelinux.org/) tutorial had such a weird introduction to database stuff.  
 
 When it has you create your database, it has you run the following sql code:
 
@@ -23,7 +23,7 @@ CREATE TABLE `categories` (
 
 What I don't get is: how is that any better/easier than giving a quick run through the migration process?  The above code could just as easily been replaced with:
 
-After creating your database, and setting your database.yml connection variables, we will be building a table to hod our To Do list categories.  We will need a model definition for a Category, and using a generator, we get a place to define both the database table for the Categories and the model for a Category.
+After creating your database, and setting your `database.yml` connection variables, we will be building a table to hod our To Do list categories.  We will need a model definition for a Category, and using a generator, we get a place to define both the database table for the Categories and the model for a Category.
 
 ```
 $ script/generate model category
@@ -55,6 +55,6 @@ class CreateCategories < ActiveRecord::Migration
 end
 ```
 
-Then run @rake db:migrate@ and you have your table and you are now ready to edit the model.  
+Then run `rake db:migrate` and you have your table and you are now ready to edit the model.  
 
 I don't see this as being worse than the SQL.  Why isn't it presented in this more "railsy" way?
