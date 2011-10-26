@@ -17,12 +17,22 @@ body > header {
 
 body article {
   ul, ol {
-    list-style: none inside none;
+    margin: 0;
+    padding: 0 0 0 .2em;
+    list-style: none;
+    text-indent: -1.2em;
+  }
+  li {
+    margin: 0 0 0 1em;
   }
   ul li:before {
-    content: "\27AB \0020";
+    content: "\27AB \0020 \0020";
   }
   ol {
     list-style-type: decimal-leading-zero;
   }
+}
+
+p code, li code {
+  display: inline;
 }
