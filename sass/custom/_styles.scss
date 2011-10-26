@@ -14,3 +14,15 @@ body > header {
     position: 1em;
   }
 }
+
+body article {
+  ul, ol {
+    list-style: none inside none;
+  }
+  ul li:before {
+    content: "\27AB \0020";
+  }
+  ol {
+    list-style-type: decimal-leading-zero;
+  }
+}
