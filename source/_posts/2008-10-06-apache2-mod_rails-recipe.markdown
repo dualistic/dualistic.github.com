@@ -28,7 +28,7 @@ If apache2 is not yet configured with mod_rails, do the following:
  PassengerRuby /usr/bin/ruby1.8
 ```
 
-* Symlink it into enabled:  ln -s /etc/apache2/mods-available/mod_rails.conf /etc/apache2/mods-enabled/mod_rails.conf
+* Symlink it into enabled:  `ln -s /etc/apache2/mods-available/mod_rails.conf /etc/apache2/mods-enabled/mod_rails.conf`
 * Restart apache2
 
 Optionally make Ubuntu's username policy more sensible (allow underscores)
@@ -37,67 +37,67 @@ Optionally make Ubuntu's username policy more sensible (allow underscores)
 $ echo "NAME_REGEX=\"[a-z_][a-z0-9_-]*[$]?\"" >> /etc/adduser.conf
 ```                     
 
-h3. Creating a ModRails Application @http://some.host.name/appname
+### Creating a ModRails Application @http://some.host.name/appname ###
 
-p. create the user, the appname will be the username:
+* create the user, the appname will be the username:
 
 ```
 $ adduser <username> (use pwgen or something for the password)
 ```
 
-p. create a stub rails app:
+* create a stub rails app:
 
 ```
 $ rails /home/<username>/rails/testapp 
 ```
 
-p. Link the testapp to the "static" application location
+* Link the testapp to the "static" application location
 
 ```
 $ ln -s /home/<username>/rails/testapp /home/<username>/rails/app
 ```
 
-p. Link the "static" application location into the servers webroot
+* Link the "static" application location into the servers webroot
 
 ```
 $ ln -s /home/<username>/rails/app/public /var/www/<username>
 ```
 
-p. Create the apache2 conf for the rails app
+* Create the apache2 conf for the rails app
 
 ```
 $ echo "RailsBaseURI /<username>" > /etc/apache2/sites-available/<username>
 ```
 
-p. Tell apache2 to actually use the app
+* Tell apache2 to actually use the app
 
 ```
 $ ln -s /etc/apache2/sites-available/<username> /etc/apache2/sites-enabled/<username>
 ```
 
-p. Make sure that the new user has ownership of the files
+* Make sure that the new user has ownership of the files
 
 ```
 $ chown -R /home/<username>/rails <username>.<username>
 ```
 
-p. Restart apache2 and check to see if it works
+* Restart apache2 and check to see if it works
 
 ```
 $ apache2ctl graceful
 $ wget http://localhost/<username> --server-response --spider # this should return 200 OK
 ```
 
-p. Create a mysql user and databases for the app
+* Create a mysql user and databases for the app
 
 ```
  $ for db in production test development; do mysql -u root -pMYSQLPASS -e "grant all privileges on <username>_$db.* to '<username>'@'localhost' identified by '<userpassword>'; create database <username>_$db;"  done
 ```
 
-p. Copy template capistrano deployment files into their home/<username>/rails directory
+* Copy template capistrano deployment files into their `home/<username>/rails` directory
 
-At this point the application will be available running at http://hostname/<username>
+At this point the application will be available running at `http://hostname/<username>`
 
-With one of the deploy.rb files, a savvy rails user can deploy their application to the server with capistrano
+With one of the `deploy.rb` files, a savvy rails user can deploy their application to the server with capistrano
 
-A less savvy rails user can connect via ssh and checkout their their rails app to someplace in their home, then symlink it to the ~/rails/app directory
+A less savvy rails user can connect via ssh and checkout their their rails app to someplace in their home, then symlink it to the `~/rails/app` directory
