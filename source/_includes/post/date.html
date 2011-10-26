@@ -10,3 +10,12 @@
 {% if was_updated != '0' %}
   {% capture updated %}<time class="updated" datetime="{{ updated | datetime | date_to_xmlschema }}">Updated {{ updated | ordinalize }}</time>{% endcapture %}
 {% else %}{% assign updated = false %}{% endif %}
+
+{% if page.previous.url %}
+  <a href="{{page.previous.url}}" title="Previous Post:
+  {{page.previous.title}}">&laquo;</a>
+{% endif %}
+{% if page.next.url %}
+<a href="{{page.next.url}}" title="next Post:
+{{page.next.title}}"> &raquo; </a>
+{% endif %}
