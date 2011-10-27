@@ -9,7 +9,7 @@
   <meta name="author" content="Pol Llovet">
 
   
-  <meta name="description" content="                      Blog Archives                    Recent Posts          Latest Tweets      Status updating&#8230;            Follow @_pol    G...">
+  <meta name="description" content="So, there are some folks on campus who would like to have their faculty&#8217;s journals listed on their faculty pages. This is certainly doable wi...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -49,8 +49,10 @@
   </fieldset>
 </form>
 <ul role=main-navigation>
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/">blog</a></li>
+  <li><a href="/blog/archives">archive</a></li>
+  <li><a href="/projects">projects</a></li>
+  <li><a href="/about">about</a></li>
 </ul>
 
 </nav>
@@ -59,8 +61,831 @@
       <div class="blog-index">
   
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/10/26/soaping-with-ruby-and-php/">SOAPing With Ruby and PHP</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+
+
+<time datetime="2011-10-26T21:10:00-06:00" pubdate  data-updated="true" >Oct 26<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>So, there are some folks on campus who would like to have their faculty&#8217;s journals listed on their faculty pages. This is certainly doable with some web-scraping, but the Web of Science (Web of Knowledge, actually) has an API, and the folks I have talked to have secured access to said API.</p>
+
+<p>Unfortunately, it is a SOAP API, something which I know nothing about. But, hey, how hard can it be?</p>
+
+<p>My plan is: learn and prototype with ruby, and then fool around a little with PHP (to make sure it works), then make a bid to do the work (and include my already spent time :P ).</p>
+
+<h3>SOAPed up Ruby</h3>
+
+<p>My gem search turned up two candidates, <a href="http://rubygems.org/gems/soap4r">SOAP4R</a> and <a href="http://rubygems.org/gems/savon">Savon</a>.  Of those two, I decided to try out Savon first because it felt newer.</p>
+
+<p>&#8230;later&#8230;</p>
+
+<p>Initial thoughts:</p>
+
+<ul>
+<li>Auth info is sent in the header.  This seems sensible.  The user/pass is base64 encoded, appended to &#8220;Basic &#8220;, and then set in an &#8220;Authorization&#8221; header.  Fine.  Annoyingly, the ruby <code>Base64.encode64()</code> method appends an \n to the encoded string so you have to <code>encode64(string).strip</code> or Mr. SOAP API will throw a 400.</li>
+<li>I have to pretend to build a cookie and send headers on my http requests as though I was holding a cookie, even though I am just pretending. The cookie games feel awkward.</li>
+<li>The ?wsdl business is pretty neat.  I like that the SOAP endpoints can tell you what api calls they respond to. I need to look at this more, can they tell you how to properly form a particular API call?  I mean, just knowing that you can do a :search doesn&#8217;t mean you know the format of the query&#8230;</li>
+</ul>
+
+
+<p>This is doable, and it shouldn&#8217;t even be that hard.  I just need to:</p>
+
+<ol>
+<li>make sure that the school has access, because it is locked down by IP</li>
+<li>figure out the query syntax</li>
+<li>prototype the ruby calls to sort out the query and parse the response strings</li>
+<li>turn the pretty ruby into ugly php. :P</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/">There Has Never Been a Better Time to Be a Self-taught Coder</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+
+
+<time datetime="2011-10-26T21:09:00-06:00" pubdate  data-updated="true" >Oct 26<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I posted this as a response to a <a href="http://www.catherynnemvalente.com/2011/10/post-apocalyptic-undergraduate-zombies/">blog post</a>, and I thought it might be more generally appreciated.  It was in response to a short quote in the post where she was wondering which degrees might be worth the astronomical cost of tuition, &#8220;Computer Science, I guess&#8230;&#8221;</p>
+
+<p>I hate to say it but to be honest, there has never been a better time to <em>not</em> be in the process of getting a computer science degree.  I work in academia, so this is a really tough thing to admit, but I think it&#8217;s true.  It&#8217;s not just the spiraling cost of education, and the cost/benefit analysis of tuition. The whole situation is changing.</p>
+
+<p>The biggest game-changer, I think, is that there is a ridiculous amount of opportunity out there for free.  It used to be that you had to go to university for the opportunity to get practice doing the work.  This isn&#8217;t the case anymore. Employers are still mostly interested in examples of your work (basically, a portfolio of code), but with open source being what it is, the world is overflowing with public projects to work on.  If you spent four years working food service and spending your off time coding on open source projects (with the same amount of time that you would have spent schooling), you would end up better off.  Probably wildly better off.  Many CS grads enter the job market with nothing but credentials and examples of canned homework projects.  Sure, they know the basics of algorithms, but that is just a small part of what software engineering is.</p>
+
+<p>Self-taught coders are often preferred over graduates because they have demonstrated at least one critical skill: the ability to independently find solutions to get things done.  If they have worked on an active open source project, then they have another critical coveted skill: the ability to collaboratively work on software projects with other developers.</p>
+
+<p>And to add to that, MIT open courseware is freely available, a curious student has access to world-class educational tools if they need it. More and more institutions are making their materials available, and Khan Academy just released its first set of computer science training classes for free.  The entire landscape is changing.</p>
+
+<p>During the recent EDUCAUSE conference, I heard this small-but-growing group of self-taught students &#8220;edupunks&#8221;.  The <a href="http://www.educause.edu/E2011/Program/FS04?page=1#tabs--2">presentation was posted online</a> and I think it&#8217;s worth a look if you are interested.</p>
+
+<p>I think the future of education is changing.  I still think academia is important, but the focus needs to change.  I don&#8217;t think that it will make sense to go to university for classes, but for hands-on training and research opportunities.  University is where mentors and students gather and work.  Live lectures are a waste of time, they should be just video.  In the classroom you should be having real-world work experiences with teachers and peers.  This transition will be painful and ugly, but I think it&#8217;s inevitable; the current system isn&#8217;t sustainable.  Learning is about practice and mentorship.  That&#8217;s what tuition should buy you.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/10/23/ruby-dbi-and-mysql-drive/">Ruby Dbi and Mysql Driver</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+
+
+<time datetime="2008-10-23T19:41:00-06:00" pubdate  data-updated="true" >Oct 23<span>rd</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you want to do direct access to mysql (or other databse) you can use the dbi gem to do it.  But what the docs don&#8217;t tell you is that you need to gem install a database driver also.  So if you want to use mysql, you do:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo gem install dbi dbd-mysql
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are other dbd&#8217;s for different databases.</p>
+
+<p>Also:
+If you are getting this error:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>LoadError: dlopen<span class="o">(</span>/Library/Ruby/Gems/1.8/gems/mysql-2.7/lib/mysql.bundle, 9<span class="o">)</span>: Library not loaded: /usr/local/mysql/lib/mysql/libmysqlclient.15.dylib
+</span><span class='line'>  Referenced from: /Library/Ruby/Gems/1.8/gems/mysql-2.7/lib/mysql.bundle
+</span><span class='line'>  Reason: image not found - /Library/Ruby/Gems/1.8/gems/mysql-2.7/lib/mysql.bundle
+</span><span class='line'>  from /Library/Ruby/Gems/1.8/gems/mysql-2.7/lib/mysql.bundle
+</span><span class='line'>  from /Library/Ruby/Site/1.8/rubygems/custom_require.rb:32:in <span class="sb">`</span>require<span class="err">&#39;</span>
+</span><span class='line'>  from <span class="o">(</span>irb<span class="o">)</span>:1
+</span><span class='line'>  from /Library/Ruby/Gems/1.8/specifications/actionpack-1.13.6.gemspec:13
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then you need to do this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo install_name_tool -change /usr/local/mysql/lib/mysql/libmysqlclient.15.dylib /usr/local/mysql/lib/libmysqlclient.15.dylib /Library/Ruby/Gems/1.8/gems/mysql-2.7/lib/mysql.bundle
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The last argument may need to be modified to match the &#8220;Referenced from&#8221; line from your error.</p>
+
+<p>Test the fix by opening up irb and doing a require &#8216;mysql&#8217;</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/10/06/apache2-mod_rails-recipe/">Apache2 Mod_rails Recipe</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+
+
+<time datetime="2008-10-06T01:12:00-06:00" pubdate  data-updated="true" >Oct 6<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently had to write a recipe to set up instances of mod_rails apps for apache2.  The goal of this process is to have a server that has apps hosted at http://server/app1, http://server/app2, etc.</p>
+
+<p>The recipe is going to be used to create a puppet script, but it could also be boiled down to a ruby or shell script to easily create app instances for anyone&#8217;s use.</p>
+
+<p>Assumptions and Server Setup</p>
+
+<ul>
+<li>All of this is done as sudo or root</li>
+<li>The OS has apache2, mysql, sqlite3, ruby, rubygems, git-core and
+subversion installed</li>
+<li>The gems sqlite3-ruby, mysql, rails, capistrano are installed</li>
+</ul>
+
+
+<p>If apache2 is not yet configured with mod_rails, do the following:</p>
+
+<ul>
+<li>Create <code>/etc/apache2/mods-available/mod_rails.conf</code> and put the following in it:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> # Ruby Passenger Config
+</span><span class='line'> LoadModule passenger_module /usr/lib/ruby/gems/1.8/gems/passenger-2.0.3/ext/apache2/mod_passenger.so
+</span><span class='line'> PassengerRoot /usr/lib/ruby/gems/1.8/gems/passenger-2.0.3
+</span><span class='line'> PassengerRuby /usr/bin/ruby1.8</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Symlink it into enabled:  <code>ln -s /etc/apache2/mods-available/mod_rails.conf /etc/apache2/mods-enabled/mod_rails.conf</code></li>
+<li>Restart apache2</li>
+</ul>
+
+
+<p>Optionally make Ubuntu&#8217;s username policy more sensible (allow underscores)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo "NAME_REGEX=\"[a-z_][a-z0-9_-]*[$]?\"" &gt;&gt; /etc/adduser.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>Creating a ModRails Application @http://some.host.name/appname</h3>
+
+<ul>
+<li>create the user, the appname will be the username:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ adduser &lt;username&gt; (use pwgen or something for the password)</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>create a stub rails app:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rails /home/&lt;username&gt;/rails/testapp </span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Link the testapp to the &#8220;static&#8221; application location</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ln -s /home/&lt;username&gt;/rails/testapp /home/&lt;username&gt;/rails/app</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Link the &#8220;static&#8221; application location into the servers webroot</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ln -s /home/&lt;username&gt;/rails/app/public /var/www/&lt;username&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Create the apache2 conf for the rails app</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo "RailsBaseURI /&lt;username&gt;" &gt; /etc/apache2/sites-available/&lt;username&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Tell apache2 to actually use the app</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ln -s /etc/apache2/sites-available/&lt;username&gt; /etc/apache2/sites-enabled/&lt;username&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Make sure that the new user has ownership of the files</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ chown -R /home/&lt;username&gt;/rails &lt;username&gt;.&lt;username&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Restart apache2 and check to see if it works</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ apache2ctl graceful
+</span><span class='line'>$ wget http://localhost/&lt;username&gt; --server-response --spider # this should return 200 OK</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Create a mysql user and databases for the app</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> $ for db in production test development; do mysql -u root -pMYSQLPASS -e "grant all privileges on &lt;username&gt;_$db.* to '&lt;username&gt;'@'localhost' identified by '&lt;userpassword&gt;'; create database &lt;username&gt;_$db;"  done</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Copy template capistrano deployment files into their <code>home/&lt;username&gt;/rails</code> directory</li>
+</ul>
+
+
+<p>At this point the application will be available running at <code>http://hostname/&lt;username&gt;</code></p>
+
+<p>With one of the <code>deploy.rb</code> files, a savvy rails user can deploy their application to the server with capistrano</p>
+
+<p>A less savvy rails user can connect via ssh and checkout their their rails app to someplace in their home, then symlink it to the <code>~/rails/app</code> directory</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/06/09/multi-os-password-management/">Multi-OS Password Management</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+
+
+<time datetime="2008-06-09T15:10:00-06:00" pubdate  data-updated="true" >Jun 9<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It&#8217;s a problem trying to keep track of all of your passwords.  I have a mac laptop, mac workstation at work, and a windows machine at home.  Add to that the myriad of websites, servers and services that I have users and passwords for.  It&#8217;s a mess.</p>
+
+<p>On windows, my password manager of choice is <a href="http://passwordsafe.sourceforge.net/">pwsafe</a>, but it only offers command-line functionality for mac (and presumably linux, though I&#8217;m not sure).  On the Mac, I quite like Keychain, it is tightly integrated with the OS, but the passwords are locked away somewhere.  Supposedly you can leverage the @security@ executable and gain access to it, but then importing/exporting would be a total pain in the ass.</p>
+
+<p>My searches had turned up an app called &#8220;Password Gorilla&#8221;, but it kind of sucked, there appeared to be nothing for me!</p>
+
+<p>Then I ran into <a href="http://www.keepassx.org/">KeePassX</a>, a password management package with binaries for all of the major OS&#8217;s.  I installed it onto the mac: perfect.  It&#8217;s exactly what I wanted.  There is some wonky UI issues (it forgets which password db you are using when you lock it), but it is totally workable.</p>
+
+<p>I plan on using FUSE to create an ssh directory to one of my servers and store the binaries and password database on them.  So far so good!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/05/09/openvz-and-mod_rails/">Openvz and Mod_rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+
+
+<time datetime="2008-05-09T16:29:00-06:00" pubdate  data-updated="true" >May 9<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Setting it up was pretty easy, though I had to triple my memory allocation over what I was using with nginx+mongrel.</p>
+
+<ul>
+<li>I created a new virtual machine, but with more memory than usual: <code>PRIVVMPAGES="150000:300000"</code></li>
+<li>I <code>vzctl enter &lt;the new machine&gt;</code></li>
+<li>as root:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ apt-get ruby ruby1.8-dev rubygems apache2 apache2-mpm-prefork build-essential vim
+</span><span class='line'>$ gem install fastthread 
+</span><span class='line'>$ gem install rake (i have rails frozen into my apps, otherwise I would have installed it also)
+</span><span class='line'>$ gem install passenger</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>for some reason, my binaries were not linked, nor the rubygems path exported, so:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ln -s /var/lib/gems/1.8/bin/* /usr/bin (heavy handed, but it works)</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>run <code>passenger-install-apache2-module</code> and follow the instructions</li>
+</ul>
+
+
+<p>after starting apache2, i was able to see my site up and running.  yay!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/04/18/the-history-meme/">The History Meme</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+
+
+<time datetime="2008-04-18T17:02:00-06:00" pubdate  data-updated="true" >Apr 18<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://diveintomark.org/archives/2008/04/15/history-meme">See Here.</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>chem69:ipm pol$ history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head
+</span><span class='line'>123 cd
+</span><span class='line'>118 ls
+</span><span class='line'>97 hg
+</span><span class='line'>19 vim
+</span><span class='line'>19 script/server
+</span><span class='line'>17 rake
+</span><span class='line'>12 script/generate
+</span><span class='line'>12 cp
+</span><span class='line'>8 ssh
+</span><span class='line'>7 script/plugin</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/04/17/applications-with-multiple-authn-sources/">Applications With Multiple Authn Sources</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+
+
+<time datetime="2008-04-17T17:11:00-06:00" pubdate  data-updated="true" >Apr 17<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;ve previously written that I want a system that can handle multiple authentication sources.  After hammering on it a bit, there are some pitfalls that exist with this kind of scenario.</p>
+
+<p>First, a recap.  I want a system that can authenticate a user from multiple sources.  The sources will be organized into a priority list.  So, for example, if User1 asks for a page that is restricted, first I check to see if they have a pubcookie or known CAS/SSI(Central Authentication Server/Single Sign On) cookie.  If so, I check to see if they have a user in the system.  If so, then I log them in.  If not, then I create one (noting the authn source) and log them in.  If they don&#8217;t have a cookie, then I send them to a login page.  With their username and password credentials, I try to log them into the list of sources.  If there is only one username that matches that user in my system, I try to log them into that first, otherwise I progress through the list.  If a remote authentication server verifies their username/email/password as a valid user, i check for a local user.  If it exists, I log them in, if not i create a local user, note their authn source, and log them in.</p>
+
+<p>The ramifications of this is that there are allowed to be users with the same username.  However, the  tuple of username, password and authn source is unique.  there will only be one Foo with the password Blarg which is authenticated with my company LDAP server.  There might be a local user with the username Foo, but I&#8217;m assuming that everyone will have different passwords.  If someone did use the same username and password as another person, and they used a higher priority authn service, they would always be the person that would log in as that user.</p>
+
+<p>This is not ideal, I will think on it further.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/04/10/textmate-erb-and-different-hightlighting/">Textmate ERB <%= and <% Different Hightlighting</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+
+
+<time datetime="2008-04-10T23:54:00-06:00" pubdate  data-updated="true" >Apr 10<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ok, so I have been bitten several times when I do something like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Your username is: &lt;% username %&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Why is my username blank?  This is a simple example, but I have run into this a number of times.  It&#8217;s like a missing semicolon problem, but ERB instead of PHP or C.  Strangely enough, even if you specify a puts method, you still get no output:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Your username is: &lt;% puts username %&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(This also will give you nothing)</p>
+
+<p>You need a &lt;%= opening in order to print out anything.  So, it would be nice if Textmate colored them differently.  I went on a quest to make this happen&#8230; and failed.</p>
+
+<p>Ultimately I ended up in the #textmate channel on freenode.  They were very helpful and pointed me to <a href="http://rafb.net/p/DVN7Qh27.html">this replacement grammar for textmate</a>, which for the sake of being complete, I&#8217;ve included Right here:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{   scopeName = 'text.html.ruby';
+</span><span class='line'>    fileTypes = ( 'rhtml', 'erb', 'html.erb' );
+</span><span class='line'>    foldingStartMarker = '(?x)
+</span><span class='line'>        (&lt;(?i:head|body|table|thead|tbody|tfoot|tr|div|select|fieldset|style|script|ul|ol|form|dl)\b.*?&gt;
+</span><span class='line'>        |&lt;!--(?!.*--&gt;)
+</span><span class='line'>        |\{\s*($|\?&gt;\s*$|//|/\*(.*\*/\s*$|(?!.*?\*/)))
+</span><span class='line'>        )';
+</span><span class='line'>    foldingStopMarker = '(?x)
+</span><span class='line'>        (&lt;/(?i:head|body|table|thead|tbody|tfoot|tr|div|select|fieldset|style|script|ul|ol|form|dl)&gt;
+</span><span class='line'>        |^\s*--&gt;
+</span><span class='line'>        |(^|\s)\}
+</span><span class='line'>        )';
+</span><span class='line'>    patterns = (
+</span><span class='line'>        {   name = 'comment.block.erb';
+</span><span class='line'>            begin = '&lt;%+#';
+</span><span class='line'>            end = '%&gt;';
+</span><span class='line'>            captures = { 0 = { name = 'punctuation.definition.comment.erb'; }; };
+</span><span class='line'>        },
+</span><span class='line'>        {   name = 'source.ruby.rails.embedded.substituted.html';
+</span><span class='line'>            begin = '&lt;%+(?!&gt;)=';
+</span><span class='line'>            end = '-?%&gt;';
+</span><span class='line'>            captures = { 0 = { name = 'punctuation.section.embedded.ruby'; }; };
+</span><span class='line'>            patterns = (
+</span><span class='line'>                {   name = 'comment.line.number-sign.ruby';
+</span><span class='line'>                    match = '(#).*?(?=-?%&gt;)';
+</span><span class='line'>                    captures = { 1 = { name = 'punctuation.definition.comment.ruby'; }; };
+</span><span class='line'>                },
+</span><span class='line'>                {   include = 'source.ruby.rails'; },
+</span><span class='line'>            );
+</span><span class='line'>        },
+</span><span class='line'>        {   name = 'source.ruby.rails.embedded.html';
+</span><span class='line'>            begin = '&lt;%+(?!&gt;)[-=]?';
+</span><span class='line'>            end = '-?%&gt;';
+</span><span class='line'>            captures = { 0 = { name = 'punctuation.section.embedded.ruby'; }; };
+</span><span class='line'>            patterns = (
+</span><span class='line'>                {   name = 'comment.line.number-sign.ruby';
+</span><span class='line'>                    match = '(#).*?(?=-?%&gt;)';
+</span><span class='line'>                    captures = { 1 = { name = 'punctuation.definition.comment.ruby'; }; };
+</span><span class='line'>                },
+</span><span class='line'>                {   include = 'source.ruby.rails'; },
+</span><span class='line'>            );
+</span><span class='line'>        },
+</span><span class='line'>        {   include = 'text.html.basic'; },
+</span><span class='line'>    );
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, here&#8217;s how to do it:</p>
+
+<ol>
+<li>In Textmate, go to Bundles > Bundle Editor > Edit Languages (or CTRL-OPT-CMD-L)</li>
+<li>Click to the Ruby on Rails > HTML (Rails) Language grammar, the code will appear in the window to the right.</li>
+<li>Replace the code with the code up above.</li>
+<li>Click Test, if you like to make sure it is good.  Take note of the &#8220;name&#8221; of two of the rules: @source.ruby.rails.embedded.html@ and @source.ruby.rails.embedded.substituted.html@</li>
+<li>Close the Bundle Editor</li>
+<li>I think it&#8217;s easiest to see what you are editing, so open up an erb or rhtml file so you can see what you are fiddling with.  After you have opened a file, continue on.</li>
+<li>Go to TextMate > Preferences (or hit CMD - ,)</li>
+<li>Click on &#8220;Fonts &amp; Colors&#8221;</li>
+<li>In the &#8220;Element&#8221; list, click the &#8216;+&#8217; to add a new element.  Call it something descriptive, I called it &#8220;Ruby HTML Output&#8221;.  In the &#8220;Scope Selector&#8221;, type or paste in @source.ruby.rails.embedded.substituted.html@.  Set the foreground and background color to be what you want.  Be careful, if there&#8217;s no direction, it will use the default foreground and background.  If you do click and choose a color, I couldn&#8217;t figure out how to un-choose and use default again. :(</li>
+<li>Optionally, you can do the same thing and add another Element for the non-output tag (I made it less saturated than the other one).</li>
+</ol>
+
+
+<p>And that&#8217;s it!  Yay for solutions!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/04/08/rails-2-0-command-line-shortcuts/">Rails 2.0 Command-line Shortcuts</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+
+
+<time datetime="2008-04-08T14:23:00-06:00" pubdate  data-updated="true" >Apr 8<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I just ran across a little confusion with Rails 2 command-line shortcuts.  By shortcuts, I mean things like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate model pizza size:integer name:string description:text
+</span><span class='line'>      exists  app/models/
+</span><span class='line'>      exists  test/unit/
+</span><span class='line'>      exists  test/fixtures/
+</span><span class='line'>      create  app/models/pizza.rb
+</span><span class='line'>      create  test/unit/pizza_test.rb
+</span><span class='line'>      create  test/fixtures/pizzas.yml
+</span><span class='line'>      exists  db/migrate
+</span><span class='line'>      create  db/migrate/004_create_pizzas.rb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, it went ahead and created the model, test, fixture and migration.  The column definitions were stuffed auto-magically into the migration.</p>
+
+<p>This is really cool, but it has some limitations.  If you are doing anything more complicated than it won&#8217;t work for you.  For example, if we wanted to do a many-to-many relationship with a toppings table, you would have to set that up manually (as far as I know).</p>
+
+<p>The confusion that I referred to earlier has to do with generating a migration.  Let&#8217;s say that I already created my topping model manually by creating an <code>app/model/topping.rb</code> file.  Then it occurs to me that I also need a migration, so I run the following:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate migration CreateTopping name:string price:float</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Unfortunately, this will create the migration file, but the <em>column declarations are ignored</em>.  This is confusing, given the following behavior:</p>
+
+<p>Let&#8217;s say, instead, I created the toppings model with the following command:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate model topping</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This would have generated an empty <code>###_create_toppings.rb</code> migration.  Then I decide to add the columns to it like so:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate migration AddNamePriceToToppings name:string price:float</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Rails does some <em>magic</em> and infers from the migration name that we are adding columns to the topping table.  But why didn&#8217;t it add columns in the earlier example?  My only explanation is that migration generation is for updating already existing models/tables, it&#8217;s not intended for model/table creation.  Arguably, what good is a created table without an associated model?  For simple cases, this holds true.  For a many-to-many situation, where you need to define a join table, this kind of shortcutting will only take you so far.</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <nav class="pagination">
     <div>
+      
+        <a class="prev" href="/blog/page/2/">&larr; Older</a>
       
       <a href="/blog/archives">Blog Archives</a>
       
@@ -72,6 +897,26 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/26/soaping-with-ruby-and-php/">SOAPing With Ruby and PHP</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/">There Has Never Been a Better Time to Be a Self-taught Coder</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/10/23/ruby-dbi-and-mysql-drive/">ruby dbi and mysql driver</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/10/06/apache2-mod_rails-recipe/">apache2 mod_rails recipe</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/06/09/multi-os-password-management/">Multi-OS Password Management</a>
+      </li>
     
   </ul>
 </section>

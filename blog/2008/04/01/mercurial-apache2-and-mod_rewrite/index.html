@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Mercurial, Apache2 and mod_rewrite - Dualistic</title>
+  <meta name="author" content="Pol Llovet">
+
+  
+  <meta name="description" content="        Mercurial, Apache2 and Mod_rewrite        &laquo;&raquo;Apr 1st, 2008      So, as previously mentioned, I had gotten mercurial working in R...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://dualistic.com/blog/2008/04/01/mercurial-apache2-and-mod_rewrite/">
+  <link href="/favicon.png" rel="icon" type="image/png">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Dualistic" type="application/atom+xml">
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Cardo:400,400italic,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Dualistic</a></h1>
+  
+    <h2>Pol Llovet :: Life & Work</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:dualistic.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">blog</a></li>
+  <li><a href="/blog/archives">archive</a></li>
+  <li><a href="/projects">projects</a></li>
+  <li><a href="/about">about</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Mercurial, Apache2 and Mod_rewrite</h1>
+    <p class="meta">
+
+
+
+
+
+  
+
+
+
+
+
+  <a href="/blog/2008/04/01/mephisto-mongrel-cluster-continued/" title="Previous Post:
+  Mephisto mongrel cluster (continued)">&laquo;</a>
+
+
+<a href="/blog/2008/04/03/problem-with-four-days-on-rails/" title="next Post:
+Problem with Four Days on Rails">&raquo;</a>
+<time datetime="2008-04-01T18:57:00-06:00" pubdate  data-updated="true" >Apr 1<span>st</span>, 2008</time></p>
+  </header>
+  
+  <p>So, <a href="/blog/2008/04/01/redmine-and-mercurial/">as previously mentioned</a>, I had gotten mercurial working in Redmine, but I was having trouble getting mercurial to work with apache2.  Part of the issue is that unlike most webserver environments, most RoR Apache2 -> Mongrel Cluster (Let&#8217;s call this RAM from now on) setups are using mod_rewrite and mod_proxy to do URL jujitsu.  This can (and did) cause a bit of problem for me.</p>
+
+<p>There are a bunch of tutorials online (<a href="http://www.selenic.com/mercurial/wiki/index.cgi/PublishingRepositories">like this one</a>) about how to publish your mercurial repos.  But if you are mod_rewriting all over the place, you need a couple extra steps.</p>
+
+<h3>Tell mod_rewrite to ignore your hg directory</h3>
+
+<p>I had to add this directive at the beginning of my mod_rewrite declarations to ignore the hg directory:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>    RewriteRule ^/hg(.*) - [PT]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>My  apache conf blok looks like this (not dissimilar to the examples):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>    # Setup HG (mercurial) location
+</span><span class='line'>    ScriptAliasMatch ^/hg(.*) /replicated/hg/hgwebdir.cgi$1
+</span><span class='line'>    &lt;Directory /replicated/hg&gt;
+</span><span class='line'>            Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+</span><span class='line'>            AllowOverride None
+</span><span class='line'>            AuthUserFile /replicated/hg/.htpasswd
+</span><span class='line'>            AuthGroupFile /dev/null
+</span><span class='line'>            AuthName "MSU Forge Mercurial Repository"
+</span><span class='line'>            AuthType Basic
+</span><span class='line'>            &lt;Limit POST PUT&gt;
+</span><span class='line'>                    Require valid-user
+</span><span class='line'>            &lt;/Limit&gt;
+</span><span class='line'>    &lt;/Directory&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, it&#8217;s working now, and that&#8217;s lovely. :)  Now, i just wish I could tie the htaccess to the Redmine user tables and use that to Auth against&#8230;  Another day, another project&#8230;</p>
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+  
+
+
+
+
+
+  <a href="/blog/2008/04/01/mephisto-mongrel-cluster-continued/" title="Previous Post:
+  Mephisto mongrel cluster (continued)">&laquo;</a>
+
+
+<a href="/blog/2008/04/03/problem-with-four-days-on-rails/" title="next Post:
+Problem with Four Days on Rails">&raquo;</a>
+<time datetime="2008-04-01T18:57:00-06:00" pubdate  data-updated="true" >Apr 1<span>st</span>, 2008</time>
+        
+
+
+      </p>
+      
+        <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dualistic.com/blog/2008/04/01/mercurial-apache2-and-mod_rewrite/" data-via="_pol" data-counturl="http://dualistic.com/blog/2008/04/01/mercurial-apache2-and-mod_rewrite/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/26/soaping-with-ruby-and-php/">SOAPing With Ruby and PHP</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/">There Has Never Been a Better Time to Be a Self-taught Coder</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/10/23/ruby-dbi-and-mysql-drive/">ruby dbi and mysql driver</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/10/06/apache2-mod_rails-recipe/">apache2 mod_rails recipe</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/06/09/multi-os-password-management/">Multi-OS Password Management</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("_pol", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/_pol" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @_pol</a>
+  
+</section>
+
+
+<section>
+  <h1>Github Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/pol">@pol</a> on Github
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'pol',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Pol Llovet -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+    (function () {
+      var disqus_shortname = 'dualistic';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://dualistic.com/blog/2008/04/01/mercurial-apache2-and-mod_rewrite/';
+        var disqus_url = 'http://dualistic.com/blog/2008/04/01/mercurial-apache2-and-mod_rewrite/';
+        var disqus_script = 'embed.js'
+      
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

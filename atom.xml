@@ -4,7 +4,7 @@
   <title><![CDATA[Dualistic]]></title>
   <link href="http://dualistic.com/atom.xml" rel="self"/>
   <link href="http://dualistic.com/"/>
-  <updated>2011-10-09T23:45:26-06:00</updated>
+  <updated>2011-10-27T00:18:16-06:00</updated>
   <id>http://dualistic.com/</id>
   <author>
     <name><![CDATA[Pol Llovet]]></name>
@@ -12,5 +12,922 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SOAPing With Ruby and PHP]]></title>
+    <link href="http://dualistic.com/blog/2011/10/26/soaping-with-ruby-and-php/"/>
+    <updated>2011-10-26T21:10:00-06:00</updated>
+    <id>http://dualistic.com/blog/2011/10/26/soaping-with-ruby-and-php</id>
+    <content type="html"><![CDATA[<p>So, there are some folks on campus who would like to have their faculty&#8217;s journals listed on their faculty pages. This is certainly doable with some web-scraping, but the Web of Science (Web of Knowledge, actually) has an API, and the folks I have talked to have secured access to said API.</p>
+
+<p>Unfortunately, it is a SOAP API, something which I know nothing about. But, hey, how hard can it be?</p>
+
+<p>My plan is: learn and prototype with ruby, and then fool around a little with PHP (to make sure it works), then make a bid to do the work (and include my already spent time :P ).</p>
+
+<h3>SOAPed up Ruby</h3>
+
+<p>My gem search turned up two candidates, <a href="http://rubygems.org/gems/soap4r">SOAP4R</a> and <a href="http://rubygems.org/gems/savon">Savon</a>.  Of those two, I decided to try out Savon first because it felt newer.</p>
+
+<p>&#8230;later&#8230;</p>
+
+<p>Initial thoughts:</p>
+
+<ul>
+<li>Auth info is sent in the header.  This seems sensible.  The user/pass is base64 encoded, appended to &#8220;Basic &#8220;, and then set in an &#8220;Authorization&#8221; header.  Fine.  Annoyingly, the ruby <code>Base64.encode64()</code> method appends an \n to the encoded string so you have to <code>encode64(string).strip</code> or Mr. SOAP API will throw a 400.</li>
+<li>I have to pretend to build a cookie and send headers on my http requests as though I was holding a cookie, even though I am just pretending. The cookie games feel awkward.</li>
+<li>The ?wsdl business is pretty neat.  I like that the SOAP endpoints can tell you what api calls they respond to. I need to look at this more, can they tell you how to properly form a particular API call?  I mean, just knowing that you can do a :search doesn&#8217;t mean you know the format of the query&#8230;</li>
+</ul>
+
+
+<p>This is doable, and it shouldn&#8217;t even be that hard.  I just need to:</p>
+
+<ol>
+<li>make sure that the school has access, because it is locked down by IP</li>
+<li>figure out the query syntax</li>
+<li>prototype the ruby calls to sort out the query and parse the response strings</li>
+<li>turn the pretty ruby into ugly php. :P</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[There Has Never Been a Better Time to Be a Self-taught Coder]]></title>
+    <link href="http://dualistic.com/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/"/>
+    <updated>2011-10-26T21:09:00-06:00</updated>
+    <id>http://dualistic.com/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder</id>
+    <content type="html"><![CDATA[<p>I posted this as a response to a <a href="http://www.catherynnemvalente.com/2011/10/post-apocalyptic-undergraduate-zombies/">blog post</a>, and I thought it might be more generally appreciated.  It was in response to a short quote in the post where she was wondering which degrees might be worth the astronomical cost of tuition, &#8220;Computer Science, I guess&#8230;&#8221;</p>
+
+<p>I hate to say it but to be honest, there has never been a better time to <em>not</em> be in the process of getting a computer science degree.  I work in academia, so this is a really tough thing to admit, but I think it&#8217;s true.  It&#8217;s not just the spiraling cost of education, and the cost/benefit analysis of tuition. The whole situation is changing.</p>
+
+<p>The biggest game-changer, I think, is that there is a ridiculous amount of opportunity out there for free.  It used to be that you had to go to university for the opportunity to get practice doing the work.  This isn&#8217;t the case anymore. Employers are still mostly interested in examples of your work (basically, a portfolio of code), but with open source being what it is, the world is overflowing with public projects to work on.  If you spent four years working food service and spending your off time coding on open source projects (with the same amount of time that you would have spent schooling), you would end up better off.  Probably wildly better off.  Many CS grads enter the job market with nothing but credentials and examples of canned homework projects.  Sure, they know the basics of algorithms, but that is just a small part of what software engineering is.</p>
+
+<p>Self-taught coders are often preferred over graduates because they have demonstrated at least one critical skill: the ability to independently find solutions to get things done.  If they have worked on an active open source project, then they have another critical coveted skill: the ability to collaboratively work on software projects with other developers.</p>
+
+<p>And to add to that, MIT open courseware is freely available, a curious student has access to world-class educational tools if they need it. More and more institutions are making their materials available, and Khan Academy just released its first set of computer science training classes for free.  The entire landscape is changing.</p>
+
+<p>During the recent EDUCAUSE conference, I heard this small-but-growing group of self-taught students &#8220;edupunks&#8221;.  The <a href="http://www.educause.edu/E2011/Program/FS04?page=1#tabs--2">presentation was posted online</a> and I think it&#8217;s worth a look if you are interested.</p>
+
+<p>I think the future of education is changing.  I still think academia is important, but the focus needs to change.  I don&#8217;t think that it will make sense to go to university for classes, but for hands-on training and research opportunities.  University is where mentors and students gather and work.  Live lectures are a waste of time, they should be just video.  In the classroom you should be having real-world work experiences with teachers and peers.  This transition will be painful and ugly, but I think it&#8217;s inevitable; the current system isn&#8217;t sustainable.  Learning is about practice and mentorship.  That&#8217;s what tuition should buy you.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ruby dbi and mysql driver]]></title>
+    <link href="http://dualistic.com/blog/2008/10/23/ruby-dbi-and-mysql-drive/"/>
+    <updated>2008-10-23T19:41:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/10/23/ruby-dbi-and-mysql-drive</id>
+    <content type="html"><![CDATA[<p>If you want to do direct access to mysql (or other databse) you can use the dbi gem to do it.  But what the docs don&#8217;t tell you is that you need to gem install a database driver also.  So if you want to use mysql, you do:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo gem install dbi dbd-mysql
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are other dbd&#8217;s for different databases.</p>
+
+<p>Also:
+If you are getting this error:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>LoadError: dlopen<span class="o">(</span>/Library/Ruby/Gems/1.8/gems/mysql-2.7/lib/mysql.bundle, 9<span class="o">)</span>: Library not loaded: /usr/local/mysql/lib/mysql/libmysqlclient.15.dylib
+</span><span class='line'>  Referenced from: /Library/Ruby/Gems/1.8/gems/mysql-2.7/lib/mysql.bundle
+</span><span class='line'>  Reason: image not found - /Library/Ruby/Gems/1.8/gems/mysql-2.7/lib/mysql.bundle
+</span><span class='line'>  from /Library/Ruby/Gems/1.8/gems/mysql-2.7/lib/mysql.bundle
+</span><span class='line'>  from /Library/Ruby/Site/1.8/rubygems/custom_require.rb:32:in <span class="sb">`</span>require<span class="err">&#39;</span>
+</span><span class='line'>  from <span class="o">(</span>irb<span class="o">)</span>:1
+</span><span class='line'>  from /Library/Ruby/Gems/1.8/specifications/actionpack-1.13.6.gemspec:13
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then you need to do this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo install_name_tool -change /usr/local/mysql/lib/mysql/libmysqlclient.15.dylib /usr/local/mysql/lib/libmysqlclient.15.dylib /Library/Ruby/Gems/1.8/gems/mysql-2.7/lib/mysql.bundle
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The last argument may need to be modified to match the &#8220;Referenced from&#8221; line from your error.</p>
+
+<p>Test the fix by opening up irb and doing a require &#8216;mysql&#8217;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[apache2 mod_rails recipe]]></title>
+    <link href="http://dualistic.com/blog/2008/10/06/apache2-mod_rails-recipe/"/>
+    <updated>2008-10-06T01:12:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/10/06/apache2-mod_rails-recipe</id>
+    <content type="html"><![CDATA[<p>I recently had to write a recipe to set up instances of mod_rails apps for apache2.  The goal of this process is to have a server that has apps hosted at http://server/app1, http://server/app2, etc.</p>
+
+<p>The recipe is going to be used to create a puppet script, but it could also be boiled down to a ruby or shell script to easily create app instances for anyone&#8217;s use.</p>
+
+<p>Assumptions and Server Setup</p>
+
+<ul>
+<li>All of this is done as sudo or root</li>
+<li>The OS has apache2, mysql, sqlite3, ruby, rubygems, git-core and
+subversion installed</li>
+<li>The gems sqlite3-ruby, mysql, rails, capistrano are installed</li>
+</ul>
+
+
+<p>If apache2 is not yet configured with mod_rails, do the following:</p>
+
+<ul>
+<li>Create <code>/etc/apache2/mods-available/mod_rails.conf</code> and put the following in it:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> # Ruby Passenger Config
+</span><span class='line'> LoadModule passenger_module /usr/lib/ruby/gems/1.8/gems/passenger-2.0.3/ext/apache2/mod_passenger.so
+</span><span class='line'> PassengerRoot /usr/lib/ruby/gems/1.8/gems/passenger-2.0.3
+</span><span class='line'> PassengerRuby /usr/bin/ruby1.8</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Symlink it into enabled:  <code>ln -s /etc/apache2/mods-available/mod_rails.conf /etc/apache2/mods-enabled/mod_rails.conf</code></li>
+<li>Restart apache2</li>
+</ul>
+
+
+<p>Optionally make Ubuntu&#8217;s username policy more sensible (allow underscores)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo "NAME_REGEX=\"[a-z_][a-z0-9_-]*[$]?\"" &gt;&gt; /etc/adduser.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>Creating a ModRails Application @http://some.host.name/appname</h3>
+
+<ul>
+<li>create the user, the appname will be the username:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ adduser &lt;username&gt; (use pwgen or something for the password)</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>create a stub rails app:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rails /home/&lt;username&gt;/rails/testapp </span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Link the testapp to the &#8220;static&#8221; application location</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ln -s /home/&lt;username&gt;/rails/testapp /home/&lt;username&gt;/rails/app</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Link the &#8220;static&#8221; application location into the servers webroot</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ln -s /home/&lt;username&gt;/rails/app/public /var/www/&lt;username&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Create the apache2 conf for the rails app</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo "RailsBaseURI /&lt;username&gt;" &gt; /etc/apache2/sites-available/&lt;username&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Tell apache2 to actually use the app</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ln -s /etc/apache2/sites-available/&lt;username&gt; /etc/apache2/sites-enabled/&lt;username&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Make sure that the new user has ownership of the files</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ chown -R /home/&lt;username&gt;/rails &lt;username&gt;.&lt;username&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Restart apache2 and check to see if it works</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ apache2ctl graceful
+</span><span class='line'>$ wget http://localhost/&lt;username&gt; --server-response --spider # this should return 200 OK</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Create a mysql user and databases for the app</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> $ for db in production test development; do mysql -u root -pMYSQLPASS -e "grant all privileges on &lt;username&gt;_$db.* to '&lt;username&gt;'@'localhost' identified by '&lt;userpassword&gt;'; create database &lt;username&gt;_$db;"  done</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Copy template capistrano deployment files into their <code>home/&lt;username&gt;/rails</code> directory</li>
+</ul>
+
+
+<p>At this point the application will be available running at <code>http://hostname/&lt;username&gt;</code></p>
+
+<p>With one of the <code>deploy.rb</code> files, a savvy rails user can deploy their application to the server with capistrano</p>
+
+<p>A less savvy rails user can connect via ssh and checkout their their rails app to someplace in their home, then symlink it to the <code>~/rails/app</code> directory</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Multi-OS Password Management]]></title>
+    <link href="http://dualistic.com/blog/2008/06/09/multi-os-password-management/"/>
+    <updated>2008-06-09T15:10:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/06/09/multi-os-password-management</id>
+    <content type="html"><![CDATA[<p>It&#8217;s a problem trying to keep track of all of your passwords.  I have a mac laptop, mac workstation at work, and a windows machine at home.  Add to that the myriad of websites, servers and services that I have users and passwords for.  It&#8217;s a mess.</p>
+
+<p>On windows, my password manager of choice is <a href="http://passwordsafe.sourceforge.net/">pwsafe</a>, but it only offers command-line functionality for mac (and presumably linux, though I&#8217;m not sure).  On the Mac, I quite like Keychain, it is tightly integrated with the OS, but the passwords are locked away somewhere.  Supposedly you can leverage the @security@ executable and gain access to it, but then importing/exporting would be a total pain in the ass.</p>
+
+<p>My searches had turned up an app called &#8220;Password Gorilla&#8221;, but it kind of sucked, there appeared to be nothing for me!</p>
+
+<p>Then I ran into <a href="http://www.keepassx.org/">KeePassX</a>, a password management package with binaries for all of the major OS&#8217;s.  I installed it onto the mac: perfect.  It&#8217;s exactly what I wanted.  There is some wonky UI issues (it forgets which password db you are using when you lock it), but it is totally workable.</p>
+
+<p>I plan on using FUSE to create an ssh directory to one of my servers and store the binaries and password database on them.  So far so good!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[openvz and mod_rails]]></title>
+    <link href="http://dualistic.com/blog/2008/05/09/openvz-and-mod_rails/"/>
+    <updated>2008-05-09T16:29:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/05/09/openvz-and-mod_rails</id>
+    <content type="html"><![CDATA[<p>Setting it up was pretty easy, though I had to triple my memory allocation over what I was using with nginx+mongrel.</p>
+
+<ul>
+<li>I created a new virtual machine, but with more memory than usual: <code>PRIVVMPAGES="150000:300000"</code></li>
+<li>I <code>vzctl enter &lt;the new machine&gt;</code></li>
+<li>as root:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ apt-get ruby ruby1.8-dev rubygems apache2 apache2-mpm-prefork build-essential vim
+</span><span class='line'>$ gem install fastthread 
+</span><span class='line'>$ gem install rake (i have rails frozen into my apps, otherwise I would have installed it also)
+</span><span class='line'>$ gem install passenger</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>for some reason, my binaries were not linked, nor the rubygems path exported, so:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ln -s /var/lib/gems/1.8/bin/* /usr/bin (heavy handed, but it works)</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>run <code>passenger-install-apache2-module</code> and follow the instructions</li>
+</ul>
+
+
+<p>after starting apache2, i was able to see my site up and running.  yay!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The History Meme]]></title>
+    <link href="http://dualistic.com/blog/2008/04/18/the-history-meme/"/>
+    <updated>2008-04-18T17:02:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/04/18/the-history-meme</id>
+    <content type="html"><![CDATA[<p><a href="http://diveintomark.org/archives/2008/04/15/history-meme">See Here.</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>chem69:ipm pol$ history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head
+</span><span class='line'>123 cd
+</span><span class='line'>118 ls
+</span><span class='line'>97 hg
+</span><span class='line'>19 vim
+</span><span class='line'>19 script/server
+</span><span class='line'>17 rake
+</span><span class='line'>12 script/generate
+</span><span class='line'>12 cp
+</span><span class='line'>8 ssh
+</span><span class='line'>7 script/plugin</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Applications with Multiple Authn Sources]]></title>
+    <link href="http://dualistic.com/blog/2008/04/17/applications-with-multiple-authn-sources/"/>
+    <updated>2008-04-17T17:11:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/04/17/applications-with-multiple-authn-sources</id>
+    <content type="html"><![CDATA[<p>I&#8217;ve previously written that I want a system that can handle multiple authentication sources.  After hammering on it a bit, there are some pitfalls that exist with this kind of scenario.</p>
+
+<p>First, a recap.  I want a system that can authenticate a user from multiple sources.  The sources will be organized into a priority list.  So, for example, if User1 asks for a page that is restricted, first I check to see if they have a pubcookie or known CAS/SSI(Central Authentication Server/Single Sign On) cookie.  If so, I check to see if they have a user in the system.  If so, then I log them in.  If not, then I create one (noting the authn source) and log them in.  If they don&#8217;t have a cookie, then I send them to a login page.  With their username and password credentials, I try to log them into the list of sources.  If there is only one username that matches that user in my system, I try to log them into that first, otherwise I progress through the list.  If a remote authentication server verifies their username/email/password as a valid user, i check for a local user.  If it exists, I log them in, if not i create a local user, note their authn source, and log them in.</p>
+
+<p>The ramifications of this is that there are allowed to be users with the same username.  However, the  tuple of username, password and authn source is unique.  there will only be one Foo with the password Blarg which is authenticated with my company LDAP server.  There might be a local user with the username Foo, but I&#8217;m assuming that everyone will have different passwords.  If someone did use the same username and password as another person, and they used a higher priority authn service, they would always be the person that would log in as that user.</p>
+
+<p>This is not ideal, I will think on it further.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Textmate ERB <%= and <% different hightlighting]]></title>
+    <link href="http://dualistic.com/blog/2008/04/10/textmate-erb-and-different-hightlighting/"/>
+    <updated>2008-04-10T23:54:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/04/10/textmate-erb-and-different-hightlighting</id>
+    <content type="html"><![CDATA[<p>Ok, so I have been bitten several times when I do something like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Your username is: &lt;% username %&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Why is my username blank?  This is a simple example, but I have run into this a number of times.  It&#8217;s like a missing semicolon problem, but ERB instead of PHP or C.  Strangely enough, even if you specify a puts method, you still get no output:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Your username is: &lt;% puts username %&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(This also will give you nothing)</p>
+
+<p>You need a &lt;%= opening in order to print out anything.  So, it would be nice if Textmate colored them differently.  I went on a quest to make this happen&#8230; and failed.</p>
+
+<p>Ultimately I ended up in the #textmate channel on freenode.  They were very helpful and pointed me to <a href="http://rafb.net/p/DVN7Qh27.html">this replacement grammar for textmate</a>, which for the sake of being complete, I&#8217;ve included Right here:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{   scopeName = 'text.html.ruby';
+</span><span class='line'>    fileTypes = ( 'rhtml', 'erb', 'html.erb' );
+</span><span class='line'>    foldingStartMarker = '(?x)
+</span><span class='line'>        (&lt;(?i:head|body|table|thead|tbody|tfoot|tr|div|select|fieldset|style|script|ul|ol|form|dl)\b.*?&gt;
+</span><span class='line'>        |&lt;!--(?!.*--&gt;)
+</span><span class='line'>        |\{\s*($|\?&gt;\s*$|//|/\*(.*\*/\s*$|(?!.*?\*/)))
+</span><span class='line'>        )';
+</span><span class='line'>    foldingStopMarker = '(?x)
+</span><span class='line'>        (&lt;/(?i:head|body|table|thead|tbody|tfoot|tr|div|select|fieldset|style|script|ul|ol|form|dl)&gt;
+</span><span class='line'>        |^\s*--&gt;
+</span><span class='line'>        |(^|\s)\}
+</span><span class='line'>        )';
+</span><span class='line'>    patterns = (
+</span><span class='line'>        {   name = 'comment.block.erb';
+</span><span class='line'>            begin = '&lt;%+#';
+</span><span class='line'>            end = '%&gt;';
+</span><span class='line'>            captures = { 0 = { name = 'punctuation.definition.comment.erb'; }; };
+</span><span class='line'>        },
+</span><span class='line'>        {   name = 'source.ruby.rails.embedded.substituted.html';
+</span><span class='line'>            begin = '&lt;%+(?!&gt;)=';
+</span><span class='line'>            end = '-?%&gt;';
+</span><span class='line'>            captures = { 0 = { name = 'punctuation.section.embedded.ruby'; }; };
+</span><span class='line'>            patterns = (
+</span><span class='line'>                {   name = 'comment.line.number-sign.ruby';
+</span><span class='line'>                    match = '(#).*?(?=-?%&gt;)';
+</span><span class='line'>                    captures = { 1 = { name = 'punctuation.definition.comment.ruby'; }; };
+</span><span class='line'>                },
+</span><span class='line'>                {   include = 'source.ruby.rails'; },
+</span><span class='line'>            );
+</span><span class='line'>        },
+</span><span class='line'>        {   name = 'source.ruby.rails.embedded.html';
+</span><span class='line'>            begin = '&lt;%+(?!&gt;)[-=]?';
+</span><span class='line'>            end = '-?%&gt;';
+</span><span class='line'>            captures = { 0 = { name = 'punctuation.section.embedded.ruby'; }; };
+</span><span class='line'>            patterns = (
+</span><span class='line'>                {   name = 'comment.line.number-sign.ruby';
+</span><span class='line'>                    match = '(#).*?(?=-?%&gt;)';
+</span><span class='line'>                    captures = { 1 = { name = 'punctuation.definition.comment.ruby'; }; };
+</span><span class='line'>                },
+</span><span class='line'>                {   include = 'source.ruby.rails'; },
+</span><span class='line'>            );
+</span><span class='line'>        },
+</span><span class='line'>        {   include = 'text.html.basic'; },
+</span><span class='line'>    );
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, here&#8217;s how to do it:</p>
+
+<ol>
+<li>In Textmate, go to Bundles > Bundle Editor > Edit Languages (or CTRL-OPT-CMD-L)</li>
+<li>Click to the Ruby on Rails > HTML (Rails) Language grammar, the code will appear in the window to the right.</li>
+<li>Replace the code with the code up above.</li>
+<li>Click Test, if you like to make sure it is good.  Take note of the &#8220;name&#8221; of two of the rules: @source.ruby.rails.embedded.html@ and @source.ruby.rails.embedded.substituted.html@</li>
+<li>Close the Bundle Editor</li>
+<li>I think it&#8217;s easiest to see what you are editing, so open up an erb or rhtml file so you can see what you are fiddling with.  After you have opened a file, continue on.</li>
+<li>Go to TextMate > Preferences (or hit CMD - ,)</li>
+<li>Click on &#8220;Fonts &amp; Colors&#8221;</li>
+<li>In the &#8220;Element&#8221; list, click the &#8216;+&#8217; to add a new element.  Call it something descriptive, I called it &#8220;Ruby HTML Output&#8221;.  In the &#8220;Scope Selector&#8221;, type or paste in @source.ruby.rails.embedded.substituted.html@.  Set the foreground and background color to be what you want.  Be careful, if there&#8217;s no direction, it will use the default foreground and background.  If you do click and choose a color, I couldn&#8217;t figure out how to un-choose and use default again. :(</li>
+<li>Optionally, you can do the same thing and add another Element for the non-output tag (I made it less saturated than the other one).</li>
+</ol>
+
+
+<p>And that&#8217;s it!  Yay for solutions!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails 2.0 Command-line Shortcuts]]></title>
+    <link href="http://dualistic.com/blog/2008/04/08/rails-2-0-command-line-shortcuts/"/>
+    <updated>2008-04-08T14:23:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/04/08/rails-2-0-command-line-shortcuts</id>
+    <content type="html"><![CDATA[<p>I just ran across a little confusion with Rails 2 command-line shortcuts.  By shortcuts, I mean things like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate model pizza size:integer name:string description:text
+</span><span class='line'>      exists  app/models/
+</span><span class='line'>      exists  test/unit/
+</span><span class='line'>      exists  test/fixtures/
+</span><span class='line'>      create  app/models/pizza.rb
+</span><span class='line'>      create  test/unit/pizza_test.rb
+</span><span class='line'>      create  test/fixtures/pizzas.yml
+</span><span class='line'>      exists  db/migrate
+</span><span class='line'>      create  db/migrate/004_create_pizzas.rb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, it went ahead and created the model, test, fixture and migration.  The column definitions were stuffed auto-magically into the migration.</p>
+
+<p>This is really cool, but it has some limitations.  If you are doing anything more complicated than it won&#8217;t work for you.  For example, if we wanted to do a many-to-many relationship with a toppings table, you would have to set that up manually (as far as I know).</p>
+
+<p>The confusion that I referred to earlier has to do with generating a migration.  Let&#8217;s say that I already created my topping model manually by creating an <code>app/model/topping.rb</code> file.  Then it occurs to me that I also need a migration, so I run the following:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate migration CreateTopping name:string price:float</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Unfortunately, this will create the migration file, but the <em>column declarations are ignored</em>.  This is confusing, given the following behavior:</p>
+
+<p>Let&#8217;s say, instead, I created the toppings model with the following command:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate model topping</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This would have generated an empty <code>###_create_toppings.rb</code> migration.  Then I decide to add the columns to it like so:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate migration AddNamePriceToToppings name:string price:float</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Rails does some <em>magic</em> and infers from the migration name that we are adding columns to the topping table.  But why didn&#8217;t it add columns in the earlier example?  My only explanation is that migration generation is for updating already existing models/tables, it&#8217;s not intended for model/table creation.  Arguably, what good is a created table without an associated model?  For simple cases, this holds true.  For a many-to-many situation, where you need to define a join table, this kind of shortcutting will only take you so far.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Terminal Colors in OSX (Dark Blue Madness Fix)]]></title>
+    <link href="http://dualistic.com/blog/2008/04/04/terminal-colors-in-osx-dark-blue-madness-fix/"/>
+    <updated>2008-04-04T17:32:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/04/04/terminal-colors-in-osx-dark-blue-madness-fix</id>
+    <content type="html"><![CDATA[<p>Editor Note:  Just use <a href="http://www.iterm2.com/">iTerm</a>.  It works great.</p>
+
+<p>This is posted in <a href="http://www.infinitered.com/blog/?p=24">other</a> <a href="http://ciaranwal.sh/2007/11/01/customising-colours-in-leopard-terminal">places</a>, but I want to make sure that it doesn&#8217;t get lost to the wilds of the interwebs.</p>
+
+<p>The default black background themes in Terminal suck if you are doing ANSI colors in the terminal.  I like colors in the term, but the dark-blue is aneurysm inducing.  So, after futzing with the defaults a bunch, I decided to see if the internet had any solutions.  By his noodlyness, they did.</p>
+
+<p>So, here&#8217;s what needs doing:</p>
+
+<ol>
+<li>Download the latest <a href="http://www.culater.net/software/SIMBL/SIMBL.php">SIMBL</a> and install it</li>
+<li>Create a <code>~/Library/Application Support/SIMBL/Plugins</code> directory</li>
+<li>Download the <a href="http://ciaranwal.sh/files/TerminalColours.bundle.zip">TerminalColors</a> SIMBL bundle</li>
+<li>Unzip it and copy it to the directory we just created</li>
+<li>Close Terminal</li>
+<li>Optionally, download and run <a href="http://www.infinitered.com/settings/IR_Black.terminal.zip">InfiniteRed&#8217;s theme</a></li>
+<li>If that didn&#8217;t start Terminal, then start it up.</li>
+<li>In the settings there is a &#8220;more&#8221; button with colors that map to ANSI terminal colors.  Change them to your liking!</li>
+</ol>
+
+
+<p>I am going to try to make a terminal theme that matches my favorite TextMate theme, Succulent (<a href="http://wiki.macromates.com/Themes/UserSubmittedThemes">screenshot</a>, <a href="http://www.fearoffish.co.uk/assets/2006/9/26/Succulent_1.tmTheme">download</a>)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Problem with Four Days on Rails]]></title>
+    <link href="http://dualistic.com/blog/2008/04/03/problem-with-four-days-on-rails/"/>
+    <updated>2008-04-03T16:40:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/04/03/problem-with-four-days-on-rails</id>
+    <content type="html"><![CDATA[<p>I am working with a new developer who has Ruby experience, but no Rails experience.  I pointed him at the Rails site and told him to run though some of the tutorials.  I was surprised that the <a href="http://rails.homelinux.org/">Four Days on Rails</a> tutorial had such a weird introduction to database stuff.</p>
+
+<p>When it has you create your database, it has you run the following sql code:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE TABLE `categories` ( 
+</span><span class='line'>  `id` smallint(5) unsigned NOT NULL auto_increment, 
+</span><span class='line'>  `category` varchar(20) NOT NULL default '', 
+</span><span class='line'>  `created_on` timestamp(14) NOT NULL, 
+</span><span class='line'>  `updated_on` timestamp(14) NOT NULL, 
+</span><span class='line'>  PRIMARY KEY  (`id`), 
+</span><span class='line'>  UNIQUE KEY `category_key` (`category`) 
+</span><span class='line'>) TYPE=MyISAM COMMENT='List of categories'; </span></code></pre></td></tr></table></div></figure>
+
+
+<p>What I don&#8217;t get is: how is that any better/easier than giving a quick run through the migration process?  The above code could just as easily been replaced with:</p>
+
+<p>After creating your database, and setting your <code>database.yml</code> connection variables, we will be building a table to hod our To Do list categories.  We will need a model definition for a Category, and using a generator, we get a place to define both the database table for the Categories and the model for a Category.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate model category
+</span><span class='line'>      exists  app/models/
+</span><span class='line'>      exists  test/unit/
+</span><span class='line'>      exists  test/fixtures/
+</span><span class='line'>      create  app/models/category.rb
+</span><span class='line'>      create  test/unit/category_test.rb
+</span><span class='line'>      create  test/fixtures/categories.yml
+</span><span class='line'>      create  db/migrate
+</span><span class='line'>      create  db/migrate/001_create_categories.rb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit the migration so that it looks like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class CreateCategories &lt; ActiveRecord::Migration
+</span><span class='line'>  def self.up
+</span><span class='line'>    create_table "categories", :force =&gt; true do |t|
+</span><span class='line'>      t.column :category,                     :string
+</span><span class='line'>      t.column :created_on,                :datetime
+</span><span class='line'>      t.column :updated_on,                :datetime
+</span><span class='line'>    end
+</span><span class='line'>  end
+</span><span class='line'>
+</span><span class='line'>  def self.down
+</span><span class='line'>    drop_table "categories"
+</span><span class='line'>  end
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then run <code>rake db:migrate</code> and you have your table and you are now ready to edit the model.</p>
+
+<p>I don&#8217;t see this as being worse than the SQL.  Why isn&#8217;t it presented in this more &#8220;railsy&#8221; way?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mercurial, Apache2 and mod_rewrite]]></title>
+    <link href="http://dualistic.com/blog/2008/04/01/mercurial-apache2-and-mod_rewrite/"/>
+    <updated>2008-04-01T18:57:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/04/01/mercurial-apache2-and-mod_rewrite</id>
+    <content type="html"><![CDATA[<p>So, <a href="http://dualistic.com/blog/2008/04/01/redmine-and-mercurial/">as previously mentioned</a>, I had gotten mercurial working in Redmine, but I was having trouble getting mercurial to work with apache2.  Part of the issue is that unlike most webserver environments, most RoR Apache2 -> Mongrel Cluster (Let&#8217;s call this RAM from now on) setups are using mod_rewrite and mod_proxy to do URL jujitsu.  This can (and did) cause a bit of problem for me.</p>
+
+<p>There are a bunch of tutorials online (<a href="http://www.selenic.com/mercurial/wiki/index.cgi/PublishingRepositories">like this one</a>) about how to publish your mercurial repos.  But if you are mod_rewriting all over the place, you need a couple extra steps.</p>
+
+<h3>Tell mod_rewrite to ignore your hg directory</h3>
+
+<p>I had to add this directive at the beginning of my mod_rewrite declarations to ignore the hg directory:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>    RewriteRule ^/hg(.*) - [PT]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>My  apache conf blok looks like this (not dissimilar to the examples):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>    # Setup HG (mercurial) location
+</span><span class='line'>    ScriptAliasMatch ^/hg(.*) /replicated/hg/hgwebdir.cgi$1
+</span><span class='line'>    &lt;Directory /replicated/hg&gt;
+</span><span class='line'>            Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+</span><span class='line'>            AllowOverride None
+</span><span class='line'>            AuthUserFile /replicated/hg/.htpasswd
+</span><span class='line'>            AuthGroupFile /dev/null
+</span><span class='line'>            AuthName "MSU Forge Mercurial Repository"
+</span><span class='line'>            AuthType Basic
+</span><span class='line'>            &lt;Limit POST PUT&gt;
+</span><span class='line'>                    Require valid-user
+</span><span class='line'>            &lt;/Limit&gt;
+</span><span class='line'>    &lt;/Directory&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, it&#8217;s working now, and that&#8217;s lovely. :)  Now, i just wish I could tie the htaccess to the Redmine user tables and use that to Auth against&#8230;  Another day, another project&#8230;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mephisto mongrel cluster (continued)]]></title>
+    <link href="http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued/"/>
+    <updated>2008-04-01T13:55:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued</id>
+    <content type="html"><![CDATA[<p>So, in regards to &#8220;this problem&#8221;:http://pol.llovet.name/2008/3/28/mephisto-mongrel-cluster-stops-responding, the server hasn&#8217;t frozen in 10 hours or so, problem solved?</p>
+
+<p>Here&#8217;s what I did:</p>
+
+<p>I had to install two packages:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@pol:/# apt-get install mysql-client libmysqlclient15-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then I was able to install the mysql gem with the config parameter:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@pol:/# gem install mysql -- --mysql-config=/etc/mysql/my.cnf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You do have to be root (or use sudo) to run those commands.</p>
+
+<p>Then I restarted the mongrel cluster, and it&#8217;s been running well so far.</p>
+
+<p>Hopefully the problem is fixed!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Redmine and Mercurial]]></title>
+    <link href="http://dualistic.com/blog/2008/04/01/redmine-and-mercurial/"/>
+    <updated>2008-04-01T03:07:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/04/01/redmine-and-mercurial</id>
+    <content type="html"><![CDATA[<p>I was setting up a Mercurial repo for Redmine today.  As it turns out, Redmine chokes on initial repositories.  After creating a single file and checking it in as an &#8220;initial commit&#8221; ( I just touched the <code>.hgignore</code> file), it worked just fine.</p>
+
+<p>I am, however, having trouble getting apache2+mercurial to work happily.  For some reason, the <code>hgwebdir.cgi</code> script isn&#8217;t being run, it&#8217;s just spitting out the text.</p>
+
+<p>To add to the problems, I tried running the script from the command-line (it&#8217;s just a python script) and it spewed a bunch of errors (I think the problem is a lack of wsgi libraries, but I&#8217;m not sure).  If I do get it working, I&#8217;ll mention what I did here.</p>
+
+<p>About the Mephisto/mongrel cluster problem, it&#8217;s still hanging every few hours.  I am at a loss as to why, and I don&#8217;t want to just install things until it works.  I like my VMs to be lean, that&#8217;s the whole point.  I tried poking the rails IRC channel about it, but didn&#8217;t get any takers.</p>
+
+<p>UPDATE:  <a href="http://dualistic.com/blog/2008/04/01/mercurial-apache2-and-mod_rewrite/">I finish this up here.</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mephisto mongrel cluster stops responding]]></title>
+    <link href="http://dualistic.com/blog/2008/03/28/mephisto-mongrel-cluster-stops-responding/"/>
+    <updated>2008-03-28T14:46:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/03/28/mephisto-mongrel-cluster-stops-responding</id>
+    <content type="html"><![CDATA[<p>So, this site has only been up for a couple days, but I&#8217;ve had to restart the mongrel cluster twice.  Interestingly, it doesn&#8217;t respond to a mongrel_rails cluster::restart, I have to do a cluster::stop, then a start to get it back up.  Then it works fine for a while.</p>
+
+<p>Nginx seems to be motoring along just fine with no problems.</p>
+
+<p>I am going to implement a change recommended <a href="http://groups.google.com/group/MephistoBlog/browse_thread/thread/38d8db08beef1444">by this google code post</a>.  The fix is to re-install the mysql gem with this option:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'> gem install mysql -- --mysql-config<span class="o">=</span>/path/to/mysql_config
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>However, I don&#8217;t have mysql installed on my virtual machine, since I have a centralized mysql server that I use for all of my virtual machines.  As a result, I don&#8217;t have a mysql config to point to.  So, I installed just the mysql client with the following command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>root@pol:/# apt-get install mysql-client
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This added 23M of extra stuff to the VM, but it also threw a <code>my.cnf</code> into the <code>/etc/mysql</code> dir.</p>
+
+<p>The next step was installing the mysql gem.  The hitch here is that I don&#8217;t have a mysql server or dev stuff installed, so the gem doesn&#8217;t want to compile.  I&#8217;m also curious how active record can work at all without the mysql gem installed&#8230;  I&#8217;m going to ask around for some more information and post it here when I&#8217;ve figure out where to proceed.</p>
+
+<p>UPDATE: <a href="http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued/">I may have solved the problem here.</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[User authentication and authorization in Ruby on Rails]]></title>
+    <link href="http://dualistic.com/blog/2008/03/27/user-authentication-and-authorization-in-ruby-on-rails/"/>
+    <updated>2008-03-27T19:42:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/03/27/user-authentication-and-authorization-in-ruby-on-rails</id>
+    <content type="html"><![CDATA[<p>The system I am working on needs a good authentication (authn) and authorization (authz) system.   So far, I can&#8217;t find anything that would work for me, so it looks like I&#8217;ll have to build one.</p>
+
+<h3>What I need</h3>
+
+<p>The ideal system would have the following features:</p>
+
+<ul>
+<li>Authn against multiple sources (LDAP, CAS, Local DB, etc.)
+
+<ul>
+<li>Authn would have an order that it would check the sources.</li>
+</ul>
+</li>
+<li>An interface to set the sources and to set a mapping from Authn source information to local Authz permissions</li>
+<li>Authz at the controller or model level through the use of roles</li>
+<li>The Authz would have an understanding of an &#8220;owner&#8221; of a model item (if it has_one &#8220;owner&#8221;) and be able to set permissions for the &#8220;owner&#8221;.</li>
+<li>Users can be assembled into groups, and the group can be given a role.  User-level permissions trump Group-level permissions</li>
+<li>An interface to assign groups and roles, and to set permissions for the roles</li>
+<li>An interface to import users from the Authn source into the local app (so that an admin can assign roles/rights to users before they&#8217;ve ever logged in)</li>
+<li>An admin interface to allow users to be self-created (register now!) or only manually/authn created.</li>
+</ul>
+
+
+<h3>What&#8217;s out there</h3>
+
+<p>There&#8217;s already an <a href="http://aclsystem.rubyforge.org/">acl_system2</a> plugin out there that does some of this stuff. It does authentication against the local database, and controller-method level permissions.  But it doesn&#8217;t have a concept of &#8220;owner&#8221;.  So you couldn&#8217;t easily set an object to be &#8220;editable by the owner or an admin&#8221;.  It doesn&#8217;t let you set permissions on the model level.  And it doesn&#8217;t let you use any kind of GUI to change the permissions, it&#8217;s all hard-coded.</p>
+
+<p>Next up is <a href="http://agilewebdevelopment.com/plugins/restful_authentication">restful_authentication</a>, it does just authn, and it doesn&#8217;t auth against any external sources.  That doesn&#8217;t mean it couldn&#8217;t, but it would be nice if it did.  Perhaps it makes sense to use it as just the local authn mechanism, and roll other remote authn mechanisms separately and then put them all under an authn system.  Using the <a href="http://code.google.com/p/rolerequirement/">role_requirement</a> plugin, you can also get roles. But it is still statically defined in the code, there&#8217;s no UI for updating the role permissions during program runtime.</p>
+
+<p>Also, <a href="http://redmine.org">Redmine</a> has a pretty good authn/authz system that will authorize against an LDAP directory.  The way that it&#8217;s organized, it looks like adding more Authz sources is possible.  However it only allows one Role per Person per Project.  That&#8217;s not good enough for what I want.  I want a many to many user/role relationship.  It also doesn&#8217;t have groups or an importer.  That is a problem for us, as we constantly want to add people to projects when they haven&#8217;t yet logged in, and so we have to tell them:  log in, then tell us, then we can add you.  An importer from the LDAP server would be ideal.</p>
+
+<p>Finally, there&#8217;s a cool writeup on implementing <a href="http://www.railsforum.com/viewtopic.php?id=14216">restful authentication with all the bells and whistles</a>.  It&#8217;s a great tutorial for getting authn/authz (using OpenID instead of LDAP) running.  However, it&#8217;s not very modular and still has the the problem of grabbing users form the Authn source (that wouldn&#8217;t have been possible with OpenID anyway, but could have been possible with LDAP).</p>
+
+<h3>Goal</h3>
+
+<p>I&#8217;m going to make what I want, and then I&#8217;ll stick it somewhere for the world to grab it if they want.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Adding themes to mephisto]]></title>
+    <link href="http://dualistic.com/blog/2008/03/27/adding-themes-to-mephisto/"/>
+    <updated>2008-03-27T00:39:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/03/27/adding-themes-to-mephisto</id>
+    <content type="html"><![CDATA[<p>Before I got to writing my setup, I wanted to theme my blog.  So, I went hunting for themes.  There seems to be only one good repository of themes at the <a href="http://mephisto-themes.nanorails.com/gallery">Mephisto Themes Gallery</a>, and it doesn&#8217;t really have that many themes.  Still, I found one I liked.</p>
+
+<p>However, I didn&#8217;t find anywhere how to install the themes.</p>
+
+<p><em>UPDATE</em> You can install themes from the Mephisto Design area.  It does seem to be easier if you have a zip file.  Skip down if you want to manually add a theme to Mephisto.</p>
+
+<h3>Installing using the Mephisto admin area</h3>
+
+<p>First, go to the Design section within the admin area.  There is a button at the top called &#8220;Manage Themes&#8221;.  This will show you the currently installed themes.   Click the &#8220;Import new Theme&#8221; button to add another theme.  From there you can upload a zip file of a theme that you got from the <a href="http://mephisto-themes.nanorails.com/gallery">Mephisto Themes Gallery</a> or you can click on the link in the text that takes you to the <a href="http://mephisto.stikipad.com/help/show/Custom+Templates">Custom Templates</a> area of the Mephisto wiki.  There are also a couple more links there that will take you to other repositories of Mephisto themes.  Still, almost all of them are available at the Themes Gallery, and you get a preview there also, which is enormously helpful.</p>
+
+<p>Download a zip file and import it into Mephisto by using the file input box.</p>
+
+<h3>How to install a theme into Mephisto manually</h3>
+
+<p>I decided that I liked the sharp000 theme (UPDATE: I have subsequently decided it was too dark, and I went with &#8220;Beautiful Day&#8221; I&#8217;d link it, but it&#8217;s hard to deep link into the Themes Gallery).  Unfortunately, it&#8217;s hard to get a direct link to the theme, so I have to download it to my desktop, then upload it to my rails server.  Bummer.  Otherwise I would just wget the url to the server directly.</p>
+
+<p>Once you have the theme, navigate to the <code>themes/site-1</code> directory in your mephisto install. This is where all of the themes live.  It doesn&#8217;t appear that the Gallery zips the folder with the files, so create a directory to hold the theme, I think the name is important, so make it the same as the theme, if you can.  In my case, I created a <code>sharp000</code> directory, then unzipped the files into there.</p>
+
+<p>Inside the theme directory there should now be something that looks like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mongrel@pol:/var/rails/mephisto/themes/site-1/sharp000$ ls
+</span><span class='line'>about.yml  images  javascripts  layouts  preview.png  stylesheets  templates</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then you open up your Mephisto admin and in the settings page, change your theme to the name of the directory for your theme.  In my case it was &#8220;sharp000&#8221;.  I also had to delete the cache files (in the settings area also, click the &#8216;caches&#8217; button) in order for the theme to show up.</p>
+
+<p>Oh, and don&#8217;t forget to update the templates, mine had the template author&#8217;s personal stuff all over it. :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails, Nginx, OpenVZ, Mongrel Cluster & Mephisto]]></title>
+    <link href="http://dualistic.com/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto/"/>
+    <updated>2008-03-26T23:05:00-06:00</updated>
+    <id>http://dualistic.com/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto</id>
+    <content type="html"><![CDATA[<p>Whew, that&#8217;s a mouthful of a title, however, I think it&#8217;s a good one.  I wanted to catch as many keywords as I could because I had a heck of a time getting all of my stuff running, I had to piece it together from goo stretched all over the internet.  But you&#8217;re reading it now, and here&#8217;s how I did it.</p>
+
+<h2>Why</h2>
+
+<p>You can skip this if you want, but I thought a bit of &#8220;why&#8221; would be nice.  I am now doing full-time RoR development.  It seemed like a good idea to keep a blog about the problems I was encountering and how I solved them.  It is so often that my own problems are solved by other people doing just that&#8230; it seemed time to give back.</p>
+
+<h2>Getting started</h2>
+
+<p>I started with a Debian Etch LAMPP(Linux Apache Mysql Postgresql Php) server that was running a bunch of vhosts(virtual hosts) with apache2.  I didn&#8217;t want to disrupt anything already there (I had friends who shared the server with me), but Rails apps aren&#8217;t intended to be virtual-hosted, and doing so doesn&#8217;t work very well.</p>
+
+<p>Ideally I wanted OpenVZ installed, then put each rails app in a virtual machine (VM).  Apache2 would proxy to ports 80 and 443 on the VMs.  Then, the VM would run a lightweight webserver and mongrel cluster.  I decided to run Nginx (pronounced engine-x) as the webserver over lighttpd based on this <a href="http://hostingfu.com/article/nginx-vs-lighttpd-for-a-small-vps">a comparison I found</a>.</p>
+
+<p>So, to summarize my steps:</p>
+
+<ol>
+<li>Install OpenVZ</li>
+<li>Create a VM</li>
+<li>Configure Apache2 to proxy to the VM as a vhost</li>
+<li>Install Nginx and Rails on the VM</li>
+<li>Install Mongrel</li>
+</ol>
+
+
+<p>At this point, I have a VM that I can copy to create more rails apps in the future if I want to.</p>
+
+<p>But for this VM, I want a blog, so I will lastly:</p>
+
+<ul>
+<li>Install Mephisto</li>
+</ul>
+
+
+<p>I need to make sure that all of this works, so I am going to post a series of articles and then link to them from this article. Hopefully, at the end of it, it will take you less time than it took me.  Yay for the internet!</p>
+]]></content>
+  </entry>
   
 </feed>

@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Rails, Nginx, OpenVZ, Mongrel Cluster & Mephisto - Dualistic</title>
+  <meta name="author" content="Pol Llovet">
+
+  
+  <meta name="description" content="        Rails, Nginx, OpenVZ, Mongrel Cluster & Mephisto      &raquo;Mar 26th, 2008      Whew, that&#8217;s a mouthful of a title, however, I think...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://dualistic.com/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto/">
+  <link href="/favicon.png" rel="icon" type="image/png">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Dualistic" type="application/atom+xml">
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Cardo:400,400italic,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Dualistic</a></h1>
+  
+    <h2>Pol Llovet :: Life & Work</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:dualistic.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">blog</a></li>
+  <li><a href="/blog/archives">archive</a></li>
+  <li><a href="/projects">projects</a></li>
+  <li><a href="/about">about</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Rails, Nginx, OpenVZ, Mongrel Cluster & Mephisto</h1>
+    <p class="meta">
+
+
+
+
+
+  
+
+
+
+
+
+
+<a href="/blog/2008/03/27/adding-themes-to-mephisto/" title="next Post:
+Adding themes to mephisto">&raquo;</a>
+<time datetime="2008-03-26T23:05:00-06:00" pubdate  data-updated="true" >Mar 26<span>th</span>, 2008</time></p>
+  </header>
+  
+  <p>Whew, that&#8217;s a mouthful of a title, however, I think it&#8217;s a good one.  I wanted to catch as many keywords as I could because I had a heck of a time getting all of my stuff running, I had to piece it together from goo stretched all over the internet.  But you&#8217;re reading it now, and here&#8217;s how I did it.</p>
+
+<h2>Why</h2>
+
+<p>You can skip this if you want, but I thought a bit of &#8220;why&#8221; would be nice.  I am now doing full-time RoR development.  It seemed like a good idea to keep a blog about the problems I was encountering and how I solved them.  It is so often that my own problems are solved by other people doing just that&#8230; it seemed time to give back.</p>
+
+<h2>Getting started</h2>
+
+<p>I started with a Debian Etch LAMPP(Linux Apache Mysql Postgresql Php) server that was running a bunch of vhosts(virtual hosts) with apache2.  I didn&#8217;t want to disrupt anything already there (I had friends who shared the server with me), but Rails apps aren&#8217;t intended to be virtual-hosted, and doing so doesn&#8217;t work very well.</p>
+
+<p>Ideally I wanted OpenVZ installed, then put each rails app in a virtual machine (VM).  Apache2 would proxy to ports 80 and 443 on the VMs.  Then, the VM would run a lightweight webserver and mongrel cluster.  I decided to run Nginx (pronounced engine-x) as the webserver over lighttpd based on this <a href="http://hostingfu.com/article/nginx-vs-lighttpd-for-a-small-vps">a comparison I found</a>.</p>
+
+<p>So, to summarize my steps:</p>
+
+<ol>
+<li>Install OpenVZ</li>
+<li>Create a VM</li>
+<li>Configure Apache2 to proxy to the VM as a vhost</li>
+<li>Install Nginx and Rails on the VM</li>
+<li>Install Mongrel</li>
+</ol>
+
+
+<p>At this point, I have a VM that I can copy to create more rails apps in the future if I want to.</p>
+
+<p>But for this VM, I want a blog, so I will lastly:</p>
+
+<ul>
+<li>Install Mephisto</li>
+</ul>
+
+
+<p>I need to make sure that all of this works, so I am going to post a series of articles and then link to them from this article. Hopefully, at the end of it, it will take you less time than it took me.  Yay for the internet!</p>
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+  
+
+
+
+
+
+
+<a href="/blog/2008/03/27/adding-themes-to-mephisto/" title="next Post:
+Adding themes to mephisto">&raquo;</a>
+<time datetime="2008-03-26T23:05:00-06:00" pubdate  data-updated="true" >Mar 26<span>th</span>, 2008</time>
+        
+
+
+      </p>
+      
+        <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dualistic.com/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto/" data-via="_pol" data-counturl="http://dualistic.com/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/26/soaping-with-ruby-and-php/">SOAPing With Ruby and PHP</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/">There Has Never Been a Better Time to Be a Self-taught Coder</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/10/23/ruby-dbi-and-mysql-drive/">ruby dbi and mysql driver</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/10/06/apache2-mod_rails-recipe/">apache2 mod_rails recipe</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/06/09/multi-os-password-management/">Multi-OS Password Management</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("_pol", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/_pol" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @_pol</a>
+  
+</section>
+
+
+<section>
+  <h1>Github Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/pol">@pol</a> on Github
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'pol',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Pol Llovet -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+    (function () {
+      var disqus_shortname = 'dualistic';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://dualistic.com/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto/';
+        var disqus_url = 'http://dualistic.com/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto/';
+        var disqus_script = 'embed.js'
+      
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

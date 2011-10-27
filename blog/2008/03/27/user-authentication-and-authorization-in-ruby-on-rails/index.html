@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>User authentication and authorization in Ruby on Rails - Dualistic</title>
+  <meta name="author" content="Pol Llovet">
+
+  
+  <meta name="description" content="        User Authentication and Authorization in Ruby on Rails        &laquo;&raquo;Mar 27th, 2008      The system I am working on needs a good aut...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://dualistic.com/blog/2008/03/27/user-authentication-and-authorization-in-ruby-on-rails/">
+  <link href="/favicon.png" rel="icon" type="image/png">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Dualistic" type="application/atom+xml">
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Cardo:400,400italic,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Dualistic</a></h1>
+  
+    <h2>Pol Llovet :: Life & Work</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:dualistic.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">blog</a></li>
+  <li><a href="/blog/archives">archive</a></li>
+  <li><a href="/projects">projects</a></li>
+  <li><a href="/about">about</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">User Authentication and Authorization in Ruby on Rails</h1>
+    <p class="meta">
+
+
+
+
+
+  
+
+
+
+
+
+  <a href="/blog/2008/03/27/adding-themes-to-mephisto/" title="Previous Post:
+  Adding themes to mephisto">&laquo;</a>
+
+
+<a href="/blog/2008/03/28/mephisto-mongrel-cluster-stops-responding/" title="next Post:
+Mephisto mongrel cluster stops responding">&raquo;</a>
+<time datetime="2008-03-27T19:42:00-06:00" pubdate  data-updated="true" >Mar 27<span>th</span>, 2008</time></p>
+  </header>
+  
+  <p>The system I am working on needs a good authentication (authn) and authorization (authz) system.   So far, I can&#8217;t find anything that would work for me, so it looks like I&#8217;ll have to build one.</p>
+
+<h3>What I need</h3>
+
+<p>The ideal system would have the following features:</p>
+
+<ul>
+<li>Authn against multiple sources (LDAP, CAS, Local DB, etc.)
+
+<ul>
+<li>Authn would have an order that it would check the sources.</li>
+</ul>
+</li>
+<li>An interface to set the sources and to set a mapping from Authn source information to local Authz permissions</li>
+<li>Authz at the controller or model level through the use of roles</li>
+<li>The Authz would have an understanding of an &#8220;owner&#8221; of a model item (if it has_one &#8220;owner&#8221;) and be able to set permissions for the &#8220;owner&#8221;.</li>
+<li>Users can be assembled into groups, and the group can be given a role.  User-level permissions trump Group-level permissions</li>
+<li>An interface to assign groups and roles, and to set permissions for the roles</li>
+<li>An interface to import users from the Authn source into the local app (so that an admin can assign roles/rights to users before they&#8217;ve ever logged in)</li>
+<li>An admin interface to allow users to be self-created (register now!) or only manually/authn created.</li>
+</ul>
+
+
+<h3>What&#8217;s out there</h3>
+
+<p>There&#8217;s already an <a href="http://aclsystem.rubyforge.org/">acl_system2</a> plugin out there that does some of this stuff. It does authentication against the local database, and controller-method level permissions.  But it doesn&#8217;t have a concept of &#8220;owner&#8221;.  So you couldn&#8217;t easily set an object to be &#8220;editable by the owner or an admin&#8221;.  It doesn&#8217;t let you set permissions on the model level.  And it doesn&#8217;t let you use any kind of GUI to change the permissions, it&#8217;s all hard-coded.</p>
+
+<p>Next up is <a href="http://agilewebdevelopment.com/plugins/restful_authentication">restful_authentication</a>, it does just authn, and it doesn&#8217;t auth against any external sources.  That doesn&#8217;t mean it couldn&#8217;t, but it would be nice if it did.  Perhaps it makes sense to use it as just the local authn mechanism, and roll other remote authn mechanisms separately and then put them all under an authn system.  Using the <a href="http://code.google.com/p/rolerequirement/">role_requirement</a> plugin, you can also get roles. But it is still statically defined in the code, there&#8217;s no UI for updating the role permissions during program runtime.</p>
+
+<p>Also, <a href="http://redmine.org">Redmine</a> has a pretty good authn/authz system that will authorize against an LDAP directory.  The way that it&#8217;s organized, it looks like adding more Authz sources is possible.  However it only allows one Role per Person per Project.  That&#8217;s not good enough for what I want.  I want a many to many user/role relationship.  It also doesn&#8217;t have groups or an importer.  That is a problem for us, as we constantly want to add people to projects when they haven&#8217;t yet logged in, and so we have to tell them:  log in, then tell us, then we can add you.  An importer from the LDAP server would be ideal.</p>
+
+<p>Finally, there&#8217;s a cool writeup on implementing <a href="http://www.railsforum.com/viewtopic.php?id=14216">restful authentication with all the bells and whistles</a>.  It&#8217;s a great tutorial for getting authn/authz (using OpenID instead of LDAP) running.  However, it&#8217;s not very modular and still has the the problem of grabbing users form the Authn source (that wouldn&#8217;t have been possible with OpenID anyway, but could have been possible with LDAP).</p>
+
+<h3>Goal</h3>
+
+<p>I&#8217;m going to make what I want, and then I&#8217;ll stick it somewhere for the world to grab it if they want.</p>
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+  
+
+
+
+
+
+  <a href="/blog/2008/03/27/adding-themes-to-mephisto/" title="Previous Post:
+  Adding themes to mephisto">&laquo;</a>
+
+
+<a href="/blog/2008/03/28/mephisto-mongrel-cluster-stops-responding/" title="next Post:
+Mephisto mongrel cluster stops responding">&raquo;</a>
+<time datetime="2008-03-27T19:42:00-06:00" pubdate  data-updated="true" >Mar 27<span>th</span>, 2008</time>
+        
+
+
+      </p>
+      
+        <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dualistic.com/blog/2008/03/27/user-authentication-and-authorization-in-ruby-on-rails/" data-via="_pol" data-counturl="http://dualistic.com/blog/2008/03/27/user-authentication-and-authorization-in-ruby-on-rails/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/26/soaping-with-ruby-and-php/">SOAPing With Ruby and PHP</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/">There Has Never Been a Better Time to Be a Self-taught Coder</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/10/23/ruby-dbi-and-mysql-drive/">ruby dbi and mysql driver</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/10/06/apache2-mod_rails-recipe/">apache2 mod_rails recipe</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/06/09/multi-os-password-management/">Multi-OS Password Management</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("_pol", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/_pol" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @_pol</a>
+  
+</section>
+
+
+<section>
+  <h1>Github Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/pol">@pol</a> on Github
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'pol',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Pol Llovet -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+    (function () {
+      var disqus_shortname = 'dualistic';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://dualistic.com/blog/2008/03/27/user-authentication-and-authorization-in-ruby-on-rails/';
+        var disqus_url = 'http://dualistic.com/blog/2008/03/27/user-authentication-and-authorization-in-ruby-on-rails/';
+        var disqus_script = 'embed.js'
+      
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

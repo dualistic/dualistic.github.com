@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Textmate ERB <%= and <% different hightlighting - Dualistic</title>
+  <meta name="author" content="Pol Llovet">
+
+  
+  <meta name="description" content="        Textmate ERB         &laquo;&raquo;Apr 10th, 2008      Ok, so I have been bitten several times when I do something like:1Your username is: ...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://dualistic.com/blog/2008/04/10/textmate-erb-and-different-hightlighting/">
+  <link href="/favicon.png" rel="icon" type="image/png">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Dualistic" type="application/atom+xml">
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Cardo:400,400italic,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Dualistic</a></h1>
+  
+    <h2>Pol Llovet :: Life & Work</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:dualistic.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">blog</a></li>
+  <li><a href="/blog/archives">archive</a></li>
+  <li><a href="/projects">projects</a></li>
+  <li><a href="/about">about</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Textmate ERB <%= and <% Different Hightlighting</h1>
+    <p class="meta">
+
+
+
+
+
+  
+
+
+
+
+
+  <a href="/blog/2008/04/08/rails-2-0-command-line-shortcuts/" title="Previous Post:
+  Rails 2.0 Command-line Shortcuts">&laquo;</a>
+
+
+<a href="/blog/2008/04/17/applications-with-multiple-authn-sources/" title="next Post:
+Applications with Multiple Authn Sources">&raquo;</a>
+<time datetime="2008-04-10T23:54:00-06:00" pubdate  data-updated="true" >Apr 10<span>th</span>, 2008</time></p>
+  </header>
+  
+  <p>Ok, so I have been bitten several times when I do something like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Your username is: &lt;% username %&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Why is my username blank?  This is a simple example, but I have run into this a number of times.  It&#8217;s like a missing semicolon problem, but ERB instead of PHP or C.  Strangely enough, even if you specify a puts method, you still get no output:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Your username is: &lt;% puts username %&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(This also will give you nothing)</p>
+
+<p>You need a &lt;%= opening in order to print out anything.  So, it would be nice if Textmate colored them differently.  I went on a quest to make this happen&#8230; and failed.</p>
+
+<p>Ultimately I ended up in the #textmate channel on freenode.  They were very helpful and pointed me to <a href="http://rafb.net/p/DVN7Qh27.html">this replacement grammar for textmate</a>, which for the sake of being complete, I&#8217;ve included Right here:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{   scopeName = 'text.html.ruby';
+</span><span class='line'>    fileTypes = ( 'rhtml', 'erb', 'html.erb' );
+</span><span class='line'>    foldingStartMarker = '(?x)
+</span><span class='line'>        (&lt;(?i:head|body|table|thead|tbody|tfoot|tr|div|select|fieldset|style|script|ul|ol|form|dl)\b.*?&gt;
+</span><span class='line'>        |&lt;!--(?!.*--&gt;)
+</span><span class='line'>        |\{\s*($|\?&gt;\s*$|//|/\*(.*\*/\s*$|(?!.*?\*/)))
+</span><span class='line'>        )';
+</span><span class='line'>    foldingStopMarker = '(?x)
+</span><span class='line'>        (&lt;/(?i:head|body|table|thead|tbody|tfoot|tr|div|select|fieldset|style|script|ul|ol|form|dl)&gt;
+</span><span class='line'>        |^\s*--&gt;
+</span><span class='line'>        |(^|\s)\}
+</span><span class='line'>        )';
+</span><span class='line'>    patterns = (
+</span><span class='line'>        {   name = 'comment.block.erb';
+</span><span class='line'>            begin = '&lt;%+#';
+</span><span class='line'>            end = '%&gt;';
+</span><span class='line'>            captures = { 0 = { name = 'punctuation.definition.comment.erb'; }; };
+</span><span class='line'>        },
+</span><span class='line'>        {   name = 'source.ruby.rails.embedded.substituted.html';
+</span><span class='line'>            begin = '&lt;%+(?!&gt;)=';
+</span><span class='line'>            end = '-?%&gt;';
+</span><span class='line'>            captures = { 0 = { name = 'punctuation.section.embedded.ruby'; }; };
+</span><span class='line'>            patterns = (
+</span><span class='line'>                {   name = 'comment.line.number-sign.ruby';
+</span><span class='line'>                    match = '(#).*?(?=-?%&gt;)';
+</span><span class='line'>                    captures = { 1 = { name = 'punctuation.definition.comment.ruby'; }; };
+</span><span class='line'>                },
+</span><span class='line'>                {   include = 'source.ruby.rails'; },
+</span><span class='line'>            );
+</span><span class='line'>        },
+</span><span class='line'>        {   name = 'source.ruby.rails.embedded.html';
+</span><span class='line'>            begin = '&lt;%+(?!&gt;)[-=]?';
+</span><span class='line'>            end = '-?%&gt;';
+</span><span class='line'>            captures = { 0 = { name = 'punctuation.section.embedded.ruby'; }; };
+</span><span class='line'>            patterns = (
+</span><span class='line'>                {   name = 'comment.line.number-sign.ruby';
+</span><span class='line'>                    match = '(#).*?(?=-?%&gt;)';
+</span><span class='line'>                    captures = { 1 = { name = 'punctuation.definition.comment.ruby'; }; };
+</span><span class='line'>                },
+</span><span class='line'>                {   include = 'source.ruby.rails'; },
+</span><span class='line'>            );
+</span><span class='line'>        },
+</span><span class='line'>        {   include = 'text.html.basic'; },
+</span><span class='line'>    );
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, here&#8217;s how to do it:</p>
+
+<ol>
+<li>In Textmate, go to Bundles > Bundle Editor > Edit Languages (or CTRL-OPT-CMD-L)</li>
+<li>Click to the Ruby on Rails > HTML (Rails) Language grammar, the code will appear in the window to the right.</li>
+<li>Replace the code with the code up above.</li>
+<li>Click Test, if you like to make sure it is good.  Take note of the &#8220;name&#8221; of two of the rules: @source.ruby.rails.embedded.html@ and @source.ruby.rails.embedded.substituted.html@</li>
+<li>Close the Bundle Editor</li>
+<li>I think it&#8217;s easiest to see what you are editing, so open up an erb or rhtml file so you can see what you are fiddling with.  After you have opened a file, continue on.</li>
+<li>Go to TextMate > Preferences (or hit CMD - ,)</li>
+<li>Click on &#8220;Fonts &amp; Colors&#8221;</li>
+<li>In the &#8220;Element&#8221; list, click the &#8216;+&#8217; to add a new element.  Call it something descriptive, I called it &#8220;Ruby HTML Output&#8221;.  In the &#8220;Scope Selector&#8221;, type or paste in @source.ruby.rails.embedded.substituted.html@.  Set the foreground and background color to be what you want.  Be careful, if there&#8217;s no direction, it will use the default foreground and background.  If you do click and choose a color, I couldn&#8217;t figure out how to un-choose and use default again. :(</li>
+<li>Optionally, you can do the same thing and add another Element for the non-output tag (I made it less saturated than the other one).</li>
+</ol>
+
+
+<p>And that&#8217;s it!  Yay for solutions!</p>
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+  
+
+
+
+
+
+  <a href="/blog/2008/04/08/rails-2-0-command-line-shortcuts/" title="Previous Post:
+  Rails 2.0 Command-line Shortcuts">&laquo;</a>
+
+
+<a href="/blog/2008/04/17/applications-with-multiple-authn-sources/" title="next Post:
+Applications with Multiple Authn Sources">&raquo;</a>
+<time datetime="2008-04-10T23:54:00-06:00" pubdate  data-updated="true" >Apr 10<span>th</span>, 2008</time>
+        
+
+
+      </p>
+      
+        <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dualistic.com/blog/2008/04/10/textmate-erb-and-different-hightlighting/" data-via="_pol" data-counturl="http://dualistic.com/blog/2008/04/10/textmate-erb-and-different-hightlighting/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/26/soaping-with-ruby-and-php/">SOAPing With Ruby and PHP</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/">There Has Never Been a Better Time to Be a Self-taught Coder</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/10/23/ruby-dbi-and-mysql-drive/">ruby dbi and mysql driver</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/10/06/apache2-mod_rails-recipe/">apache2 mod_rails recipe</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/06/09/multi-os-password-management/">Multi-OS Password Management</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("_pol", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/_pol" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @_pol</a>
+  
+</section>
+
+
+<section>
+  <h1>Github Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/pol">@pol</a> on Github
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'pol',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Pol Llovet -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+    (function () {
+      var disqus_shortname = 'dualistic';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://dualistic.com/blog/2008/04/10/textmate-erb-and-different-hightlighting/';
+        var disqus_url = 'http://dualistic.com/blog/2008/04/10/textmate-erb-and-different-hightlighting/';
+        var disqus_script = 'embed.js'
+      
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

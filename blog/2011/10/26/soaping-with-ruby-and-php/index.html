@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>SOAPing With Ruby and PHP - Dualistic</title>
+  <meta name="author" content="Pol Llovet">
+
+  
+  <meta name="description" content="So, there are some folks on campus who would like to have their faculty&#8217;s journals listed on their faculty pages. This is certainly doable wi...">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://dualistic.com/blog/2011/10/26/soaping-with-ruby-and-php/">
+  <link href="/favicon.png" rel="icon" type="image/png">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Dualistic" type="application/atom+xml">
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Cardo:400,400italic,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Dualistic</a></h1>
+  
+    <h2>Pol Llovet :: Life & Work</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:dualistic.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">blog</a></li>
+  <li><a href="/blog/archives">archive</a></li>
+  <li><a href="/projects">projects</a></li>
+  <li><a href="/about">about</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">SOAPing With Ruby and PHP</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+
+
+  <a href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/" title="Previous Post:
+  There Has Never Been a Better Time to Be a Self-taught Coder">&laquo;</a>
+
+<time datetime="2011-10-26T21:10:00-06:00" pubdate  data-updated="true" >Oct 26<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>So, there are some folks on campus who would like to have their faculty&#8217;s journals listed on their faculty pages. This is certainly doable with some web-scraping, but the Web of Science (Web of Knowledge, actually) has an API, and the folks I have talked to have secured access to said API.</p>
+
+<p>Unfortunately, it is a SOAP API, something which I know nothing about. But, hey, how hard can it be?</p>
+
+<p>My plan is: learn and prototype with ruby, and then fool around a little with PHP (to make sure it works), then make a bid to do the work (and include my already spent time :P ).</p>
+
+<h3>SOAPed up Ruby</h3>
+
+<p>My gem search turned up two candidates, <a href="http://rubygems.org/gems/soap4r">SOAP4R</a> and <a href="http://rubygems.org/gems/savon">Savon</a>.  Of those two, I decided to try out Savon first because it felt newer.</p>
+
+<p>&#8230;later&#8230;</p>
+
+<p>Initial thoughts:</p>
+
+<ul>
+<li>Auth info is sent in the header.  This seems sensible.  The user/pass is base64 encoded, appended to &#8220;Basic &#8220;, and then set in an &#8220;Authorization&#8221; header.  Fine.  Annoyingly, the ruby <code>Base64.encode64()</code> method appends an \n to the encoded string so you have to <code>encode64(string).strip</code> or Mr. SOAP API will throw a 400.</li>
+<li>I have to pretend to build a cookie and send headers on my http requests as though I was holding a cookie, even though I am just pretending. The cookie games feel awkward.</li>
+<li>The ?wsdl business is pretty neat.  I like that the SOAP endpoints can tell you what api calls they respond to. I need to look at this more, can they tell you how to properly form a particular API call?  I mean, just knowing that you can do a :search doesn&#8217;t mean you know the format of the query&#8230;</li>
+</ul>
+
+
+<p>This is doable, and it shouldn&#8217;t even be that hard.  I just need to:</p>
+
+<ol>
+<li>make sure that the school has access, because it is locked down by IP</li>
+<li>figure out the query syntax</li>
+<li>prototype the ruby calls to sort out the query and parse the response strings</li>
+<li>turn the pretty ruby into ugly php. :P</li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Pol Llovet</span></span>
+
+      
+
+
+
+
+
+  
+
+
+
+
+
+  <a href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/" title="Previous Post:
+  There Has Never Been a Better Time to Be a Self-taught Coder">&laquo;</a>
+
+<time datetime="2011-10-26T21:10:00-06:00" pubdate  data-updated="true" >Oct 26<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/prototype/'>prototype</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/soap/'>soap</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dualistic.com/blog/2011/10/26/soaping-with-ruby-and-php/" data-via="_pol" data-counturl="http://dualistic.com/blog/2011/10/26/soaping-with-ruby-and-php/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/10/26/soaping-with-ruby-and-php/">SOAPing With Ruby and PHP</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/">There Has Never Been a Better Time to Be a Self-taught Coder</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/10/23/ruby-dbi-and-mysql-drive/">ruby dbi and mysql driver</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/10/06/apache2-mod_rails-recipe/">apache2 mod_rails recipe</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2008/06/09/multi-os-password-management/">Multi-OS Password Management</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("_pol", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/_pol" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @_pol</a>
+  
+</section>
+
+
+<section>
+  <h1>Github Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/pol">@pol</a> on Github
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'pol',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - Pol Llovet -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+    (function () {
+      var disqus_shortname = 'dualistic';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://dualistic.com/blog/2011/10/26/soaping-with-ruby-and-php/';
+        var disqus_url = 'http://dualistic.com/blog/2011/10/26/soaping-with-ruby-and-php/';
+        var disqus_script = 'embed.js'
+      
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>
