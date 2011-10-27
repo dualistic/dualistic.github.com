@@ -3,8 +3,7 @@ layout: page
 title: "ruby dbi and mysql driver"
 date: 2008-10-23 19:41
 comments: true
-sharing: true
-footer: true
+categories: legacy ruby mysql
 ---
 If you want to do direct access to mysql (or other databse) you can use the dbi gem to do it.  But what the docs don't tell you is that you need to gem install a database driver also.  So if you want to use mysql, you do:
 
