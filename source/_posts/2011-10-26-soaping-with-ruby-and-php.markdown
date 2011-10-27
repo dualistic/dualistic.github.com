@@ -15,6 +15,8 @@ My plan is: learn and prototype with ruby, and then fool around a little with PH
 
 My gem search turned up two candidates, [SOAP4R](http://rubygems.org/gems/soap4r) and [Savon](http://rubygems.org/gems/savon).  Of those two, I decided to try out Savon first because it felt newer.
 
+...later...
+
 Initial thoughts:
 
 * Auth info is sent in the header.  This seems sensible.  The user/pass is base64 encoded, appended to "Basic ", and then set in an "Authorization" header.  Fine.  Annoyingly, the ruby `Base64.encode64()` method appends an \n to the encoded string so you have to `encode64(string).strip` or Mr. SOAP API will throw a 400. 
