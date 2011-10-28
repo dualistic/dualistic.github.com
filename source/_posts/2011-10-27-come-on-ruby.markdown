@@ -6,6 +6,7 @@ comments: true
 categories: [ruby, rvm, soap, pita]
 ---
 I love Ruby, but it can be a total pain in the ass. Not the language, mind you, but the ecosystem.  And the crazy thing is, the Rubygems+RVM setup is basically unparalleled in the development world for flexibility and ease of use.  I really can't think of any other dev environment that is half as cool. So, what's wrong?  Well, let's go on a little journey... 
+<!-- more -->
 
 ## A Simple Problem ##
 
@@ -15,7 +16,7 @@ Note: I am going to include every hiccup I ran into, even those that aren't the 
 
 ### Step 1: RVM ###
 
-This is a fresh install of Ubuntu, so I go to the RVM site, copy the install command and paste it into my terminal:
+This is a fresh, minimal install of Ubuntu, so I go to the RVM site, copy the install command and paste it into my terminal:
 
 ``` bash install rvm (try 1)
 $ bash < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer )
@@ -23,7 +24,7 @@ The program 'curl' is currently not installed.  You can install it by typing:
 sudo apt-get install curl
 ```
 
-**Hitch #1:** Curl isn't installed on fresh Ubuntu.<br /> **Solution:** `sudo apt-get install curl`
+**Hitch #1:** Curl isn't installed on this machine.<br /> **Solution:** `sudo apt-get install curl`
 
 Next try:
 
@@ -34,7 +35,7 @@ bash: line 156: git: command not found
 
 ERROR: Unable to clone the RVM repository, attempted both git:// and https://
 ```
-**Hitch #2:** Git isn't installed on fresh Ubuntu.<br /> **Solution:** `sudo apt-get install git-core`
+**Hitch #2:** Git isn't installed on this machine.<br /> **Solution:** `sudo apt-get install git-core`
 
 Note: I did a quick check of the RVM docs, and it doesn't seem to mention anywhere that git/curl may not be available and what to do about it if they aren't.
 
@@ -254,7 +255,7 @@ And finally, it all works.
 
 1. (minor) RVM doesn't tell you which packages you need in order to use their install scripts
 2. RVM doesn't check for required libs necessary to run rubygems, so everything will compile, but you may still have a nonfunctional system.
-3. RVM also doesn't let you know which optiional libs might be needed by various ruby gems, and the gems don't tell you if it is just a system lib you are missing, or something that needs to be compiled into Ruby.
+3. RVM also doesn't let you know which optional libs might be needed by various ruby gems, and the gems don't tell you if it is just a system lib you are missing, or something that needs to be compiled into Ruby.
 4. Gems that require additional compiled ruby functionality don't check to see if it is available when the gem is installed, it just fails at runtime.
 
 The upshot is that while this is annoying for an experienced user, it could represent a brick wall for a new user.  This should be a straightforward and easy process. And I get the feeling that if I had removed the RVM variable, it would have made the problem even harder to solve because recompiling is harder when you have installed from apt.

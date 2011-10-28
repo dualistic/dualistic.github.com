@@ -7,7 +7,7 @@ sharing: true
 footer: true
 ---
 So, in regards to "this problem":http://pol.llovet.name/2008/3/28/mephisto-mongrel-cluster-stops-responding, the server hasn't frozen in 10 hours or so, problem solved?
-
+<!--more--> 
 Here's what I did:
 
 I had to install two packages:

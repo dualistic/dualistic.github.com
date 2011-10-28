@@ -8,7 +8,7 @@ footer: true
 ---
 
 Whew, that's a mouthful of a title, however, I think it's a good one.  I wanted to catch as many keywords as I could because I had a heck of a time getting all of my stuff running, I had to piece it together from goo stretched all over the internet.  But you're reading it now, and here's how I did it.
-
+<!--more--> 
 ## Why
 
 You can skip this if you want, but I thought a bit of "why" would be nice.  I am now doing full-time RoR development.  It seemed like a good idea to keep a blog about the problems I was encountering and how I solved them.  It is so often that my own problems are solved by other people doing just that... it seemed time to give back.

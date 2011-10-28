@@ -7,7 +7,7 @@ sharing: true
 footer: true
 ---
 I am working with a new developer who has Ruby experience, but no Rails experience.  I pointed him at the Rails site and told him to run though some of the tutorials.  I was surprised that the [Four Days on Rails](http://rails.homelinux.org/) tutorial had such a weird introduction to database stuff.  
-
+<!--more--> 
 When it has you create your database, it has you run the following sql code:
 
 ```

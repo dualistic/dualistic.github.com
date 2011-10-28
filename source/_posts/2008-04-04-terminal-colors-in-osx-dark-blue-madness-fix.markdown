@@ -12,7 +12,7 @@ Editor Note:  Just use [iTerm](http://www.iterm2.com/).  It works great.
 This is posted in [other](http://www.infinitered.com/blog/?p=24) [places](http://ciaranwal.sh/2007/11/01/customising-colours-in-leopard-terminal), but I want to make sure that it doesn't get lost to the wilds of the interwebs.
 
 The default black background themes in Terminal suck if you are doing ANSI colors in the terminal.  I like colors in the term, but the dark-blue is aneurysm inducing.  So, after futzing with the defaults a bunch, I decided to see if the internet had any solutions.  By his noodlyness, they did.  
-
+<!--more--> 
 So, here's what needs doing:
 
 1. Download the latest [SIMBL](http://www.culater.net/software/SIMBL/SIMBL.php) and install it

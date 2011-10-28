@@ -11,7 +11,7 @@ Before I got to writing my setup, I wanted to theme my blog.  So, I went hunting
 However, I didn't find anywhere how to install the themes.  
 
 *UPDATE* You can install themes from the Mephisto Design area.  It does seem to be easier if you have a zip file.  Skip down if you want to manually add a theme to Mephisto.
-
+<!--more--> 
 ### Installing using the Mephisto admin area 
 
 First, go to the Design section within the admin area.  There is a button at the top called "Manage Themes".  This will show you the currently installed themes.   Click the "Import new Theme" button to add another theme.  From there you can upload a zip file of a theme that you got from the [Mephisto Themes Gallery](http://mephisto-themes.nanorails.com/gallery) or you can click on the link in the text that takes you to the [Custom Templates](http://mephisto.stikipad.com/help/show/Custom+Templates) area of the Mephisto wiki.  There are also a couple more links there that will take you to other repositories of Mephisto themes.  Still, almost all of them are available at the Themes Gallery, and you get a preview there also, which is enormously helpful.

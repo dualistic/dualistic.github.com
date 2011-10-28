@@ -8,7 +8,7 @@ categories: [soap, ruby, php, prototype]
 So, there are some folks on campus who would like to have their faculty's journals listed on their faculty pages. This is certainly doable with some web-scraping, but the Web of Science (Web of Knowledge, actually) has an API, and the folks I have talked to have secured access to said API. 
 
 Unfortunately, it is a SOAP API, something which I know nothing about. But, hey, how hard can it be?
-
+<!--more--> 
 My plan is: learn and prototype with ruby, and then fool around a little with PHP (to make sure it works), then make a bid to do the work (and include my already spent time :P ). 
 
 ### SOAPed up Ruby ###

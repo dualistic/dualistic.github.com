@@ -7,7 +7,7 @@ sharing: true
 footer: true
 ---
 The system I am working on needs a good authentication (authn) and authorization (authz) system.   So far, I can't find anything that would work for me, so it looks like I'll have to build one.
-
+<!--more--> 
 ### What I need
 
 The ideal system would have the following features:

@@ -6,7 +6,9 @@ comments: true
 sharing: true
 footer: true
 ---
-I just ran across a little confusion with Rails 2 command-line shortcuts.  By shortcuts, I mean things like this:
+I just ran across a little confusion with Rails 2 command-line shortcuts.  It was while I was teaching a co-worker how to use them. Let's see how things  can be a little confusing...
+<!--more--> 
+By shortcuts, I mean things like this:
 
 ```
 $ script/generate model pizza size:integer name:string description:text

@@ -8,8 +8,8 @@ categories: [apache, mod_rails, puppet]
 I recently had to write a recipe to set up instances of mod_rails apps for apache2.  The goal of this process is to have a server that has apps hosted at http://server/app1, http://server/app2, etc.
 
 The recipe is going to be used to create a puppet script, but it could also be boiled down to a ruby or shell script to easily create app instances for anyone's use.
-
-Assumptions and Server Setup
+<!--more--> 
+### Assumptions and Server Setup ###
 
 * All of this is done as sudo or root
 * The OS has apache2, mysql, sqlite3, ruby, rubygems, git-core and

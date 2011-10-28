@@ -8,7 +8,7 @@ footer: true
 ---
 
 So, this site has only been up for a couple days, but I've had to restart the mongrel cluster twice.  Interestingly, it doesn't respond to a mongrel_rails cluster::restart, I have to do a cluster::stop, then a start to get it back up.  Then it works fine for a while.
-
+<!--more--> 
 Nginx seems to be motoring along just fine with no problems.
 
 I am going to implement a change recommended [by this google code post](http://groups.google.com/group/MephistoBlog/browse_thread/thread/38d8db08beef1444).  The fix is to re-install the mysql gem with this option:

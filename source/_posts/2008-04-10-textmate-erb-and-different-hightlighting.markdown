@@ -6,6 +6,8 @@ comments: true
 sharing: true
 footer: true
 ---
+I can't be the only person that has run into the accidental no-output from erb tags.  Let's use textmate's syntax highlighting to solve this problem (or at least make it less obnoxious).
+<!--more--> 
 Ok, so I have been bitten several times when I do something like:
 
 ```
