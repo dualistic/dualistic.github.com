@@ -4,55 +4,55 @@
         <loc>
             http://dualistic.com/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto/
         </loc>
-        <lastmod>2011-10-26T01:59:11-06:00</lastmod>
+        <lastmod>2011-10-28T13:19:54-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/blog/2008/03/27/adding-themes-to-mephisto/</loc>
-        <lastmod>2011-10-26T01:58:36-06:00</lastmod>
+        <lastmod>2011-10-28T13:19:49-06:00</lastmod>
     </url>
     <url>
         <loc>
             http://dualistic.com/blog/2008/03/27/user-authentication-and-authorization-in-ruby-on-rails/
         </loc>
-        <lastmod>2011-10-26T01:53:03-06:00</lastmod>
+        <lastmod>2011-10-28T13:19:39-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/blog/2008/03/28/mephisto-mongrel-cluster-stops-responding/</loc>
-        <lastmod>2011-10-26T01:50:11-06:00</lastmod>
+        <lastmod>2011-10-28T13:19:28-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/blog/2008/04/01/redmine-and-mercurial/</loc>
-        <lastmod>2011-10-26T01:46:51-06:00</lastmod>
+        <lastmod>2011-10-28T13:19:09-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued/</loc>
-        <lastmod>2011-10-17T02:26:18-06:00</lastmod>
+        <lastmod>2011-10-28T13:19:24-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/blog/2008/04/01/mercurial-apache2-and-mod_rewrite/</loc>
-        <lastmod>2011-10-26T01:44:54-06:00</lastmod>
+        <lastmod>2011-10-28T13:19:18-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/blog/2008/04/03/problem-with-four-days-on-rails/</loc>
-        <lastmod>2011-10-26T01:30:31-06:00</lastmod>
+        <lastmod>2011-10-28T13:18:53-06:00</lastmod>
     </url>
     <url>
         <loc>
             http://dualistic.com/blog/2008/04/04/terminal-colors-in-osx-dark-blue-madness-fix/
         </loc>
-        <lastmod>2011-10-26T01:29:20-06:00</lastmod>
+        <lastmod>2011-10-28T13:18:44-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/blog/2008/04/08/rails-2-0-command-line-shortcuts/</loc>
-        <lastmod>2011-10-26T01:23:53-06:00</lastmod>
+        <lastmod>2011-10-28T13:18:29-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/blog/2008/04/10/textmate-erb-and-different-hightlighting/</loc>
-        <lastmod>2011-10-26T01:21:34-06:00</lastmod>
+        <lastmod>2011-10-28T13:17:42-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/blog/2008/04/17/applications-with-multiple-authn-sources/</loc>
-        <lastmod>2011-10-17T02:15:48-06:00</lastmod>
+        <lastmod>2011-10-28T13:16:16-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/blog/2008/04/18/the-history-meme/</loc>
@@ -64,29 +64,29 @@
     </url>
     <url>
         <loc>http://dualistic.com/blog/2008/06/09/multi-os-password-management/</loc>
-        <lastmod>2011-10-26T00:31:14-06:00</lastmod>
+        <lastmod>2011-10-28T13:15:57-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/blog/2008/10/06/apache2-mod_rails-recipe/</loc>
-        <lastmod>2011-10-27T10:23:41-06:00</lastmod>
+        <lastmod>2011-10-28T13:15:35-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/blog/2008/10/23/ruby-dbi-and-mysql-drive/</loc>
-        <lastmod>2011-10-27T10:22:59-06:00</lastmod>
+        <lastmod>2011-10-28T13:15:14-06:00</lastmod>
     </url>
     <url>
         <loc>
             http://dualistic.com/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/
         </loc>
-        <lastmod>2011-10-27T10:22:48-06:00</lastmod>
+        <lastmod>2011-10-28T13:06:51-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/blog/2011/10/26/soaping-with-ruby-and-php/</loc>
-        <lastmod>2011-10-28T00:55:30-06:00</lastmod>
+        <lastmod>2011-10-28T13:14:34-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/blog/2011/10/27/come-on-ruby/</loc>
-        <lastmod>2011-10-27T23:42:23-06:00</lastmod>
+        <lastmod>2011-10-28T13:14:51-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/404.html</loc>
@@ -98,7 +98,7 @@
     </url>
     <url>
         <loc>http://dualistic.com/blog/archives/</loc>
-        <lastmod>2011-10-28T00:55:30-06:00</lastmod>
+        <lastmod>2011-10-28T13:19:54-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/curriculum_vitae/</loc>
@@ -106,7 +106,7 @@
     </url>
     <url>
         <loc>http://dualistic.com/</loc>
-        <lastmod>2011-10-28T00:55:30-06:00</lastmod>
+        <lastmod>2011-10-28T13:19:54-06:00</lastmod>
     </url>
     <url>
         <loc>http://dualistic.com/projects/</loc>

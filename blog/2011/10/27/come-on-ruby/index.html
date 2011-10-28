@@ -91,6 +91,9 @@
 
 <div class="entry-content"><p>I love Ruby, but it can be a total pain in the ass. Not the language, mind you, but the ecosystem.  And the crazy thing is, the Rubygems+RVM setup is basically unparalleled in the development world for flexibility and ease of use.  I really can&#8217;t think of any other dev environment that is half as cool. So, what&#8217;s wrong?  Well, let&#8217;s go on a little journey&#8230;</p>
 
+<!-- more -->
+
+
 <h2>A Simple Problem</h2>
 
 <p>As mentioned in a <a href="/blog/2011/10/26/soaping-with-ruby-and-php/">prior post</a>, I am doing some messing around with SOAP.  As it happens, I am moving from my development area to try this in a server machine.  No problem.</p>
@@ -99,7 +102,7 @@
 
 <h3>Step 1: RVM</h3>
 
-<p>This is a fresh install of Ubuntu, so I go to the RVM site, copy the install command and paste it into my terminal:</p>
+<p>This is a fresh, minimal install of Ubuntu, so I go to the RVM site, copy the install command and paste it into my terminal:</p>
 
 <figure class='code'><figcaption><span>install rvm (try 1)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -110,7 +113,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>Hitch #1:</strong> Curl isn&#8217;t installed on fresh Ubuntu.<br /> <strong>Solution:</strong> <code>sudo apt-get install curl</code></p>
+<p><strong>Hitch #1:</strong> Curl isn&#8217;t installed on this machine.<br /> <strong>Solution:</strong> <code>sudo apt-get install curl</code></p>
 
 <p>Next try:</p>
 
@@ -127,7 +130,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>Hitch #2:</strong> Git isn&#8217;t installed on fresh Ubuntu.<br /> <strong>Solution:</strong> <code>sudo apt-get install git-core</code></p>
+<p><strong>Hitch #2:</strong> Git isn&#8217;t installed on this machine.<br /> <strong>Solution:</strong> <code>sudo apt-get install git-core</code></p>
 
 <p>Note: I did a quick check of the RVM docs, and it doesn&#8217;t seem to mention anywhere that git/curl may not be available and what to do about it if they aren&#8217;t.</p>
 
@@ -495,7 +498,7 @@
 <ol>
 <li>(minor) RVM doesn&#8217;t tell you which packages you need in order to use their install scripts</li>
 <li>RVM doesn&#8217;t check for required libs necessary to run rubygems, so everything will compile, but you may still have a nonfunctional system.</li>
-<li>RVM also doesn&#8217;t let you know which optiional libs might be needed by various ruby gems, and the gems don&#8217;t tell you if it is just a system lib you are missing, or something that needs to be compiled into Ruby.</li>
+<li>RVM also doesn&#8217;t let you know which optional libs might be needed by various ruby gems, and the gems don&#8217;t tell you if it is just a system lib you are missing, or something that needs to be compiled into Ruby.</li>
 <li>Gems that require additional compiled ruby functionality don&#8217;t check to see if it is available when the gem is installed, it just fails at runtime.</li>
 </ol>
 

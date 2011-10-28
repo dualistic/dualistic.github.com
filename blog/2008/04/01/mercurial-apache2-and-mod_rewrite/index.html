@@ -86,7 +86,11 @@ Problem with Four Days on Rails">&raquo;</a>
   
   <p>So, <a href="/blog/2008/04/01/redmine-and-mercurial/">as previously mentioned</a>, I had gotten mercurial working in Redmine, but I was having trouble getting mercurial to work with apache2.  Part of the issue is that unlike most webserver environments, most RoR Apache2 -> Mongrel Cluster (Let&#8217;s call this RAM from now on) setups are using mod_rewrite and mod_proxy to do URL jujitsu.  This can (and did) cause a bit of problem for me.</p>
 
-<p>There are a bunch of tutorials online (<a href="http://www.selenic.com/mercurial/wiki/index.cgi/PublishingRepositories">like this one</a>) about how to publish your mercurial repos.  But if you are mod_rewriting all over the place, you need a couple extra steps.</p>
+<!--more-->
+
+
+<p>
+There are a bunch of tutorials online (<a href="http://www.selenic.com/mercurial/wiki/index.cgi/PublishingRepositories">like this one</a>) about how to publish your mercurial repos.  But if you are mod_rewriting all over the place, you need a couple extra steps.</p>
 
 <h3>Tell mod_rewrite to ignore your hg directory</h3>
 

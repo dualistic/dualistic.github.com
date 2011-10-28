@@ -86,7 +86,11 @@ Redmine and Mercurial">&raquo;</a>
   
   <p>So, this site has only been up for a couple days, but I&#8217;ve had to restart the mongrel cluster twice.  Interestingly, it doesn&#8217;t respond to a mongrel_rails cluster::restart, I have to do a cluster::stop, then a start to get it back up.  Then it works fine for a while.</p>
 
-<p>Nginx seems to be motoring along just fine with no problems.</p>
+<!--more-->
+
+
+<p>
+Nginx seems to be motoring along just fine with no problems.</p>
 
 <p>I am going to implement a change recommended <a href="http://groups.google.com/group/MephistoBlog/browse_thread/thread/38d8db08beef1444">by this google code post</a>.  The fix is to re-install the mysql gem with this option:</p>
 

@@ -9,7 +9,7 @@
   <meta name="author" content="Pol Llovet">
 
   
-  <meta name="description" content="I just ran across a little confusion with Rails 2 command-line shortcuts.  By shortcuts, I mean things like this:123456789$ script/generate model p...">
+  <meta name="description" content="I just ran across a little confusion with Rails 2 command-line shortcuts.  It was while I was teaching a co-worker how to use them. Let&#8217;s see...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -89,55 +89,14 @@
   </header>
 
 
-  <div class="entry-content"><p>I just ran across a little confusion with Rails 2 command-line shortcuts.  By shortcuts, I mean things like this:</p>
+  <div class="entry-content"><p>I just ran across a little confusion with Rails 2 command-line shortcuts.  It was while I was teaching a co-worker how to use them. Let&#8217;s see how things  can be a little confusing&#8230;</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate model pizza size:integer name:string description:text
-</span><span class='line'>      exists  app/models/
-</span><span class='line'>      exists  test/unit/
-</span><span class='line'>      exists  test/fixtures/
-</span><span class='line'>      create  app/models/pizza.rb
-</span><span class='line'>      create  test/unit/pizza_test.rb
-</span><span class='line'>      create  test/fixtures/pizzas.yml
-</span><span class='line'>      exists  db/migrate
-</span><span class='line'>      create  db/migrate/004_create_pizzas.rb</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As you can see, it went ahead and created the model, test, fixture and migration.  The column definitions were stuffed auto-magically into the migration.</p>
-
-<p>This is really cool, but it has some limitations.  If you are doing anything more complicated than it won&#8217;t work for you.  For example, if we wanted to do a many-to-many relationship with a toppings table, you would have to set that up manually (as far as I know).</p>
-
-<p>The confusion that I referred to earlier has to do with generating a migration.  Let&#8217;s say that I already created my topping model manually by creating an <code>app/model/topping.rb</code> file.  Then it occurs to me that I also need a migration, so I run the following:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate migration CreateTopping name:string price:float</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Unfortunately, this will create the migration file, but the <em>column declarations are ignored</em>.  This is confusing, given the following behavior:</p>
-
-<p>Let&#8217;s say, instead, I created the toppings model with the following command:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate model topping</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This would have generated an empty <code>###_create_toppings.rb</code> migration.  Then I decide to add the columns to it like so:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate migration AddNamePriceToToppings name:string price:float</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Rails does some <em>magic</em> and infers from the migration name that we are adding columns to the topping table.  But why didn&#8217;t it add columns in the earlier example?  My only explanation is that migration generation is for updating already existing models/tables, it&#8217;s not intended for model/table creation.  Arguably, what good is a created table without an associated model?  For simple cases, this holds true.  For a many-to-many situation, where you need to define a join table, this kind of shortcutting will only take you so far.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2008/04/08/rails-2-0-command-line-shortcuts/">Continue &rarr;</a>
+    </footer>
   
 
 
@@ -177,23 +136,12 @@
 
 <p>The default black background themes in Terminal suck if you are doing ANSI colors in the terminal.  I like colors in the term, but the dark-blue is aneurysm inducing.  So, after futzing with the defaults a bunch, I decided to see if the internet had any solutions.  By his noodlyness, they did.</p>
 
-<p>So, here&#8217;s what needs doing:</p>
-
-<ol>
-<li>Download the latest <a href="http://www.culater.net/software/SIMBL/SIMBL.php">SIMBL</a> and install it</li>
-<li>Create a <code>~/Library/Application Support/SIMBL/Plugins</code> directory</li>
-<li>Download the <a href="http://ciaranwal.sh/files/TerminalColours.bundle.zip">TerminalColors</a> SIMBL bundle</li>
-<li>Unzip it and copy it to the directory we just created</li>
-<li>Close Terminal</li>
-<li>Optionally, download and run <a href="http://www.infinitered.com/settings/IR_Black.terminal.zip">InfiniteRed&#8217;s theme</a></li>
-<li>If that didn&#8217;t start Terminal, then start it up.</li>
-<li>In the settings there is a &#8220;more&#8221; button with colors that map to ANSI terminal colors.  Change them to your liking!</li>
-</ol>
-
-
-<p>I am going to try to make a terminal theme that matches my favorite TextMate theme, Succulent (<a href="http://wiki.macromates.com/Themes/UserSubmittedThemes">screenshot</a>, <a href="http://www.fearoffish.co.uk/assets/2006/9/26/Succulent_1.tmTheme">download</a>)</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2008/04/04/terminal-colors-in-osx-dark-blue-madness-fix/">Continue &rarr;</a>
+    </footer>
   
 
 
@@ -229,85 +177,12 @@
 
   <div class="entry-content"><p>I am working with a new developer who has Ruby experience, but no Rails experience.  I pointed him at the Rails site and told him to run though some of the tutorials.  I was surprised that the <a href="http://rails.homelinux.org/">Four Days on Rails</a> tutorial had such a weird introduction to database stuff.</p>
 
-<p>When it has you create your database, it has you run the following sql code:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE TABLE `categories` ( 
-</span><span class='line'>  `id` smallint(5) unsigned NOT NULL auto_increment, 
-</span><span class='line'>  `category` varchar(20) NOT NULL default '', 
-</span><span class='line'>  `created_on` timestamp(14) NOT NULL, 
-</span><span class='line'>  `updated_on` timestamp(14) NOT NULL, 
-</span><span class='line'>  PRIMARY KEY  (`id`), 
-</span><span class='line'>  UNIQUE KEY `category_key` (`category`) 
-</span><span class='line'>) TYPE=MyISAM COMMENT='List of categories'; </span></code></pre></td></tr></table></div></figure>
-
-
-<p>What I don&#8217;t get is: how is that any better/easier than giving a quick run through the migration process?  The above code could just as easily been replaced with:</p>
-
-<p>After creating your database, and setting your <code>database.yml</code> connection variables, we will be building a table to hod our To Do list categories.  We will need a model definition for a Category, and using a generator, we get a place to define both the database table for the Categories and the model for a Category.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate model category
-</span><span class='line'>      exists  app/models/
-</span><span class='line'>      exists  test/unit/
-</span><span class='line'>      exists  test/fixtures/
-</span><span class='line'>      create  app/models/category.rb
-</span><span class='line'>      create  test/unit/category_test.rb
-</span><span class='line'>      create  test/fixtures/categories.yml
-</span><span class='line'>      create  db/migrate
-</span><span class='line'>      create  db/migrate/001_create_categories.rb</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Edit the migration so that it looks like this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class CreateCategories &lt; ActiveRecord::Migration
-</span><span class='line'>  def self.up
-</span><span class='line'>    create_table "categories", :force =&gt; true do |t|
-</span><span class='line'>      t.column :category,                     :string
-</span><span class='line'>      t.column :created_on,                :datetime
-</span><span class='line'>      t.column :updated_on,                :datetime
-</span><span class='line'>    end
-</span><span class='line'>  end
-</span><span class='line'>
-</span><span class='line'>  def self.down
-</span><span class='line'>    drop_table "categories"
-</span><span class='line'>  end
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Then run <code>rake db:migrate</code> and you have your table and you are now ready to edit the model.</p>
-
-<p>I don&#8217;t see this as being worse than the SQL.  Why isn&#8217;t it presented in this more &#8220;railsy&#8221; way?</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2008/04/03/problem-with-four-days-on-rails/">Continue &rarr;</a>
+    </footer>
   
 
 
@@ -343,49 +218,12 @@
 
   <div class="entry-content"><p>So, <a href="/blog/2008/04/01/redmine-and-mercurial/">as previously mentioned</a>, I had gotten mercurial working in Redmine, but I was having trouble getting mercurial to work with apache2.  Part of the issue is that unlike most webserver environments, most RoR Apache2 -> Mongrel Cluster (Let&#8217;s call this RAM from now on) setups are using mod_rewrite and mod_proxy to do URL jujitsu.  This can (and did) cause a bit of problem for me.</p>
 
-<p>There are a bunch of tutorials online (<a href="http://www.selenic.com/mercurial/wiki/index.cgi/PublishingRepositories">like this one</a>) about how to publish your mercurial repos.  But if you are mod_rewriting all over the place, you need a couple extra steps.</p>
-
-<h3>Tell mod_rewrite to ignore your hg directory</h3>
-
-<p>I had to add this directive at the beginning of my mod_rewrite declarations to ignore the hg directory:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>    RewriteRule ^/hg(.*) - [PT]</span></code></pre></td></tr></table></div></figure>
-
-
-<p>My  apache conf blok looks like this (not dissimilar to the examples):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>    # Setup HG (mercurial) location
-</span><span class='line'>    ScriptAliasMatch ^/hg(.*) /replicated/hg/hgwebdir.cgi$1
-</span><span class='line'>    &lt;Directory /replicated/hg&gt;
-</span><span class='line'>            Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
-</span><span class='line'>            AllowOverride None
-</span><span class='line'>            AuthUserFile /replicated/hg/.htpasswd
-</span><span class='line'>            AuthGroupFile /dev/null
-</span><span class='line'>            AuthName "MSU Forge Mercurial Repository"
-</span><span class='line'>            AuthType Basic
-</span><span class='line'>            &lt;Limit POST PUT&gt;
-</span><span class='line'>                    Require valid-user
-</span><span class='line'>            &lt;/Limit&gt;
-</span><span class='line'>    &lt;/Directory&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So, it&#8217;s working now, and that&#8217;s lovely. :)  Now, i just wish I could tie the htaccess to the Redmine user tables and use that to Auth against&#8230;  Another day, another project&#8230;</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2008/04/01/mercurial-apache2-and-mod_rewrite/">Continue &rarr;</a>
+    </footer>
   
 
 
@@ -421,27 +259,12 @@
 
   <div class="entry-content"><p>So, in regards to &#8220;this problem&#8221;:http://pol.llovet.name/2008/3/28/mephisto-mongrel-cluster-stops-responding, the server hasn&#8217;t frozen in 10 hours or so, problem solved?</p>
 
-<p>Here&#8217;s what I did:</p>
-
-<p>I had to install two packages:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>root@pol:/# apt-get install mysql-client libmysqlclient15-dev</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Then I was able to install the mysql gem with the config parameter:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>root@pol:/# gem install mysql -- --mysql-config=/etc/mysql/my.cnf</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You do have to be root (or use sudo) to run those commands.</p>
-
-<p>Then I restarted the mongrel cluster, and it&#8217;s been running well so far.</p>
-
-<p>Hopefully the problem is fixed!</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2008/04/01/mephisto-mongrel-cluster-continued/">Continue &rarr;</a>
+    </footer>
   
 
 
@@ -479,13 +302,12 @@
 
 <p>I am, however, having trouble getting apache2+mercurial to work happily.  For some reason, the <code>hgwebdir.cgi</code> script isn&#8217;t being run, it&#8217;s just spitting out the text.</p>
 
-<p>To add to the problems, I tried running the script from the command-line (it&#8217;s just a python script) and it spewed a bunch of errors (I think the problem is a lack of wsgi libraries, but I&#8217;m not sure).  If I do get it working, I&#8217;ll mention what I did here.</p>
-
-<p>About the Mephisto/mongrel cluster problem, it&#8217;s still hanging every few hours.  I am at a loss as to why, and I don&#8217;t want to just install things until it works.  I like my VMs to be lean, that&#8217;s the whole point.  I tried poking the rails IRC channel about it, but didn&#8217;t get any takers.</p>
-
-<p>UPDATE:  <a href="/blog/2008/04/01/mercurial-apache2-and-mod_rewrite/">I finish this up here.</a></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2008/04/01/redmine-and-mercurial/">Continue &rarr;</a>
+    </footer>
   
 
 
@@ -521,29 +343,12 @@
 
   <div class="entry-content"><p>So, this site has only been up for a couple days, but I&#8217;ve had to restart the mongrel cluster twice.  Interestingly, it doesn&#8217;t respond to a mongrel_rails cluster::restart, I have to do a cluster::stop, then a start to get it back up.  Then it works fine for a while.</p>
 
-<p>Nginx seems to be motoring along just fine with no problems.</p>
-
-<p>I am going to implement a change recommended <a href="http://groups.google.com/group/MephistoBlog/browse_thread/thread/38d8db08beef1444">by this google code post</a>.  The fix is to re-install the mysql gem with this option:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'> gem install mysql -- --mysql-config<span class="o">=</span>/path/to/mysql_config
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>However, I don&#8217;t have mysql installed on my virtual machine, since I have a centralized mysql server that I use for all of my virtual machines.  As a result, I don&#8217;t have a mysql config to point to.  So, I installed just the mysql client with the following command:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>root@pol:/# apt-get install mysql-client
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This added 23M of extra stuff to the VM, but it also threw a <code>my.cnf</code> into the <code>/etc/mysql</code> dir.</p>
-
-<p>The next step was installing the mysql gem.  The hitch here is that I don&#8217;t have a mysql server or dev stuff installed, so the gem doesn&#8217;t want to compile.  I&#8217;m also curious how active record can work at all without the mysql gem installed&#8230;  I&#8217;m going to ask around for some more information and post it here when I&#8217;ve figure out where to proceed.</p>
-
-<p>UPDATE: <a href="/blog/2008/04/01/mephisto-mongrel-cluster-continued/">I may have solved the problem here.</a></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2008/03/28/mephisto-mongrel-cluster-stops-responding/">Continue &rarr;</a>
+    </footer>
   
 
 
@@ -579,42 +384,12 @@
 
   <div class="entry-content"><p>The system I am working on needs a good authentication (authn) and authorization (authz) system.   So far, I can&#8217;t find anything that would work for me, so it looks like I&#8217;ll have to build one.</p>
 
-<h3>What I need</h3>
-
-<p>The ideal system would have the following features:</p>
-
-<ul>
-<li>Authn against multiple sources (LDAP, CAS, Local DB, etc.)
-
-<ul>
-<li>Authn would have an order that it would check the sources.</li>
-</ul>
-</li>
-<li>An interface to set the sources and to set a mapping from Authn source information to local Authz permissions</li>
-<li>Authz at the controller or model level through the use of roles</li>
-<li>The Authz would have an understanding of an &#8220;owner&#8221; of a model item (if it has_one &#8220;owner&#8221;) and be able to set permissions for the &#8220;owner&#8221;.</li>
-<li>Users can be assembled into groups, and the group can be given a role.  User-level permissions trump Group-level permissions</li>
-<li>An interface to assign groups and roles, and to set permissions for the roles</li>
-<li>An interface to import users from the Authn source into the local app (so that an admin can assign roles/rights to users before they&#8217;ve ever logged in)</li>
-<li>An admin interface to allow users to be self-created (register now!) or only manually/authn created.</li>
-</ul>
-
-
-<h3>What&#8217;s out there</h3>
-
-<p>There&#8217;s already an <a href="http://aclsystem.rubyforge.org/">acl_system2</a> plugin out there that does some of this stuff. It does authentication against the local database, and controller-method level permissions.  But it doesn&#8217;t have a concept of &#8220;owner&#8221;.  So you couldn&#8217;t easily set an object to be &#8220;editable by the owner or an admin&#8221;.  It doesn&#8217;t let you set permissions on the model level.  And it doesn&#8217;t let you use any kind of GUI to change the permissions, it&#8217;s all hard-coded.</p>
-
-<p>Next up is <a href="http://agilewebdevelopment.com/plugins/restful_authentication">restful_authentication</a>, it does just authn, and it doesn&#8217;t auth against any external sources.  That doesn&#8217;t mean it couldn&#8217;t, but it would be nice if it did.  Perhaps it makes sense to use it as just the local authn mechanism, and roll other remote authn mechanisms separately and then put them all under an authn system.  Using the <a href="http://code.google.com/p/rolerequirement/">role_requirement</a> plugin, you can also get roles. But it is still statically defined in the code, there&#8217;s no UI for updating the role permissions during program runtime.</p>
-
-<p>Also, <a href="http://redmine.org">Redmine</a> has a pretty good authn/authz system that will authorize against an LDAP directory.  The way that it&#8217;s organized, it looks like adding more Authz sources is possible.  However it only allows one Role per Person per Project.  That&#8217;s not good enough for what I want.  I want a many to many user/role relationship.  It also doesn&#8217;t have groups or an importer.  That is a problem for us, as we constantly want to add people to projects when they haven&#8217;t yet logged in, and so we have to tell them:  log in, then tell us, then we can add you.  An importer from the LDAP server would be ideal.</p>
-
-<p>Finally, there&#8217;s a cool writeup on implementing <a href="http://www.railsforum.com/viewtopic.php?id=14216">restful authentication with all the bells and whistles</a>.  It&#8217;s a great tutorial for getting authn/authz (using OpenID instead of LDAP) running.  However, it&#8217;s not very modular and still has the the problem of grabbing users form the Authn source (that wouldn&#8217;t have been possible with OpenID anyway, but could have been possible with LDAP).</p>
-
-<h3>Goal</h3>
-
-<p>I&#8217;m going to make what I want, and then I&#8217;ll stick it somewhere for the world to grab it if they want.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2008/03/27/user-authentication-and-authorization-in-ruby-on-rails/">Continue &rarr;</a>
+    </footer>
   
 
 
@@ -654,31 +429,12 @@
 
 <p><em>UPDATE</em> You can install themes from the Mephisto Design area.  It does seem to be easier if you have a zip file.  Skip down if you want to manually add a theme to Mephisto.</p>
 
-<h3>Installing using the Mephisto admin area</h3>
-
-<p>First, go to the Design section within the admin area.  There is a button at the top called &#8220;Manage Themes&#8221;.  This will show you the currently installed themes.   Click the &#8220;Import new Theme&#8221; button to add another theme.  From there you can upload a zip file of a theme that you got from the <a href="http://mephisto-themes.nanorails.com/gallery">Mephisto Themes Gallery</a> or you can click on the link in the text that takes you to the <a href="http://mephisto.stikipad.com/help/show/Custom+Templates">Custom Templates</a> area of the Mephisto wiki.  There are also a couple more links there that will take you to other repositories of Mephisto themes.  Still, almost all of them are available at the Themes Gallery, and you get a preview there also, which is enormously helpful.</p>
-
-<p>Download a zip file and import it into Mephisto by using the file input box.</p>
-
-<h3>How to install a theme into Mephisto manually</h3>
-
-<p>I decided that I liked the sharp000 theme (UPDATE: I have subsequently decided it was too dark, and I went with &#8220;Beautiful Day&#8221; I&#8217;d link it, but it&#8217;s hard to deep link into the Themes Gallery).  Unfortunately, it&#8217;s hard to get a direct link to the theme, so I have to download it to my desktop, then upload it to my rails server.  Bummer.  Otherwise I would just wget the url to the server directly.</p>
-
-<p>Once you have the theme, navigate to the <code>themes/site-1</code> directory in your mephisto install. This is where all of the themes live.  It doesn&#8217;t appear that the Gallery zips the folder with the files, so create a directory to hold the theme, I think the name is important, so make it the same as the theme, if you can.  In my case, I created a <code>sharp000</code> directory, then unzipped the files into there.</p>
-
-<p>Inside the theme directory there should now be something that looks like this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mongrel@pol:/var/rails/mephisto/themes/site-1/sharp000$ ls
-</span><span class='line'>about.yml  images  javascripts  layouts  preview.png  stylesheets  templates</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Then you open up your Mephisto admin and in the settings page, change your theme to the name of the directory for your theme.  In my case it was &#8220;sharp000&#8221;.  I also had to delete the cache files (in the settings area also, click the &#8216;caches&#8217; button) in order for the theme to show up.</p>
-
-<p>Oh, and don&#8217;t forget to update the templates, mine had the template author&#8217;s personal stuff all over it. :)</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2008/03/27/adding-themes-to-mephisto/">Continue &rarr;</a>
+    </footer>
   
 
 
@@ -714,39 +470,12 @@
 
   <div class="entry-content"><p>Whew, that&#8217;s a mouthful of a title, however, I think it&#8217;s a good one.  I wanted to catch as many keywords as I could because I had a heck of a time getting all of my stuff running, I had to piece it together from goo stretched all over the internet.  But you&#8217;re reading it now, and here&#8217;s how I did it.</p>
 
-<h2>Why</h2>
-
-<p>You can skip this if you want, but I thought a bit of &#8220;why&#8221; would be nice.  I am now doing full-time RoR development.  It seemed like a good idea to keep a blog about the problems I was encountering and how I solved them.  It is so often that my own problems are solved by other people doing just that&#8230; it seemed time to give back.</p>
-
-<h2>Getting started</h2>
-
-<p>I started with a Debian Etch LAMPP(Linux Apache Mysql Postgresql Php) server that was running a bunch of vhosts(virtual hosts) with apache2.  I didn&#8217;t want to disrupt anything already there (I had friends who shared the server with me), but Rails apps aren&#8217;t intended to be virtual-hosted, and doing so doesn&#8217;t work very well.</p>
-
-<p>Ideally I wanted OpenVZ installed, then put each rails app in a virtual machine (VM).  Apache2 would proxy to ports 80 and 443 on the VMs.  Then, the VM would run a lightweight webserver and mongrel cluster.  I decided to run Nginx (pronounced engine-x) as the webserver over lighttpd based on this <a href="http://hostingfu.com/article/nginx-vs-lighttpd-for-a-small-vps">a comparison I found</a>.</p>
-
-<p>So, to summarize my steps:</p>
-
-<ol>
-<li>Install OpenVZ</li>
-<li>Create a VM</li>
-<li>Configure Apache2 to proxy to the VM as a vhost</li>
-<li>Install Nginx and Rails on the VM</li>
-<li>Install Mongrel</li>
-</ol>
-
-
-<p>At this point, I have a VM that I can copy to create more rails apps in the future if I want to.</p>
-
-<p>But for this VM, I want a blog, so I will lastly:</p>
-
-<ul>
-<li>Install Mephisto</li>
-</ul>
-
-
-<p>I need to make sure that all of this works, so I am going to post a series of articles and then link to them from this article. Hopefully, at the end of it, it will take you less time than it took me.  Yay for the internet!</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto/">Continue &rarr;</a>
+    </footer>
   
 
 

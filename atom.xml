@@ -4,7 +4,7 @@
   <title><![CDATA[Dualistic]]></title>
   <link href="http://dualistic.com/atom.xml" rel="self"/>
   <link href="http://dualistic.com/"/>
-  <updated>2011-10-28T00:55:34-06:00</updated>
+  <updated>2011-10-28T13:20:11-06:00</updated>
   <id>http://dualistic.com/</id>
   <author>
     <name><![CDATA[Pol Llovet]]></name>
@@ -20,6 +20,9 @@
     <id>http://dualistic.com/blog/2011/10/27/come-on-ruby</id>
     <content type="html"><![CDATA[<p>I love Ruby, but it can be a total pain in the ass. Not the language, mind you, but the ecosystem.  And the crazy thing is, the Rubygems+RVM setup is basically unparalleled in the development world for flexibility and ease of use.  I really can&#8217;t think of any other dev environment that is half as cool. So, what&#8217;s wrong?  Well, let&#8217;s go on a little journey&#8230;</p>
 
+<!-- more -->
+
+
 <h2>A Simple Problem</h2>
 
 <p>As mentioned in a <a href="http://dualistic.com/blog/2011/10/26/soaping-with-ruby-and-php/">prior post</a>, I am doing some messing around with SOAP.  As it happens, I am moving from my development area to try this in a server machine.  No problem.</p>
@@ -28,7 +31,7 @@
 
 <h3>Step 1: RVM</h3>
 
-<p>This is a fresh install of Ubuntu, so I go to the RVM site, copy the install command and paste it into my terminal:</p>
+<p>This is a fresh, minimal install of Ubuntu, so I go to the RVM site, copy the install command and paste it into my terminal:</p>
 
 <figure class='code'><figcaption><span>install rvm (try 1)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -39,7 +42,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>Hitch #1:</strong> Curl isn&#8217;t installed on fresh Ubuntu.<br /> <strong>Solution:</strong> <code>sudo apt-get install curl</code></p>
+<p><strong>Hitch #1:</strong> Curl isn&#8217;t installed on this machine.<br /> <strong>Solution:</strong> <code>sudo apt-get install curl</code></p>
 
 <p>Next try:</p>
 
@@ -56,7 +59,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>Hitch #2:</strong> Git isn&#8217;t installed on fresh Ubuntu.<br /> <strong>Solution:</strong> <code>sudo apt-get install git-core</code></p>
+<p><strong>Hitch #2:</strong> Git isn&#8217;t installed on this machine.<br /> <strong>Solution:</strong> <code>sudo apt-get install git-core</code></p>
 
 <p>Note: I did a quick check of the RVM docs, and it doesn&#8217;t seem to mention anywhere that git/curl may not be available and what to do about it if they aren&#8217;t.</p>
 
@@ -424,7 +427,7 @@
 <ol>
 <li>(minor) RVM doesn&#8217;t tell you which packages you need in order to use their install scripts</li>
 <li>RVM doesn&#8217;t check for required libs necessary to run rubygems, so everything will compile, but you may still have a nonfunctional system.</li>
-<li>RVM also doesn&#8217;t let you know which optiional libs might be needed by various ruby gems, and the gems don&#8217;t tell you if it is just a system lib you are missing, or something that needs to be compiled into Ruby.</li>
+<li>RVM also doesn&#8217;t let you know which optional libs might be needed by various ruby gems, and the gems don&#8217;t tell you if it is just a system lib you are missing, or something that needs to be compiled into Ruby.</li>
 <li>Gems that require additional compiled ruby functionality don&#8217;t check to see if it is available when the gem is installed, it just fails at runtime.</li>
 </ol>
 
@@ -444,7 +447,11 @@
 
 <p>Unfortunately, it is a SOAP API, something which I know nothing about. But, hey, how hard can it be?</p>
 
-<p>My plan is: learn and prototype with ruby, and then fool around a little with PHP (to make sure it works), then make a bid to do the work (and include my already spent time :P ).</p>
+<!--more-->
+
+
+<p>
+My plan is: learn and prototype with ruby, and then fool around a little with PHP (to make sure it works), then make a bid to do the work (and include my already spent time :P ).</p>
 
 <h3>SOAPed up Ruby</h3>
 
@@ -630,7 +637,11 @@ print_r($search_response);
 
 <p>I hate to say it but to be honest, there has never been a better time to <em>not</em> be in the process of getting a computer science degree.  I work in academia, so this is a really tough thing to admit, but I think it&#8217;s true.  It&#8217;s not just the spiraling cost of education, and the cost/benefit analysis of tuition. The whole situation is changing.</p>
 
-<p>The biggest game-changer, I think, is that there is a ridiculous amount of opportunity out there for free.  It used to be that you had to go to university for the opportunity to get practice doing the work.  This isn&#8217;t the case anymore. Employers are still mostly interested in examples of your work (basically, a portfolio of code), but with open source being what it is, the world is overflowing with public projects to work on.  If you spent four years working food service and spending your off time coding on open source projects (with the same amount of time that you would have spent schooling), you would end up better off.  Probably wildly better off.  Many CS grads enter the job market with nothing but credentials and examples of canned homework projects.  Sure, they know the basics of algorithms, but that is just a small part of what software engineering is.</p>
+<!--more-->
+
+
+<p>
+The biggest game-changer, I think, is that there is a ridiculous amount of opportunity out there for free.  It used to be that you had to go to university for the opportunity to get practice doing the work.  This isn&#8217;t the case anymore. Employers are still mostly interested in examples of your work (basically, a portfolio of code), but with open source being what it is, the world is overflowing with public projects to work on.  If you spent four years working food service and spending your off time coding on open source projects (with the same amount of time that you would have spent schooling), you would end up better off.  Probably wildly better off.  Many CS grads enter the job market with nothing but credentials and examples of canned homework projects.  Sure, they know the basics of algorithms, but that is just a small part of what software engineering is.</p>
 
 <p>Self-taught coders are often preferred over graduates because they have demonstrated at least one critical skill: the ability to independently find solutions to get things done.  If they have worked on an active open source project, then they have another critical coveted skill: the ability to collaboratively work on software projects with other developers.</p>
 
@@ -647,7 +658,13 @@ print_r($search_response);
     <link href="http://dualistic.com/blog/2008/10/23/ruby-dbi-and-mysql-drive/"/>
     <updated>2008-10-23T19:41:00-06:00</updated>
     <id>http://dualistic.com/blog/2008/10/23/ruby-dbi-and-mysql-drive</id>
-    <content type="html"><![CDATA[<p>If you want to do direct access to mysql (or other databse) you can use the dbi gem to do it.  But what the docs don&#8217;t tell you is that you need to gem install a database driver also.  So if you want to use mysql, you do:</p>
+    <content type="html"><![CDATA[<p>If you want to do direct access to mysql (or other databse) you can use the dbi gem to do it.  But what the docs don&#8217;t tell you is that you need to gem install a database driver also.</p>
+
+<!--more-->
+
+
+<p>
+So if you want to use mysql, you do:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo gem install dbi dbd-mysql
@@ -698,7 +715,12 @@ If you are getting this error:</p>
 
 <p>The recipe is going to be used to create a puppet script, but it could also be boiled down to a ruby or shell script to easily create app instances for anyone&#8217;s use.</p>
 
-<p>Assumptions and Server Setup</p>
+<!--more-->
+
+
+<p></p>
+
+<h3>Assumptions and Server Setup</h3>
 
 <ul>
 <li>All of this is done as sudo or root</li>
@@ -842,9 +864,13 @@ subversion installed</li>
     <link href="http://dualistic.com/blog/2008/06/09/multi-os-password-management/"/>
     <updated>2008-06-09T15:10:00-06:00</updated>
     <id>http://dualistic.com/blog/2008/06/09/multi-os-password-management</id>
-    <content type="html"><![CDATA[<p>It&#8217;s a problem trying to keep track of all of your passwords.  I have a mac laptop, mac workstation at work, and a windows machine at home.  Add to that the myriad of websites, servers and services that I have users and passwords for.  It&#8217;s a mess.</p>
+    <content type="html"><![CDATA[<p>It&#8217;s a problem trying to keep track of all of your passwords.  I have a mac laptop, mac workstation at work, and a windows machine at home.  Add to that the myriad of websites, servers and services that I have users and passwords for.  It&#8217;s a mess.  However, I managed to find a perfect solution&#8230;</p>
 
-<p>On windows, my password manager of choice is <a href="http://passwordsafe.sourceforge.net/">pwsafe</a>, but it only offers command-line functionality for mac (and presumably linux, though I&#8217;m not sure).  On the Mac, I quite like Keychain, it is tightly integrated with the OS, but the passwords are locked away somewhere.  Supposedly you can leverage the @security@ executable and gain access to it, but then importing/exporting would be a total pain in the ass.</p>
+<!--more-->
+
+
+<p>
+On windows, my password manager of choice is <a href="http://passwordsafe.sourceforge.net/">pwsafe</a>, but it only offers command-line functionality for mac (and presumably linux, though I&#8217;m not sure).  On the Mac, I quite like Keychain, it is tightly integrated with the OS, but the passwords are locked away somewhere.  Supposedly you can leverage the @security@ executable and gain access to it, but then importing/exporting would be a total pain in the ass.</p>
 
 <p>My searches had turned up an app called &#8220;Password Gorilla&#8221;, but it kind of sucked, there appeared to be nothing for me!</p>
 
@@ -936,7 +962,11 @@ subversion installed</li>
     <id>http://dualistic.com/blog/2008/04/17/applications-with-multiple-authn-sources</id>
     <content type="html"><![CDATA[<p>I&#8217;ve previously written that I want a system that can handle multiple authentication sources.  After hammering on it a bit, there are some pitfalls that exist with this kind of scenario.</p>
 
-<p>First, a recap.  I want a system that can authenticate a user from multiple sources.  The sources will be organized into a priority list.  So, for example, if User1 asks for a page that is restricted, first I check to see if they have a pubcookie or known CAS/SSI(Central Authentication Server/Single Sign On) cookie.  If so, I check to see if they have a user in the system.  If so, then I log them in.  If not, then I create one (noting the authn source) and log them in.  If they don&#8217;t have a cookie, then I send them to a login page.  With their username and password credentials, I try to log them into the list of sources.  If there is only one username that matches that user in my system, I try to log them into that first, otherwise I progress through the list.  If a remote authentication server verifies their username/email/password as a valid user, i check for a local user.  If it exists, I log them in, if not i create a local user, note their authn source, and log them in.</p>
+<!--more-->
+
+
+<p>
+First, a recap.  I want a system that can authenticate a user from multiple sources.  The sources will be organized into a priority list.  So, for example, if User1 asks for a page that is restricted, first I check to see if they have a pubcookie or known CAS/SSI(Central Authentication Server/Single Sign On) cookie.  If so, I check to see if they have a user in the system.  If so, then I log them in.  If not, then I create one (noting the authn source) and log them in.  If they don&#8217;t have a cookie, then I send them to a login page.  With their username and password credentials, I try to log them into the list of sources.  If there is only one username that matches that user in my system, I try to log them into that first, otherwise I progress through the list.  If a remote authentication server verifies their username/email/password as a valid user, i check for a local user.  If it exists, I log them in, if not i create a local user, note their authn source, and log them in.</p>
 
 <p>The ramifications of this is that there are allowed to be users with the same username.  However, the  tuple of username, password and authn source is unique.  there will only be one Foo with the password Blarg which is authenticated with my company LDAP server.  There might be a local user with the username Foo, but I&#8217;m assuming that everyone will have different passwords.  If someone did use the same username and password as another person, and they used a higher priority authn service, they would always be the person that would log in as that user.</p>
 
@@ -949,7 +979,13 @@ subversion installed</li>
     <link href="http://dualistic.com/blog/2008/04/10/textmate-erb-and-different-hightlighting/"/>
     <updated>2008-04-10T23:54:00-06:00</updated>
     <id>http://dualistic.com/blog/2008/04/10/textmate-erb-and-different-hightlighting</id>
-    <content type="html"><![CDATA[<p>Ok, so I have been bitten several times when I do something like:</p>
+    <content type="html"><![CDATA[<p>I can&#8217;t be the only person that has run into the accidental no-output from erb tags.  Let&#8217;s use textmate&#8217;s syntax highlighting to solve this problem (or at least make it less obnoxious).</p>
+
+<!--more-->
+
+
+<p>
+Ok, so I have been bitten several times when I do something like:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>Your username is: &lt;% username %&gt;</span></code></pre></td></tr></table></div></figure>
@@ -1084,7 +1120,13 @@ subversion installed</li>
     <link href="http://dualistic.com/blog/2008/04/08/rails-2-0-command-line-shortcuts/"/>
     <updated>2008-04-08T14:23:00-06:00</updated>
     <id>http://dualistic.com/blog/2008/04/08/rails-2-0-command-line-shortcuts</id>
-    <content type="html"><![CDATA[<p>I just ran across a little confusion with Rails 2 command-line shortcuts.  By shortcuts, I mean things like this:</p>
+    <content type="html"><![CDATA[<p>I just ran across a little confusion with Rails 2 command-line shortcuts.  It was while I was teaching a co-worker how to use them. Let&#8217;s see how things  can be a little confusing&#8230;</p>
+
+<!--more-->
+
+
+<p>
+By shortcuts, I mean things like this:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1145,7 +1187,11 @@ subversion installed</li>
 
 <p>The default black background themes in Terminal suck if you are doing ANSI colors in the terminal.  I like colors in the term, but the dark-blue is aneurysm inducing.  So, after futzing with the defaults a bunch, I decided to see if the internet had any solutions.  By his noodlyness, they did.</p>
 
-<p>So, here&#8217;s what needs doing:</p>
+<!--more-->
+
+
+<p>
+So, here&#8217;s what needs doing:</p>
 
 <ol>
 <li>Download the latest <a href="http://www.culater.net/software/SIMBL/SIMBL.php">SIMBL</a> and install it</li>
@@ -1170,7 +1216,11 @@ subversion installed</li>
     <id>http://dualistic.com/blog/2008/04/03/problem-with-four-days-on-rails</id>
     <content type="html"><![CDATA[<p>I am working with a new developer who has Ruby experience, but no Rails experience.  I pointed him at the Rails site and told him to run though some of the tutorials.  I was surprised that the <a href="http://rails.homelinux.org/">Four Days on Rails</a> tutorial had such a weird introduction to database stuff.</p>
 
-<p>When it has you create your database, it has you run the following sql code:</p>
+<!--more-->
+
+
+<p>
+When it has you create your database, it has you run the following sql code:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1257,7 +1307,11 @@ subversion installed</li>
     <id>http://dualistic.com/blog/2008/04/01/mercurial-apache2-and-mod_rewrite</id>
     <content type="html"><![CDATA[<p>So, <a href="http://dualistic.com/blog/2008/04/01/redmine-and-mercurial/">as previously mentioned</a>, I had gotten mercurial working in Redmine, but I was having trouble getting mercurial to work with apache2.  Part of the issue is that unlike most webserver environments, most RoR Apache2 -> Mongrel Cluster (Let&#8217;s call this RAM from now on) setups are using mod_rewrite and mod_proxy to do URL jujitsu.  This can (and did) cause a bit of problem for me.</p>
 
-<p>There are a bunch of tutorials online (<a href="http://www.selenic.com/mercurial/wiki/index.cgi/PublishingRepositories">like this one</a>) about how to publish your mercurial repos.  But if you are mod_rewriting all over the place, you need a couple extra steps.</p>
+<!--more-->
+
+
+<p>
+There are a bunch of tutorials online (<a href="http://www.selenic.com/mercurial/wiki/index.cgi/PublishingRepositories">like this one</a>) about how to publish your mercurial repos.  But if you are mod_rewriting all over the place, you need a couple extra steps.</p>
 
 <h3>Tell mod_rewrite to ignore your hg directory</h3>
 
@@ -1308,7 +1362,11 @@ subversion installed</li>
     <id>http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued</id>
     <content type="html"><![CDATA[<p>So, in regards to &#8220;this problem&#8221;:http://pol.llovet.name/2008/3/28/mephisto-mongrel-cluster-stops-responding, the server hasn&#8217;t frozen in 10 hours or so, problem solved?</p>
 
-<p>Here&#8217;s what I did:</p>
+<!--more-->
+
+
+<p>
+Here&#8217;s what I did:</p>
 
 <p>I had to install two packages:</p>
 
@@ -1339,7 +1397,11 @@ subversion installed</li>
 
 <p>I am, however, having trouble getting apache2+mercurial to work happily.  For some reason, the <code>hgwebdir.cgi</code> script isn&#8217;t being run, it&#8217;s just spitting out the text.</p>
 
-<p>To add to the problems, I tried running the script from the command-line (it&#8217;s just a python script) and it spewed a bunch of errors (I think the problem is a lack of wsgi libraries, but I&#8217;m not sure).  If I do get it working, I&#8217;ll mention what I did here.</p>
+<!--more-->
+
+
+<p>
+To add to the problems, I tried running the script from the command-line (it&#8217;s just a python script) and it spewed a bunch of errors (I think the problem is a lack of wsgi libraries, but I&#8217;m not sure).  If I do get it working, I&#8217;ll mention what I did here.</p>
 
 <p>About the Mephisto/mongrel cluster problem, it&#8217;s still hanging every few hours.  I am at a loss as to why, and I don&#8217;t want to just install things until it works.  I like my VMs to be lean, that&#8217;s the whole point.  I tried poking the rails IRC channel about it, but didn&#8217;t get any takers.</p>
 
@@ -1354,7 +1416,11 @@ subversion installed</li>
     <id>http://dualistic.com/blog/2008/03/28/mephisto-mongrel-cluster-stops-responding</id>
     <content type="html"><![CDATA[<p>So, this site has only been up for a couple days, but I&#8217;ve had to restart the mongrel cluster twice.  Interestingly, it doesn&#8217;t respond to a mongrel_rails cluster::restart, I have to do a cluster::stop, then a start to get it back up.  Then it works fine for a while.</p>
 
-<p>Nginx seems to be motoring along just fine with no problems.</p>
+<!--more-->
+
+
+<p>
+Nginx seems to be motoring along just fine with no problems.</p>
 
 <p>I am going to implement a change recommended <a href="http://groups.google.com/group/MephistoBlog/browse_thread/thread/38d8db08beef1444">by this google code post</a>.  The fix is to re-install the mysql gem with this option:</p>
 
@@ -1384,6 +1450,11 @@ subversion installed</li>
     <updated>2008-03-27T19:42:00-06:00</updated>
     <id>http://dualistic.com/blog/2008/03/27/user-authentication-and-authorization-in-ruby-on-rails</id>
     <content type="html"><![CDATA[<p>The system I am working on needs a good authentication (authn) and authorization (authz) system.   So far, I can&#8217;t find anything that would work for me, so it looks like I&#8217;ll have to build one.</p>
+
+<!--more-->
+
+
+<p></p>
 
 <h3>What I need</h3>
 
@@ -1433,6 +1504,11 @@ subversion installed</li>
 
 <p><em>UPDATE</em> You can install themes from the Mephisto Design area.  It does seem to be easier if you have a zip file.  Skip down if you want to manually add a theme to Mephisto.</p>
 
+<!--more-->
+
+
+<p></p>
+
 <h3>Installing using the Mephisto admin area</h3>
 
 <p>First, go to the Design section within the admin area.  There is a button at the top called &#8220;Manage Themes&#8221;.  This will show you the currently installed themes.   Click the &#8220;Import new Theme&#8221; button to add another theme.  From there you can upload a zip file of a theme that you got from the <a href="http://mephisto-themes.nanorails.com/gallery">Mephisto Themes Gallery</a> or you can click on the link in the text that takes you to the <a href="http://mephisto.stikipad.com/help/show/Custom+Templates">Custom Templates</a> area of the Mephisto wiki.  There are also a couple more links there that will take you to other repositories of Mephisto themes.  Still, almost all of them are available at the Themes Gallery, and you get a preview there also, which is enormously helpful.</p>
@@ -1465,6 +1541,11 @@ subversion installed</li>
     <updated>2008-03-26T23:05:00-06:00</updated>
     <id>http://dualistic.com/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto</id>
     <content type="html"><![CDATA[<p>Whew, that&#8217;s a mouthful of a title, however, I think it&#8217;s a good one.  I wanted to catch as many keywords as I could because I had a heck of a time getting all of my stuff running, I had to piece it together from goo stretched all over the internet.  But you&#8217;re reading it now, and here&#8217;s how I did it.</p>
+
+<!--more-->
+
+
+<p></p>
 
 <h2>Why</h2>
 
