@@ -9,7 +9,7 @@
   <meta name="author" content="Pol Llovet">
 
   
-  <meta name="description" content="So, there are some folks on campus who would like to have their faculty&#8217;s journals listed on their faculty pages. This is certainly doable wi...">
+  <meta name="description" content="I love Ruby, but it can be a total pain in the ass. Not the language, mind you, but the ecosystem.  And the crazy thing is, the Rubygems+RVM setup ...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,455 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2011/10/27/come-on-ruby/">I Know We Can Do Better, Ruby (a Simple Setup in 8 Excruciating Steps)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+
+
+<time datetime="2011-10-27T22:05:00-06:00" pubdate  data-updated="true" >Oct 27<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I love Ruby, but it can be a total pain in the ass. Not the language, mind you, but the ecosystem.  And the crazy thing is, the Rubygems+RVM setup is basically unparalleled in the development world for flexibility and ease of use.  I really can&#8217;t think of any other dev environment that is half as cool. So, what&#8217;s wrong?  Well, let&#8217;s go on a little journey&#8230;</p>
+
+<h2>A Simple Problem</h2>
+
+<p>As mentioned in a <a href="/blog/2011/10/26/soaping-with-ruby-and-php/">prior post</a>, I am doing some messing around with SOAP.  As it happens, I am moving from my development area to try this in a server machine.  No problem.</p>
+
+<p>Note: I am going to include every hiccup I ran into, even those that aren&#8217;t the fault of the Ruby ecosystem, just to be thorough.  I am just tracing the steps that a complete newb would.</p>
+
+<h3>Step 1: RVM</h3>
+
+<p>This is a fresh install of Ubuntu, so I go to the RVM site, copy the install command and paste it into my terminal:</p>
+
+<figure class='code'><figcaption><span>install rvm (try 1)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bash &lt; &lt;<span class="o">(</span>curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer <span class="o">)</span>
+</span><span class='line'>The program <span class="s1">&#39;curl&#39;</span> is currently not installed.  You can install it by typing:
+</span><span class='line'>sudo apt-get install curl
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Hitch #1:</strong> Curl isn&#8217;t installed on fresh Ubuntu.<br /> <strong>Solution:</strong> <code>sudo apt-get install curl</code></p>
+
+<p>Next try:</p>
+
+<figure class='code'><figcaption><span>install rvm (try 2)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bash &lt; &lt;<span class="o">(</span>curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer <span class="o">)</span>
+</span><span class='line'>bash: line 154: git: <span class="nb">command </span>not found
+</span><span class='line'>bash: line 156: git: <span class="nb">command </span>not found
+</span><span class='line'>
+</span><span class='line'>ERROR: Unable to clone the RVM repository, attempted both git:// and https://
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Hitch #2:</strong> Git isn&#8217;t installed on fresh Ubuntu.<br /> <strong>Solution:</strong> <code>sudo apt-get install git-core</code></p>
+
+<p>Note: I did a quick check of the RVM docs, and it doesn&#8217;t seem to mention anywhere that git/curl may not be available and what to do about it if they aren&#8217;t.</p>
+
+<figure class='code'><figcaption><span>install rvm (try 3)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bash &lt; &lt;<span class="o">(</span>curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer <span class="o">)</span>
+</span><span class='line'>Initialized empty Git repository in /home/pol/.rvm/src/rvm/.git/
+</span><span class='line'>...SNIP...
+</span><span class='line'><span class="c"># For JRuby, install the following:</span>
+</span><span class='line'>  jruby: /usr/bin/apt-get install curl g++ openjdk-6-jre-headless
+</span><span class='line'>  jruby-head: /usr/bin/apt-get install ant openjdk-6-jdk
+</span><span class='line'>
+</span><span class='line'><span class="c"># For IronRuby, install the following:</span>
+</span><span class='line'>  ironruby: /usr/bin/apt-get install curl mono-2.0-devel
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Success! this point RVM installs cleanly, and after logging in/out (or <code>source ~/.bashrc</code>), RVM is ready to go.  However, it is of note that the WALL OF TEXT that RVM spits out is exceptionally daunting.  It would be nice if the last thing shown was generally relevant (like, hey, you need to restart your shell), not here&#8217;s what you need for IronRuby.  I know, I know, RTFM, but&#8230; it&#8217;s a thing.</p>
+
+<h3>Step 2: Ruby</h3>
+
+<p>I need ruby 1.9.2, so let&#8217;s grab that.</p>
+
+<figure class='code'><figcaption><span>install ruby 1.9.2</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rvm install ruby-1.9.2-p290
+</span><span class='line'>Installing Ruby from <span class="nb">source </span>to: /home/pol/.rvm/rubies/ruby-1.9.2-p290, this may take a <span class="k">while </span>depending on your cpu<span class="o">(</span>s<span class="o">)</span>...
+</span><span class='line'>
+</span><span class='line'>ruby-1.9.2-p290 - <span class="c">#fetching </span>
+</span><span class='line'>ruby-1.9.2-p290 - <span class="c">#downloading ruby-1.9.2-p290, this may take a while depending on your connection...</span>
+</span><span class='line'>...SNIP...
+</span><span class='line'>Install of ruby-1.9.2-p290 - <span class="c">#complete</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Great! Mission accomplished, everything built cleanly.</p>
+
+<h3>Step 3: Create a Gemset</h3>
+
+<p>Gemsets are good practice, so let&#8217;s make one:</p>
+
+<figure class='code'><figcaption><span>create and use a gemset</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rvm gemset create webofscience
+</span><span class='line'><span class="s1">&#39;webofscience&#39;</span> gemset created <span class="o">(</span>/home/pol/.rvm/gems/ruby-1.9.2-p290@webofscience<span class="o">)</span>.
+</span><span class='line'><span class="nv">$ </span>rvm gemset use webofscience
+</span><span class='line'>Using /home/pol/.rvm/gems/ruby-1.9.2-p290 with gemset webofscience
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Awesome.  Again, everything going smoothly (yay we &lt;3 ruby!) It&#8217;s worth mentioning here that at this point I am getting warm and fuzzy feelings about Ruby+RVM.  This is how it <em>should be</em>.</p>
+
+<h3>Step 4: Install the Gems (try 1)</h3>
+
+<p>Last step before pulling out the editor, get the gems:</p>
+
+<figure class='code'><figcaption><span>install the gems</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>gem install savon handsoap
+</span><span class='line'>ERROR:  Loading <span class="nb">command</span>: install <span class="o">(</span>LoadError<span class="o">)</span>
+</span><span class='line'>    no such file to load -- zlib
+</span><span class='line'>ERROR:  While executing gem ... <span class="o">(</span>NameError<span class="o">)</span>
+</span><span class='line'>    uninitialized constant Gem::Commands::InstallCommand
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Wait, WTF?  There haven&#8217;t been any errors or anything, what is this?</p>
+
+<p><strong>Hitch #3:</strong> Mysterious &#8220;no such file to load &#8211; zlib&#8221; ERROR.<br /> <strong>Solution:</strong> At this point the user will need to google.  If they have good google-fu, they will find the stack-overflow solution (there are other ways to solve this, but the rvm one is the cleanest).</p>
+
+<h3>Step 5: Remove Ruby, add zlib, redo steps 2 &amp; 3</h3>
+
+<p>Ok, so, a minor hitch, just add a lib, change the rvm ruby install command a bit, and get caught up again.</p>
+
+<figure class='code'><figcaption><span>remove ruby, add zlib, and recompile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rvm gemset delete webofscience
+</span><span class='line'>WARN: Are you SURE you wish to remove the entire gemset directory <span class="s1">&#39;webofscience&#39;</span> <span class="o">(</span>/home/pol/.rvm/gems/ruby-1.9.2-p290@webofscience<span class="o">)</span>?
+</span><span class='line'><span class="o">(</span>anything other than <span class="s1">&#39;yes&#39;</span> will cancel<span class="o">)</span> &gt; yes
+</span><span class='line'><span class="nv">$ </span>rvm remove ruby-1.9.2-p290
+</span><span class='line'>Removing /home/pol/.rvm/src/ruby-1.9.2-p290...
+</span><span class='line'>Removing /home/pol/.rvm/rubies/ruby-1.9.2-p290...
+</span><span class='line'>Removing ruby-1.9.2-p290 aliases...
+</span><span class='line'>Removing ruby-1.9.2-p290 wrappers...
+</span><span class='line'>Removing ruby-1.9.2-p290 environments...
+</span><span class='line'>Removing ruby-1.9.2-p290 binaries...
+</span><span class='line'><span class="nv">$ </span>rvm pkg install zlib
+</span><span class='line'>Fetching zlib-1.2.5.tar.gz to /home/pol/.rvm/archives
+</span><span class='line'>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+</span><span class='line'>                                 Dload  Upload   Total   Spent    Left  Speed
+</span><span class='line'>100  531k  100  531k    0     0   318k      0  0:00:01  0:00:01 --:--:--  371k
+</span><span class='line'>Extracting zlib-1.2.5.tar.gz to /home/pol/.rvm/src
+</span><span class='line'>Configuring zlib in /home/pol/.rvm/src/zlib-1.2.5.
+</span><span class='line'>Compiling zlib in /home/pol/.rvm/src/zlib-1.2.5.
+</span><span class='line'>Installing zlib to /home/pol/.rvm/usr
+</span><span class='line'><span class="nv">$ </span>rvm install 1.9.2-p290 -C --with-zlib-dir<span class="o">=</span><span class="nv">$rvm_path</span>/usr
+</span><span class='line'>Installing Ruby from <span class="nb">source </span>to: /home/pol/.rvm/rubies/ruby-1.9.2-p290, this may take a <span class="k">while </span>depending on your cpu<span class="o">(</span>s<span class="o">)</span>...
+</span><span class='line'>...SNIP...
+</span><span class='line'>Install of ruby-1.9.2-p290 - <span class="c">#complete</span>
+</span><span class='line'><span class="nv">$ </span>rvm use ruby-1.9.2-p290
+</span><span class='line'>Using /home/pol/.rvm/gems/ruby-1.9.2-p290
+</span><span class='line'><span class="nv">$ </span>rvm gemset create webofscience
+</span><span class='line'><span class="s1">&#39;webofscience&#39;</span> gemset created <span class="o">(</span>/home/pol/.rvm/gems/ruby-1.9.2-p290@webofscience<span class="o">)</span>.
+</span><span class='line'><span class="nv">$ </span>rvm use ruby-1.9.2-p290@webofscience
+</span><span class='line'>Using /home/pol/.rvm/gems/ruby-1.9.2-p290 with gemset webofscience
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Rockin.  Minor misstep, let&#8217;s keep on rollin&#8217;.</p>
+
+<h3>Step 6: Install the Gems (try 2)</h3>
+
+<p>Second time&#8217;s the charm!  You&#8217;d think&#8230;</p>
+
+<figure class='code'><figcaption><span>install the gems (try 2)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>gem install savon handsoap
+</span><span class='line'>Fetching: builder-3.0.0.gem <span class="o">(</span>100%<span class="o">)</span>
+</span><span class='line'>Fetching: nori-1.0.2.gem <span class="o">(</span>100%<span class="o">)</span>
+</span><span class='line'>Fetching: rack-1.3.5.gem <span class="o">(</span>100%<span class="o">)</span>
+</span><span class='line'>Fetching: httpi-0.9.5.gem <span class="o">(</span>100%<span class="o">)</span>
+</span><span class='line'>Fetching: nokogiri-1.5.0.gem <span class="o">(</span>100%<span class="o">)</span>
+</span><span class='line'>Building native extensions.  This could take a <span class="k">while</span>...
+</span><span class='line'>ERROR:  Error installing savon:
+</span><span class='line'>  ERROR: Failed to build gem native extension.
+</span><span class='line'>
+</span><span class='line'>        /home/pol/.rvm/rubies/ruby-1.9.2-p290/bin/ruby extconf.rb
+</span><span class='line'>checking <span class="k">for </span>libxml/parser.h... no
+</span><span class='line'>-----
+</span><span class='line'>libxml2 is missing.  please visit http://nokogiri.org/tutorials/installing_nokogiri.html <span class="k">for </span><span class="nb">help </span>with installing dependencies.
+</span><span class='line'>-----
+</span><span class='line'>*** extconf.rb failed ***
+</span><span class='line'>...SNIP...
+</span><span class='line'>Successfully installed handsoap-1.1.8
+</span><span class='line'>1 gem installed
+</span><span class='line'>Installing ri documentation <span class="k">for </span>handsoap-1.1.8...
+</span><span class='line'>Installing RDoc documentation <span class="k">for </span>handsoap-1.1.8...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ok, missing libxml2.  Again, would have been nice to know this earlier&#8230; but this is more like the git/curl situation, it&#8217;s an OS thing.</p>
+
+<p><strong>Hitch #4:</strong> Nokogiri gem has a compilation error.<br /> <strong>Solution:</strong> After googling around, the nokogiri docs say that on ubuntu, you need a couple more libs: <code>sudo apt-get install libxslt-dev libxml2-dev</code></p>
+
+<p>After installing the libs, the gems finally install cleanly:</p>
+
+<figure class='code'><figcaption><span>install the gems (try 3)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>gem install savon handsoap
+</span><span class='line'>Building native extensions.  This could take a <span class="k">while</span>...
+</span><span class='line'>Fetching: wasabi-2.0.0.gem <span class="o">(</span>100%<span class="o">)</span>
+</span><span class='line'>Fetching: gyoku-0.4.4.gem <span class="o">(</span>100%<span class="o">)</span>
+</span><span class='line'>...SNIP...
+</span><span class='line'>Installing RDoc documentation <span class="k">for </span>savon-0.9.7...
+</span><span class='line'>Installing RDoc documentation <span class="k">for </span>handsoap-1.1.8...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Great!  Gems are installed, everything is ready to rock n&#8217; roll.</p>
+
+<h3>Step 7: Run the code</h3>
+
+<p>So, the code is super trivial (<a href="https://gist.github.com/1321660">gist</a> if you want to see), let&#8217;s run it:</p>
+
+<figure class='code'><figcaption><span>run the code!</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ruby wos.rb
+</span><span class='line'>/home/pol/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:36:in <span class="sb">`</span>require<span class="s1">&#39;: no such file to load -- openssl (LoadError)</span>
+</span><span class='line'><span class="s1"> from /home/pol/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:36:in `require&#39;</span>
+</span><span class='line'>  from /home/pol/.rvm/gems/ruby-1.9.2-p290@webofscience/gems/httpi-0.9.5/lib/httpi/auth/ssl.rb:1:in <span class="sb">`</span>&lt;top <span class="o">(</span>required<span class="o">)</span>&gt;<span class="s1">&#39;</span>
+</span><span class='line'><span class="s1"> from /home/pol/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:36:in `require&#39;</span>
+</span><span class='line'>  from /home/pol/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:36:in <span class="sb">`</span>require<span class="s1">&#39;</span>
+</span><span class='line'><span class="s1"> from /home/pol/.rvm/gems/ruby-1.9.2-p290@webofscience/gems/httpi-0.9.5/lib/httpi/auth/config.rb:1:in `&lt;top (required)&gt;&#39;</span>
+</span><span class='line'>  from /home/pol/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:36:in <span class="sb">`</span>require<span class="s1">&#39;</span>
+</span><span class='line'><span class="s1"> from /home/pol/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:36:in `require&#39;</span>
+</span><span class='line'>  from /home/pol/.rvm/gems/ruby-1.9.2-p290@webofscience/gems/httpi-0.9.5/lib/httpi/request.rb:2:in <span class="sb">`</span>&lt;top <span class="o">(</span>required<span class="o">)</span>&gt;<span class="s1">&#39;</span>
+</span><span class='line'><span class="s1"> from /home/pol/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:36:in `require&#39;</span>
+</span><span class='line'>  from /home/pol/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:36:in <span class="sb">`</span>require<span class="s1">&#39;</span>
+</span><span class='line'><span class="s1"> from /home/pol/.rvm/gems/ruby-1.9.2-p290@webofscience/gems/savon-0.9.7/lib/savon/client.rb:1:in `&lt;top (required)&gt;&#39;</span>
+</span><span class='line'>  from /home/pol/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:36:in <span class="sb">`</span>require<span class="s1">&#39;</span>
+</span><span class='line'><span class="s1"> from /home/pol/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:36:in `require&#39;</span>
+</span><span class='line'>  from /home/pol/.rvm/gems/ruby-1.9.2-p290@webofscience/gems/savon-0.9.7/lib/savon.rb:3:in <span class="sb">`</span>&lt;top <span class="o">(</span>required<span class="o">)</span>&gt;<span class="s1">&#39;</span>
+</span><span class='line'><span class="s1"> from &lt;internal:lib/rubygems/custom_require&gt;:33:in `require&#39;</span>
+</span><span class='line'>  from &lt;internal:lib/rubygems/custom_require&gt;:33:in <span class="sb">`</span>rescue in require<span class="s1">&#39;</span>
+</span><span class='line'><span class="s1"> from &lt;internal:lib/rubygems/custom_require&gt;:29:in `require&#39;</span>
+</span><span class='line'>  from wos.rb:1:in <span class="sb">`</span>&lt;main&gt;<span class="err">&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Can I get another WTF?  Everything installed clean!  Ruby, RVM, Gems, everything&#8230; why is this breaking?</p>
+
+<p><strong>Hitch #5:</strong> Running the code throws a &#8220;no such file to load &#8211; openssl&#8221; error.<br /> <strong>Solution:</strong> Google again to the rescue; more specifically stack-overflow to the rescue.  This solution is similar to the first: use rvm to add the missing libs to ruby. Awesome, we get to re-compile again.</p>
+
+<h3>Step 8: Remove Ruby, add openssl and iconv, redo steps 2, 3, 6 &amp; 7</h3>
+
+<p>We&#8217;ve had some practice, so let&#8217;s do it again, though the stack-overflow said to install iconv in addition to openssl.  Since we won&#8217;t get <em>any</em> information in advance as to whether or not iconv is required, let&#8217;s just do it now.  Also, don&#8217;t forget the original zlib compilation that we did!</p>
+
+<figure class='code'><figcaption><span>remove ruby, add openssl, and recompile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rvm gemset delete webofscience
+</span><span class='line'>WARN: Are you SURE you wish to remove the entire gemset directory <span class="s1">&#39;webofscience&#39;</span> <span class="o">(</span>/home/pol/.rvm/gems/ruby-1.9.2-p290@webofscience<span class="o">)</span>?
+</span><span class='line'><span class="o">(</span>anything other than <span class="s1">&#39;yes&#39;</span> will cancel<span class="o">)</span> &gt; yes
+</span><span class='line'><span class="nv">$ </span>rvm remove ruby-1.9.2-p290
+</span><span class='line'>Removing /home/pol/.rvm/src/ruby-1.9.2-p290...
+</span><span class='line'>Removing /home/pol/.rvm/rubies/ruby-1.9.2-p290...
+</span><span class='line'>Removing ruby-1.9.2-p290 aliases...
+</span><span class='line'>Removing ruby-1.9.2-p290 wrappers...
+</span><span class='line'>Removing ruby-1.9.2-p290 environments...
+</span><span class='line'>Removing ruby-1.9.2-p290 binaries...
+</span><span class='line'><span class="nv">$ </span>rvm pkg install openssl
+</span><span class='line'>Fetching openssl-0.9.8n.tar.gz to /home/pol/.rvm/archives
+</span><span class='line'>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+</span><span class='line'>                                 Dload  Upload   Total   Spent    Left  Speed
+</span><span class='line'>100 3681k  100 3681k    0     0   560k      0  0:00:06  0:00:06 --:--:--  704k
+</span><span class='line'>Extracting openssl-0.9.8n.tar.gz to /home/pol/.rvm/src
+</span><span class='line'>Configuring openssl in /home/pol/.rvm/src/openssl-0.9.8n.
+</span><span class='line'>Compiling openssl in /home/pol/.rvm/src/openssl-0.9.8n.
+</span><span class='line'>Installing openssl to /home/pol/.rvm/usr
+</span><span class='line'><span class="nv">$ </span>rvm install 1.9.2 -C --with-openssl-dir<span class="o">=</span><span class="nv">$rvm_path</span>/.rvm/usr,--with-iconv-dir<span class="o">=</span><span class="nv">$rvm_path</span>/usr,--with-zlib-dir<span class="o">=</span><span class="nv">$rvm_path</span>/usr
+</span><span class='line'>Installing Ruby from <span class="nb">source </span>to: /home/pol/.rvm/rubies/ruby-1.9.2-p290, this may take a <span class="k">while </span>depending on your cpu<span class="o">(</span>s<span class="o">)</span>...
+</span><span class='line'>...SNIP...
+</span><span class='line'>Install of ruby-1.9.2-p290 - <span class="c">#complete</span>
+</span><span class='line'><span class="nv">$ </span>rvm use ruby-1.9.2-p290
+</span><span class='line'>Using /home/pol/.rvm/gems/ruby-1.9.2-p290
+</span><span class='line'><span class="nv">$ </span>rvm gemset create webofscience
+</span><span class='line'><span class="s1">&#39;webofscience&#39;</span> gemset created <span class="o">(</span>/home/pol/.rvm/gems/ruby-1.9.2-p290@webofscience<span class="o">)</span>.
+</span><span class='line'><span class="nv">$ </span>rvm use ruby-1.9.2-p290@webofscience
+</span><span class='line'>Using /home/pol/.rvm/gems/ruby-1.9.2-p290 with gemset webofscience
+</span><span class='line'><span class="nv">$ </span>gem install savon handsoap
+</span><span class='line'>Fetching: builder-3.0.0.gem <span class="o">(</span>100%<span class="o">)</span>
+</span><span class='line'>...SNIP...
+</span><span class='line'>Installing RDoc documentation <span class="k">for </span>savon-0.9.7...
+</span><span class='line'>Installing RDoc documentation <span class="k">for </span>handsoap-1.1.8...
+</span><span class='line'><span class="nv">$ </span>ruby wos.rb
+</span><span class='line'>D, <span class="o">[</span>2011-10-27T23:30:14.123847 <span class="c">#23626] DEBUG -- : HTTPI executes HTTP GET using the net_http adapter</span>
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And finally, it all works.</p>
+
+<h2>Summary of Issues</h2>
+
+<ol>
+<li>(minor) RVM doesn&#8217;t tell you which packages you need in order to use their install scripts</li>
+<li>RVM doesn&#8217;t check for required libs necessary to run rubygems, so everything will compile, but you may still have a nonfunctional system.</li>
+<li>RVM also doesn&#8217;t let you know which optiional libs might be needed by various ruby gems, and the gems don&#8217;t tell you if it is just a system lib you are missing, or something that needs to be compiled into Ruby.</li>
+<li>Gems that require additional compiled ruby functionality don&#8217;t check to see if it is available when the gem is installed, it just fails at runtime.</li>
+</ol>
+
+
+<p>The upshot is that while this is annoying for an experienced user, it could represent a brick wall for a new user.  This should be a straightforward and easy process. And I get the feeling that if I had removed the RVM variable, it would have made the problem even harder to solve because recompiling is harder when you have installed from apt.</p>
+
+<p>I love ruby, but this is kind of embarrassing.  What can we do to make this better?</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2011/10/26/soaping-with-ruby-and-php/">SOAPing With Ruby and PHP</a></h1>
     
     
@@ -97,27 +546,175 @@
 
 <h3>SOAPed up Ruby</h3>
 
-<p>My gem search turned up two candidates, <a href="http://rubygems.org/gems/soap4r">SOAP4R</a> and <a href="http://rubygems.org/gems/savon">Savon</a>.  Of those two, I decided to try out Savon first because it felt newer.</p>
-
-<p>&#8230;later&#8230;</p>
-
-<p>Initial thoughts:</p>
+<p>My first stop for a library search is, of course, the excellent <a href="http://www.ruby-toolbox.com">Ruby Toolbox</a>.  They list <a href="https://www.ruby-toolbox.com/categories/soap">three options</a>:</p>
 
 <ul>
-<li>Auth info is sent in the header.  This seems sensible.  The user/pass is base64 encoded, appended to &#8220;Basic &#8220;, and then set in an &#8220;Authorization&#8221; header.  Fine.  Annoyingly, the ruby <code>Base64.encode64()</code> method appends an \n to the encoded string so you have to <code>encode64(string).strip</code> or Mr. SOAP API will throw a 400.</li>
-<li>I have to pretend to build a cookie and send headers on my http requests as though I was holding a cookie, even though I am just pretending. The cookie games feel awkward.</li>
-<li>The ?wsdl business is pretty neat.  I like that the SOAP endpoints can tell you what api calls they respond to. I need to look at this more, can they tell you how to properly form a particular API call?  I mean, just knowing that you can do a :search doesn&#8217;t mean you know the format of the query&#8230;</li>
+<li><a href="http://rubygems.org/gems/savon">Savon</a></li>
+<li><a href="http://github.com/troelskn/handsoap">Handsoap</a></li>
+<li><a href="http://github.com/jeremydurham/serviceproxy">Serviceproxy</a></li>
 </ul>
 
 
-<p>This is doable, and it shouldn&#8217;t even be that hard.  I just need to:</p>
+<p>The searching also indicated that <a href="http://rubygems.org/gems/soap4r">SOAP4R</a> was the original ruby SOAP library, but that it also is slow, old, and nobody likes it.  I decided to try first with Savon because it was first.</p>
 
-<ol>
-<li>make sure that the school has access, because it is locked down by IP</li>
-<li>figure out the query syntax</li>
-<li>prototype the ruby calls to sort out the query and parse the response strings</li>
-<li>turn the pretty ruby into ugly php. :P</li>
-</ol>
+<p>Ruby:</p>
+
+<div><script src='https://gist.github.com/1321660.js?file=wos.rb'></script>
+<noscript><pre><code>require 'savon'
+require 'handsoap'
+require 'pp'
+
+class Soapy
+  def initialize(opts)
+    @client = Savon::Client
+    @auth_url   = opts[:auth_url] || 
+                &quot;http://search.isiknowledge.com/esti/wokmws/ws/WOKMWSAuthenticate?wsdl&quot;
+    @search_url = opts[:search_url] ||
+                &quot;http://search.isiknowledge.com/esti/wokmws/ws/WokSearchLite?wsdl&quot;
+    @search_xml = opts[:search_xml] ||     
+                &lt;&lt;-EOF
+                &lt;queryParameters&gt;
+                  &lt;databaseID&gt;WOS&lt;/databaseID&gt;
+                  &lt;userQuery&gt;AU=Douglas T*&lt;/userQuery&gt;
+                  &lt;editions&gt;
+                    &lt;collection&gt;WOS&lt;/collection&gt;
+                    &lt;edition&gt;SSCI&lt;/edition&gt; 
+                  &lt;/editions&gt; 
+                  &lt;editions&gt;
+                    &lt;collection&gt;WOS&lt;/collection&gt;
+                    &lt;edition&gt;SCI&lt;/edition&gt; 
+                  &lt;/editions&gt;
+                  &lt;queryLanguage&gt;en&lt;/queryLanguage&gt;
+                &lt;/queryParameters&gt;
+                &lt;retrieveParameters&gt;
+                  &lt;count&gt;5&lt;/count&gt;
+                  &lt;fields&gt;
+                    &lt;name&gt;Date&lt;/name&gt;
+                    &lt;sort&gt;D&lt;/sort&gt;
+                  &lt;/fields&gt;
+                  &lt;firstRecord&gt;1&lt;/firstRecord&gt;
+                &lt;/retrieveParameters&gt;
+                EOF
+  end
+
+  def authenticate(auth_url=@auth_url)
+    @auth_client ||= @client.new(@auth_url)
+    @auth_client.request :authenticate
+    @session_cookie = @auth_client.http.headers[&quot;Cookie&quot;]
+    @search_client.http.headers[&quot;Cookie&quot;] = @session_cookie if @search_client
+  end
+  
+  def search(query=@search_xml)
+    @search_client ||= @client.new(@search_url)
+    authenticate if @session_cookie.nil?
+    @last_search = @search_client.request(:search) { soap.body = query}
+  end
+  
+  def destroy
+    @auth_client.request :close_session
+  end
+  
+end
+
+# Savon
+soap = Soapy.new
+pp soap.search
+
+# Handsoap
+# So... the Handsoap API turned out to be a pain, so let's just use Savon.  </code></pre></noscript></div>
+
+
+<p>PHP:</p>
+
+<div><script src='https://gist.github.com/1321660.js?file=wos.php'></script>
+<noscript><pre><code>&lt;?php
+$auth_url  = &quot;http://search.isiknowledge.com/esti/wokmws/ws/WOKMWSAuthenticate?wsdl&quot;;
+$auth_client = @new SoapClient($auth_url);
+
+$auth_response = $auth_client-&gt;authenticate();
+
+print_r($auth_response);
+echo &quot;REQUEST HEADERS:\n&quot; . $auth_client-&gt;__getLastRequestHeaders() . &quot;\n&quot;;
+
+$search_url = &quot;http://search.isiknowledge.com/esti/wokmws/ws/WokSearchLite?wsdl&quot;;
+$search_client = @new SoapClient($search_url);
+$search_client-&gt;__setCookie('SID',$auth_response-&gt;return);
+
+print_r($search_client);
+// $search_client-&gt;__setCookie(&quot;Cookie&quot;)
+
+$search_xml = &lt;&lt;&lt;EOF
+&lt;xml&gt;
+&lt;queryParameters&gt;
+  &lt;databaseID&gt;WOS&lt;/databaseID&gt;
+  &lt;userQuery&gt;AU=Douglas T*&lt;/userQuery&gt;
+  &lt;editions&gt;
+    &lt;collection&gt;WOS&lt;/collection&gt;
+    &lt;edition&gt;SSCI&lt;/edition&gt; 
+  &lt;/editions&gt; 
+  &lt;editions&gt;
+    &lt;collection&gt;WOS&lt;/collection&gt;
+    &lt;edition&gt;SCI&lt;/edition&gt; 
+  &lt;/editions&gt;
+  &lt;queryLanguage&gt;en&lt;/queryLanguage&gt;
+&lt;/queryParameters&gt;
+&lt;retrieveParameters&gt;
+  &lt;count&gt;5&lt;/count&gt;
+  &lt;fields&gt;
+    &lt;name&gt;Date&lt;/name&gt;
+    &lt;sort&gt;D&lt;/sort&gt;
+  &lt;/fields&gt;
+  &lt;firstRecord&gt;1&lt;/firstRecord&gt;
+  &lt;timeSpan&gt;&lt;/timeSpan&gt;
+  &lt;symbolicTimeSpan&gt;&lt;/symbolicTimeSpan&gt;
+&lt;/retrieveParameters&gt;
+&lt;/xml&gt;
+EOF;
+
+$search_array = array(
+  'queryParameters' =&gt; array(
+    'databaseID' =&gt; 'WOS',
+    'userQuery' =&gt; 'AU=Douglas T*',
+    'editions' =&gt; array(
+      array('collection' =&gt; 'WOS', 'edition' =&gt; 'SSCI'),
+      array('collection' =&gt; 'WOS', 'edition' =&gt; 'SCI')
+    ),
+    'queryLanguage' =&gt; 'en'
+  ),
+  'retrieveParameters' =&gt; array(
+    'count' =&gt; '5',
+    'fields' =&gt; array(
+      array('name' =&gt; 'Date', 'sort' =&gt; 'D')
+    ),
+    'firstRecord' =&gt; '1'
+  )
+);
+
+$search_obj = simplexml_load_string($search_xml);
+
+// print_r($search_obj);
+try{
+ 
+  $search_response = $search_client-&gt;search($search_array);
+} catch (Exception $e) {  
+    echo $e-&gt;getMessage(); 
+}
+
+
+print_r($search_response);
+
+?&gt;</code></pre></noscript></div>
+
+
+<h3>Thoughts:</h3>
+
+<ul>
+<li>As mentioned in the gist, I ended up not using Handsoap because the class API was hard to figure out.  Savon was way easier.  However, I still had an issue with passing the query params into the soap body.  I ultimately ended up just using a blob of manually crafted xml (a hash failed!). So, not perfect, but a fine proof of concept.</li>
+<li>The PHP is shorter than the Ruby!  Mostly this is because of the fact that I couldn&#8217;t get a hash to work (and had to make raw xml).  But also it is because I made a class (in anticipation of using both Savon and Handsoap).  Even still, building the associative array in PHP drove me bonkers (seriously?  i have to use the array() function <em>every time</em>?)!</li>
+<li>Auth info is sent in the header.  This seems sensible.  The user/pass is base64 encoded, appended to &#8220;Basic &#8220;, and then set in an &#8220;Authorization&#8221; header.  Fine.  Annoyingly, the ruby <code>Base64.encode64()</code> method appends an \n to the encoded string so you have to <code>encode64(string).strip</code> or Mr. SOAP API will throw a 400. Anyway, our access is auth&#8217;ed via IP, so this doesn&#8217;t matter and I never did get to see what a successful user/pass auth looked like.</li>
+<li>I have to pretend to build a cookie and send headers on my http requests as though I was holding a cookie, even though I am just pretending. The cookie games feel awkward.</li>
+<li>The ?wsdl business is pretty neat.  I like that the SOAP endpoints can tell you what api calls they respond to. I need to look at this more, can they tell you how to properly form a particular API call?  I mean, just knowing that you can do a :search doesn&#8217;t mean you know the format of the query&#8230;</li>
+</ul>
 
 </div>
   
@@ -800,88 +1397,6 @@ subversion installed</li>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/04/08/rails-2-0-command-line-shortcuts/">Rails 2.0 Command-line Shortcuts</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-
-
-<time datetime="2008-04-08T14:23:00-06:00" pubdate  data-updated="true" >Apr 8<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I just ran across a little confusion with Rails 2 command-line shortcuts.  By shortcuts, I mean things like this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate model pizza size:integer name:string description:text
-</span><span class='line'>      exists  app/models/
-</span><span class='line'>      exists  test/unit/
-</span><span class='line'>      exists  test/fixtures/
-</span><span class='line'>      create  app/models/pizza.rb
-</span><span class='line'>      create  test/unit/pizza_test.rb
-</span><span class='line'>      create  test/fixtures/pizzas.yml
-</span><span class='line'>      exists  db/migrate
-</span><span class='line'>      create  db/migrate/004_create_pizzas.rb</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As you can see, it went ahead and created the model, test, fixture and migration.  The column definitions were stuffed auto-magically into the migration.</p>
-
-<p>This is really cool, but it has some limitations.  If you are doing anything more complicated than it won&#8217;t work for you.  For example, if we wanted to do a many-to-many relationship with a toppings table, you would have to set that up manually (as far as I know).</p>
-
-<p>The confusion that I referred to earlier has to do with generating a migration.  Let&#8217;s say that I already created my topping model manually by creating an <code>app/model/topping.rb</code> file.  Then it occurs to me that I also need a migration, so I run the following:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate migration CreateTopping name:string price:float</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Unfortunately, this will create the migration file, but the <em>column declarations are ignored</em>.  This is confusing, given the following behavior:</p>
-
-<p>Let&#8217;s say, instead, I created the toppings model with the following command:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate model topping</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This would have generated an empty <code>###_create_toppings.rb</code> migration.  Then I decide to add the columns to it like so:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate migration AddNamePriceToToppings name:string price:float</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Rails does some <em>magic</em> and infers from the migration name that we are adding columns to the topping table.  But why didn&#8217;t it add columns in the earlier example?  My only explanation is that migration generation is for updating already existing models/tables, it&#8217;s not intended for model/table creation.  Arguably, what good is a created table without an associated model?  For simple cases, this holds true.  For a many-to-many situation, where you need to define a join table, this kind of shortcutting will only take you so far.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -899,6 +1414,10 @@ subversion installed</li>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2011/10/27/come-on-ruby/">I know we can do better, Ruby (a simple setup in 8 excruciating steps)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2011/10/26/soaping-with-ruby-and-php/">SOAPing With Ruby and PHP</a>
       </li>
     
@@ -912,10 +1431,6 @@ subversion installed</li>
     
       <li class="post">
         <a href="/blog/2008/10/06/apache2-mod_rails-recipe/">apache2 mod_rails recipe</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2008/06/09/multi-os-password-management/">Multi-OS Password Management</a>
       </li>
     
   </ul>
@@ -975,7 +1490,7 @@ subversion installed</li>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Pol Llovet -
+  <a href='http://creativecommons.org/licenses/by-nc-sa/3.0/'>CC BY-NC-SA 3.0</a> - Pol Llovet -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

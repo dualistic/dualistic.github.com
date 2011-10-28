@@ -9,7 +9,7 @@
   <meta name="author" content="Pol Llovet">
 
   
-  <meta name="description" content="Editor Note:  Just use iTerm.  It works great.This is posted in other places, but I want to make sure that it doesn&#8217;t get lost to the wilds o...">
+  <meta name="description" content="I just ran across a little confusion with Rails 2 command-line shortcuts.  By shortcuts, I mean things like this:123456789$ script/generate model p...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -60,6 +60,88 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/04/08/rails-2-0-command-line-shortcuts/">Rails 2.0 Command-line Shortcuts</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+
+
+<time datetime="2008-04-08T14:23:00-06:00" pubdate  data-updated="true" >Apr 8<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I just ran across a little confusion with Rails 2 command-line shortcuts.  By shortcuts, I mean things like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate model pizza size:integer name:string description:text
+</span><span class='line'>      exists  app/models/
+</span><span class='line'>      exists  test/unit/
+</span><span class='line'>      exists  test/fixtures/
+</span><span class='line'>      create  app/models/pizza.rb
+</span><span class='line'>      create  test/unit/pizza_test.rb
+</span><span class='line'>      create  test/fixtures/pizzas.yml
+</span><span class='line'>      exists  db/migrate
+</span><span class='line'>      create  db/migrate/004_create_pizzas.rb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, it went ahead and created the model, test, fixture and migration.  The column definitions were stuffed auto-magically into the migration.</p>
+
+<p>This is really cool, but it has some limitations.  If you are doing anything more complicated than it won&#8217;t work for you.  For example, if we wanted to do a many-to-many relationship with a toppings table, you would have to set that up manually (as far as I know).</p>
+
+<p>The confusion that I referred to earlier has to do with generating a migration.  Let&#8217;s say that I already created my topping model manually by creating an <code>app/model/topping.rb</code> file.  Then it occurs to me that I also need a migration, so I run the following:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate migration CreateTopping name:string price:float</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Unfortunately, this will create the migration file, but the <em>column declarations are ignored</em>.  This is confusing, given the following behavior:</p>
+
+<p>Let&#8217;s say, instead, I created the toppings model with the following command:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate model topping</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This would have generated an empty <code>###_create_toppings.rb</code> migration.  Then I decide to add the columns to it like so:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/generate migration AddNamePriceToToppings name:string price:float</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Rails does some <em>magic</em> and infers from the migration name that we are adding columns to the topping table.  But why didn&#8217;t it add columns in the earlier example?  My only explanation is that migration generation is for updating already existing models/tables, it&#8217;s not intended for model/table creation.  Arguably, what good is a created table without an associated model?  For simple cases, this holds true.  For a many-to-many situation, where you need to define a join table, this kind of shortcutting will only take you so far.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -687,6 +769,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2011/10/27/come-on-ruby/">I know we can do better, Ruby (a simple setup in 8 excruciating steps)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2011/10/26/soaping-with-ruby-and-php/">SOAPing With Ruby and PHP</a>
       </li>
     
@@ -700,10 +786,6 @@
     
       <li class="post">
         <a href="/blog/2008/10/06/apache2-mod_rails-recipe/">apache2 mod_rails recipe</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2008/06/09/multi-os-password-management/">Multi-OS Password Management</a>
       </li>
     
   </ul>
@@ -763,7 +845,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Pol Llovet -
+  <a href='http://creativecommons.org/licenses/by-nc-sa/3.0/'>CC BY-NC-SA 3.0</a> - Pol Llovet -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

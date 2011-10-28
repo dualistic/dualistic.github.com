@@ -82,6 +82,9 @@
   <a href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/" title="Previous Post:
   There Has Never Been a Better Time to Be a Self-taught Coder">&laquo;</a>
 
+
+<a href="/blog/2011/10/27/come-on-ruby/" title="next Post:
+I know we can do better, Ruby (a simple setup in 8 excruciating steps)">&raquo;</a>
 <time datetime="2011-10-26T21:10:00-06:00" pubdate  data-updated="true" >Oct 26<span>th</span>, 2011</time>
         
       </p>
@@ -97,27 +100,175 @@
 
 <h3>SOAPed up Ruby</h3>
 
-<p>My gem search turned up two candidates, <a href="http://rubygems.org/gems/soap4r">SOAP4R</a> and <a href="http://rubygems.org/gems/savon">Savon</a>.  Of those two, I decided to try out Savon first because it felt newer.</p>
-
-<p>&#8230;later&#8230;</p>
-
-<p>Initial thoughts:</p>
+<p>My first stop for a library search is, of course, the excellent <a href="http://www.ruby-toolbox.com">Ruby Toolbox</a>.  They list <a href="https://www.ruby-toolbox.com/categories/soap">three options</a>:</p>
 
 <ul>
-<li>Auth info is sent in the header.  This seems sensible.  The user/pass is base64 encoded, appended to &#8220;Basic &#8220;, and then set in an &#8220;Authorization&#8221; header.  Fine.  Annoyingly, the ruby <code>Base64.encode64()</code> method appends an \n to the encoded string so you have to <code>encode64(string).strip</code> or Mr. SOAP API will throw a 400.</li>
-<li>I have to pretend to build a cookie and send headers on my http requests as though I was holding a cookie, even though I am just pretending. The cookie games feel awkward.</li>
-<li>The ?wsdl business is pretty neat.  I like that the SOAP endpoints can tell you what api calls they respond to. I need to look at this more, can they tell you how to properly form a particular API call?  I mean, just knowing that you can do a :search doesn&#8217;t mean you know the format of the query&#8230;</li>
+<li><a href="http://rubygems.org/gems/savon">Savon</a></li>
+<li><a href="http://github.com/troelskn/handsoap">Handsoap</a></li>
+<li><a href="http://github.com/jeremydurham/serviceproxy">Serviceproxy</a></li>
 </ul>
 
 
-<p>This is doable, and it shouldn&#8217;t even be that hard.  I just need to:</p>
+<p>The searching also indicated that <a href="http://rubygems.org/gems/soap4r">SOAP4R</a> was the original ruby SOAP library, but that it also is slow, old, and nobody likes it.  I decided to try first with Savon because it was first.</p>
 
-<ol>
-<li>make sure that the school has access, because it is locked down by IP</li>
-<li>figure out the query syntax</li>
-<li>prototype the ruby calls to sort out the query and parse the response strings</li>
-<li>turn the pretty ruby into ugly php. :P</li>
-</ol>
+<p>Ruby:</p>
+
+<div><script src='https://gist.github.com/1321660.js?file=wos.rb'></script>
+<noscript><pre><code>require 'savon'
+require 'handsoap'
+require 'pp'
+
+class Soapy
+  def initialize(opts)
+    @client = Savon::Client
+    @auth_url   = opts[:auth_url] || 
+                &quot;http://search.isiknowledge.com/esti/wokmws/ws/WOKMWSAuthenticate?wsdl&quot;
+    @search_url = opts[:search_url] ||
+                &quot;http://search.isiknowledge.com/esti/wokmws/ws/WokSearchLite?wsdl&quot;
+    @search_xml = opts[:search_xml] ||     
+                &lt;&lt;-EOF
+                &lt;queryParameters&gt;
+                  &lt;databaseID&gt;WOS&lt;/databaseID&gt;
+                  &lt;userQuery&gt;AU=Douglas T*&lt;/userQuery&gt;
+                  &lt;editions&gt;
+                    &lt;collection&gt;WOS&lt;/collection&gt;
+                    &lt;edition&gt;SSCI&lt;/edition&gt; 
+                  &lt;/editions&gt; 
+                  &lt;editions&gt;
+                    &lt;collection&gt;WOS&lt;/collection&gt;
+                    &lt;edition&gt;SCI&lt;/edition&gt; 
+                  &lt;/editions&gt;
+                  &lt;queryLanguage&gt;en&lt;/queryLanguage&gt;
+                &lt;/queryParameters&gt;
+                &lt;retrieveParameters&gt;
+                  &lt;count&gt;5&lt;/count&gt;
+                  &lt;fields&gt;
+                    &lt;name&gt;Date&lt;/name&gt;
+                    &lt;sort&gt;D&lt;/sort&gt;
+                  &lt;/fields&gt;
+                  &lt;firstRecord&gt;1&lt;/firstRecord&gt;
+                &lt;/retrieveParameters&gt;
+                EOF
+  end
+
+  def authenticate(auth_url=@auth_url)
+    @auth_client ||= @client.new(@auth_url)
+    @auth_client.request :authenticate
+    @session_cookie = @auth_client.http.headers[&quot;Cookie&quot;]
+    @search_client.http.headers[&quot;Cookie&quot;] = @session_cookie if @search_client
+  end
+  
+  def search(query=@search_xml)
+    @search_client ||= @client.new(@search_url)
+    authenticate if @session_cookie.nil?
+    @last_search = @search_client.request(:search) { soap.body = query}
+  end
+  
+  def destroy
+    @auth_client.request :close_session
+  end
+  
+end
+
+# Savon
+soap = Soapy.new
+pp soap.search
+
+# Handsoap
+# So... the Handsoap API turned out to be a pain, so let's just use Savon.  </code></pre></noscript></div>
+
+
+<p>PHP:</p>
+
+<div><script src='https://gist.github.com/1321660.js?file=wos.php'></script>
+<noscript><pre><code>&lt;?php
+$auth_url  = &quot;http://search.isiknowledge.com/esti/wokmws/ws/WOKMWSAuthenticate?wsdl&quot;;
+$auth_client = @new SoapClient($auth_url);
+
+$auth_response = $auth_client-&gt;authenticate();
+
+print_r($auth_response);
+echo &quot;REQUEST HEADERS:\n&quot; . $auth_client-&gt;__getLastRequestHeaders() . &quot;\n&quot;;
+
+$search_url = &quot;http://search.isiknowledge.com/esti/wokmws/ws/WokSearchLite?wsdl&quot;;
+$search_client = @new SoapClient($search_url);
+$search_client-&gt;__setCookie('SID',$auth_response-&gt;return);
+
+print_r($search_client);
+// $search_client-&gt;__setCookie(&quot;Cookie&quot;)
+
+$search_xml = &lt;&lt;&lt;EOF
+&lt;xml&gt;
+&lt;queryParameters&gt;
+  &lt;databaseID&gt;WOS&lt;/databaseID&gt;
+  &lt;userQuery&gt;AU=Douglas T*&lt;/userQuery&gt;
+  &lt;editions&gt;
+    &lt;collection&gt;WOS&lt;/collection&gt;
+    &lt;edition&gt;SSCI&lt;/edition&gt; 
+  &lt;/editions&gt; 
+  &lt;editions&gt;
+    &lt;collection&gt;WOS&lt;/collection&gt;
+    &lt;edition&gt;SCI&lt;/edition&gt; 
+  &lt;/editions&gt;
+  &lt;queryLanguage&gt;en&lt;/queryLanguage&gt;
+&lt;/queryParameters&gt;
+&lt;retrieveParameters&gt;
+  &lt;count&gt;5&lt;/count&gt;
+  &lt;fields&gt;
+    &lt;name&gt;Date&lt;/name&gt;
+    &lt;sort&gt;D&lt;/sort&gt;
+  &lt;/fields&gt;
+  &lt;firstRecord&gt;1&lt;/firstRecord&gt;
+  &lt;timeSpan&gt;&lt;/timeSpan&gt;
+  &lt;symbolicTimeSpan&gt;&lt;/symbolicTimeSpan&gt;
+&lt;/retrieveParameters&gt;
+&lt;/xml&gt;
+EOF;
+
+$search_array = array(
+  'queryParameters' =&gt; array(
+    'databaseID' =&gt; 'WOS',
+    'userQuery' =&gt; 'AU=Douglas T*',
+    'editions' =&gt; array(
+      array('collection' =&gt; 'WOS', 'edition' =&gt; 'SSCI'),
+      array('collection' =&gt; 'WOS', 'edition' =&gt; 'SCI')
+    ),
+    'queryLanguage' =&gt; 'en'
+  ),
+  'retrieveParameters' =&gt; array(
+    'count' =&gt; '5',
+    'fields' =&gt; array(
+      array('name' =&gt; 'Date', 'sort' =&gt; 'D')
+    ),
+    'firstRecord' =&gt; '1'
+  )
+);
+
+$search_obj = simplexml_load_string($search_xml);
+
+// print_r($search_obj);
+try{
+ 
+  $search_response = $search_client-&gt;search($search_array);
+} catch (Exception $e) {  
+    echo $e-&gt;getMessage(); 
+}
+
+
+print_r($search_response);
+
+?&gt;</code></pre></noscript></div>
+
+
+<h3>Thoughts:</h3>
+
+<ul>
+<li>As mentioned in the gist, I ended up not using Handsoap because the class API was hard to figure out.  Savon was way easier.  However, I still had an issue with passing the query params into the soap body.  I ultimately ended up just using a blob of manually crafted xml (a hash failed!). So, not perfect, but a fine proof of concept.</li>
+<li>The PHP is shorter than the Ruby!  Mostly this is because of the fact that I couldn&#8217;t get a hash to work (and had to make raw xml).  But also it is because I made a class (in anticipation of using both Savon and Handsoap).  Even still, building the associative array in PHP drove me bonkers (seriously?  i have to use the array() function <em>every time</em>?)!</li>
+<li>Auth info is sent in the header.  This seems sensible.  The user/pass is base64 encoded, appended to &#8220;Basic &#8220;, and then set in an &#8220;Authorization&#8221; header.  Fine.  Annoyingly, the ruby <code>Base64.encode64()</code> method appends an \n to the encoded string so you have to <code>encode64(string).strip</code> or Mr. SOAP API will throw a 400. Anyway, our access is auth&#8217;ed via IP, so this doesn&#8217;t matter and I never did get to see what a successful user/pass auth looked like.</li>
+<li>I have to pretend to build a cookie and send headers on my http requests as though I was holding a cookie, even though I am just pretending. The cookie games feel awkward.</li>
+<li>The ?wsdl business is pretty neat.  I like that the SOAP endpoints can tell you what api calls they respond to. I need to look at this more, can they tell you how to properly form a particular API call?  I mean, just knowing that you can do a :search doesn&#8217;t mean you know the format of the query&#8230;</li>
+</ul>
 
 </div>
 
@@ -144,6 +295,9 @@
   <a href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/" title="Previous Post:
   There Has Never Been a Better Time to Be a Self-taught Coder">&laquo;</a>
 
+
+<a href="/blog/2011/10/27/come-on-ruby/" title="next Post:
+I know we can do better, Ruby (a simple setup in 8 excruciating steps)">&raquo;</a>
 <time datetime="2011-10-26T21:10:00-06:00" pubdate  data-updated="true" >Oct 26<span>th</span>, 2011</time>
       
 
@@ -184,6 +338,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2011/10/27/come-on-ruby/">I know we can do better, Ruby (a simple setup in 8 excruciating steps)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2011/10/26/soaping-with-ruby-and-php/">SOAPing With Ruby and PHP</a>
       </li>
     
@@ -197,10 +355,6 @@
     
       <li class="post">
         <a href="/blog/2008/10/06/apache2-mod_rails-recipe/">apache2 mod_rails recipe</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2008/06/09/multi-os-password-management/">Multi-OS Password Management</a>
       </li>
     
   </ul>
@@ -261,7 +415,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - Pol Llovet -
+  <a href='http://creativecommons.org/licenses/by-nc-sa/3.0/'>CC BY-NC-SA 3.0</a> - Pol Llovet -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
