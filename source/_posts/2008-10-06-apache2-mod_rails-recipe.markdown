@@ -3,8 +3,7 @@ layout: page
 title: "apache2 mod_rails recipe"
 date: 2008-10-06 01:12
 comments: true
-sharing: true
-footer: true
+categories: [apache, mod_rails, puppet]
 ---
 I recently had to write a recipe to set up instances of mod_rails apps for apache2.  The goal of this process is to have a server that has apps hosted at http://server/app1, http://server/app2, etc.
 

@@ -3,7 +3,7 @@ layout: post
 title: "There Has Never Been a Better Time to Be a Self-taught Coder"
 date: 2011-10-26 21:09
 comments: true
-categories: educause compsci education
+categories: [educause, computer science, education]
 ---
 I posted this as a response to a [blog post](http://www.catherynnemvalente.com/2011/10/post-apocalyptic-undergraduate-zombies/), and I thought it might be more generally appreciated.  It was in response to a short quote in the post where she was wondering which degrees might be worth the astronomical cost of tuition, "Computer Science, I guess..."
 
