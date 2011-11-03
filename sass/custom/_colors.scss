@@ -3,8 +3,8 @@
 // If you need a handy color picker try http://hslpicker.com
 
 $header-bg: #F4EBE9;
-$title-color: #5B5250;
-$subtitle-color: lighten($title-color, 20);
+$title-color: #421D14;
+$subtitle-color: lighten($title-color, 10);
 //$nav-bg: desaturate(lighten(#8fc17a, 18), 5);
 //$sidebar-bg: desaturate(#eceff5, 8);
 //$sidebar-link-color: saturate(#526f9a, 10);
@@ -31,6 +31,8 @@ $solar-violet:    #6c71c4;
 $solar-blue:      #268bd2;
 $solar-cyan:      #2aa198;
 $solar-green:     #859900;
+
+$header-bg: $base01;
 
 /* Non highlighted code colors */
 //$pre-bg: $base03;
