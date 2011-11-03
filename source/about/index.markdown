@@ -19,13 +19,13 @@ As it happens, research cyberinfrastructure really comes down to one thing: scie
 
 ## Site Technology ##
 
-This site is built with Octopress because it is the god damned bees knees.  I plan on messing with the template heavily, I would be surprised if it loaded at all in any version of IE.  If it does, then I would praise imathis, since I did my darndest to not care.
+This site is built with Octopress because it is the *damned bees knees*.  I plan on messing with the template heavily, I would be surprised if it loaded at all in any version of IE.  If it does, then I would praise [imathis](https://github.com/imathis/), since I did my darndest to not care.
 
 The fonts are from the google open font directory, so they are free to re-use. I wanted the site to look unique, and haven't noticed many people using the open fonts.
 
 I am hosting the site at github because 1) it just works and 2) free bandwidth and 3) git changed my life.  I am a huge git evangelist. This ties into my passion for data management, git fits right into my niche.  And oh what a nice fit.  The distributed revision control model that is possible with git is unheard of with regard to scientific data. It gives me goosebumps to think of what might be possible if git were to get deeply integrated with scientific data management... there I go again. See?  Anyway.
 
-Feel free to browse my commits if you want; the source for the site and posts and everything is, of course, on github available for perusal for the curious.
+Feel free to browse my commits if you want; the source for the site and posts and everything is, of course, [on github](http://github.com/dualistic/dualistic.github.com) available for perusal for the curious.
 
 ## Atheism ##
 
