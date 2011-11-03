@@ -7,11 +7,11 @@
 .serif { font-family: "Cardo", Georgia, Times, "Times New Roman", serif; }
 
 body > header {
-  padding-left: 140px;
+  padding-left: 175px;
   background: {
     image: url('/images/logo-100x100.png');
     repeat: no-repeat;
-    position: 1em;
+    position: 2.2em;
   }
 }
 
@@ -52,3 +52,13 @@ body article .hide-toggle {
    }
 }
 
+body > div > div {
+  background-color: $base2;
+}
+
+#blossoms {
+  position: absolute;
+  top: 0;
+  right: 100px;
+/*  background-image: url("/images/blossoms.png");*/
+}
