@@ -1,8 +1,6 @@
 ---
 layout: page
 title: "About"
-date: 2011-10-17 01:43
-comments: false
 sharing: true
 footer: true
 ---

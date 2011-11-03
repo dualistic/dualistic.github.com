@@ -1,8 +1,6 @@
 ---
 layout: page
 title: "Projects"
-date: 2011-10-17 01:43
-comments: true
 sharing: true
 footer: true
 ---
