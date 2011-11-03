@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Mephisto mongrel cluster (continued) - Dualistic</title>
+  <title>Everything past here is old - Dualistic</title>
   <meta name="author" content="Pol Llovet">
 
   
-  <meta name="description" content="        Mephisto Mongrel Cluster (Continued)        &laquo;&raquo;Apr 1st, 2008      So, in regards to &#8220;this problem&#8221;:http://pol.llovet...">
+  <meta name="description" content="This is just a note.  All of the rest of the posts here on this blog are imported from my old blog and are from 2008.  They are woefully out of dat...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued/">
+  <link rel="canonical" href="http://dualistic.com/blog/2011/01/01/everything-past-here-is-old/">
   <link href="/favicon.png" rel="icon" type="image/png">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -59,62 +59,15 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Mephisto Mongrel Cluster (Continued)</h1>
-    <p class="meta">
-
-
-
-
-
-  
-
-
-
-
-
-  <a href="/blog/2008/04/01/redmine-and-mercurial/" title="Previous Post:
-  Redmine and Mercurial">&laquo;</a>
-
-
-<a href="/blog/2008/04/01/mercurial-apache2-and-mod_rewrite/" title="next Post:
-Mercurial, Apache2 and mod_rewrite">&raquo;</a>
-<time datetime="2008-04-01T13:55:00-06:00" pubdate  data-updated="true" >Apr 1<span>st</span>, 2008</time></p>
-  </header>
-  
-  <p>So, in regards to &#8220;this problem&#8221;:http://pol.llovet.name/2008/3/28/mephisto-mongrel-cluster-stops-responding, the server hasn&#8217;t frozen in 10 hours or so, problem solved?</p>
-
-<!--more-->
-
-
-<p>
-Here&#8217;s what I did:</p>
-
-<p>I had to install two packages:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>root@pol:/# apt-get install mysql-client libmysqlclient15-dev</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Then I was able to install the mysql gem with the config parameter:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>root@pol:/# gem install mysql -- --mysql-config=/etc/mysql/my.cnf</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You do have to be root (or use sudo) to run those commands.</p>
-
-<p>Then I restarted the mongrel cluster, and it&#8217;s been running well so far.</p>
-
-<p>Hopefully the problem is fixed!</p>
-
-  
-    <footer>
+    
+      <h1 class="entry-title">Everything Past Here Is Old</h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
@@ -126,30 +79,71 @@ Here&#8217;s what I did:</p>
 
 
 
-  <a href="/blog/2008/04/01/redmine-and-mercurial/" title="Previous Post:
-  Redmine and Mercurial">&laquo;</a>
+  <a href="/blog/2008/10/23/ruby-dbi-and-mysql-drive/" title="Previous Post:
+  ruby dbi and mysql driver">&laquo;</a>
 
 
-<a href="/blog/2008/04/01/mercurial-apache2-and-mod_rewrite/" title="next Post:
-Mercurial, Apache2 and mod_rewrite">&raquo;</a>
-<time datetime="2008-04-01T13:55:00-06:00" pubdate  data-updated="true" >Apr 1<span>st</span>, 2008</time>
+<a href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/" title="next Post:
+There Has Never Been a Better Time to Be a Self-taught Coder">&raquo;</a>
+<time datetime="2011-01-01T01:01:00-07:00" pubdate  data-updated="true" >Jan 1<span>st</span>, 2011</time>
         
-
-
       </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This is just a note.  All of the rest of the posts here on this blog are imported from my old blog and are from 2008.  They are woefully out of date, and I just imported them for posterity and continuity.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
       
-        <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued/" data-via="_pol" data-counturl="http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued/" >Tweet</a>
+
+<span class="byline author vcard">Posted by <span class="fn">Pol Llovet</span></span>
+
+      
+
+
+
+
+
+  
+
+
+
+
+
+  <a href="/blog/2008/10/23/ruby-dbi-and-mysql-drive/" title="Previous Post:
+  ruby dbi and mysql driver">&laquo;</a>
+
+
+<a href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/" title="next Post:
+There Has Never Been a Better Time to Be a Self-taught Coder">&raquo;</a>
+<time datetime="2011-01-01T01:01:00-07:00" pubdate  data-updated="true" >Jan 1<span>st</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/pita/'>pita</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/rvm/'>rvm</a>, <a class='category' href='/blog/categories/soap/'>soap</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dualistic.com/blog/2011/01/01/everything-past-here-is-old/" data-via="_pol" data-counturl="http://dualistic.com/blog/2011/01/01/everything-past-here-is-old/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
   
 </div>
 
-      
-    </footer>
-  
+    
+  </footer>
 </article>
 
   <section>
@@ -257,8 +251,8 @@ Mercurial, Apache2 and mod_rewrite">&raquo;</a>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued/';
-        var disqus_url = 'http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued/';
+        var disqus_identifier = 'http://dualistic.com/blog/2011/01/01/everything-past-here-is-old/';
+        var disqus_url = 'http://dualistic.com/blog/2011/01/01/everything-past-here-is-old/';
         var disqus_script = 'embed.js'
       
 

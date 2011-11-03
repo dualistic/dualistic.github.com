@@ -9,7 +9,7 @@
   <meta name="author" content="Pol Llovet">
 
   
-  <meta name="description" content="        Projects      Oct 17th, 2011      These are the projects that I work on day to day. They are in some particular order.YogoThe Yogo Project....">
+  <meta name="description" content="        Projects      Oct 17th, 2011      Current FociYogoThe Yogo Project.  Yogo is a set of ruby libraries for building scientific data managemen...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -36,7 +36,7 @@
     <h2>Pol Llovet :: Life & Work</h2>
   
 </hgroup>
-
+<div id='blossoms'><img src='/images/blossoms.png' alt='plum blossoms'></div>
 </header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
   <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
@@ -78,31 +78,63 @@
 <time datetime="2011-10-17T01:43:00-06:00" pubdate  data-updated="true" >Oct 17<span>th</span>, 2011</time></p>
   </header>
   
-  <p>These are the projects that I work on day to day. They are in some particular order.</p>
+  <h2>Current Foci</h2>
 
-<h3>Yogo</h3>
+<h3><a href="https://github.com/yogo">Yogo</a></h3>
 
-<p>The Yogo Project.</p>
+<p>The Yogo Project.  Yogo is a set of ruby libraries for building scientific data management applications. It is a data management framework that has been used to build some of the other software that is listed here. It is currently in development.</p>
 
-<h3>Crux</h3>
+<p>As a note, this project began its life many years ago as Neurosys.  It was thought that the name should change, so I offered Yogo (we were doing the software in Ruby, and the Yogo is a sapphire unique to Montana).  It stuck.  I really dislike the acronym-plague that saturates grant-funded projects.  It drives me <em>crazy</em>.  I suffer through it, but make every effort to name my projects without using acronyms.</p>
 
-<p>The Crux Experiment Management system.</p>
+<h3><a href="https://github.com/yogo/VOEIS">VOEIS</a></h3>
+
+<p>The Virtual Observatory and Ecological Informatics System.  VOEIS is a Yogo Framework application that is designed to manage Ecological data.  It is funded through NSF EPSCoR and is currently in development.</p>
+
+<h3>Evolution: The Game</h3>
+
+<p>A four player, team-based, tactical card game.  The teams are bridge-style, cooperative but without full knowledge of each other&#8217;s situation.  Table-talk is prohibited, team members must signal information to their partner through their plays.</p>
+
+<p>This is a full-on physical game, no code involved.  We (my partner is an artist) are in the art/assembly stage trying to get all of the assets finished for a first prototype.</p>
+
+<h3><a href="https://github.com/dualistic/dualistic.github.com">Dualistic.com</a></h3>
+
+<p>This website. It&#8217;s built with <a href="http://octopress.com">Octopress</a> which is a fabulous obsessively-designed static site generator. I love the heck out of it and it has been a joy to work with.</p>
+
+<p>Dualistic.com started long ago as a php site (which I have plans to import at some point), then I thought that I should use it for other things, and I built a <a href="http://www.mephistoblog.com/">Mephisto</a> blog at pol.llovet.name (no longer there).  This never felt quite right to me, so I started on a <a href="http://sinatrarb.com">Sinatra</a> app with a custom blog-thing.  It was fun to write, but in the midst of development I happened upon Octopress.  At the time I was considering how best to integrate code snippets and was thinking I was just going to have to use embedded gists. Octopress does it the way I would have done it if I had the time and persistence to do it properly.  Plus, I could store my posts in git, and revision them.  Add to that, I can host my gorgeous static site at github (combining two of my favorite tools, git and github).  Sold.  Done.  In the bag.</p>
+
+<h2>Will Get To Any Day Now&#8230;</h2>
+
+<h3><a href="https://github.com/pol/outliner">Outliner</a></h3>
+
+<p>A simple outliner written in Ruby to make outlining papers easier. Seriously, here&#8217;s what I wanted:</p>
+
+<ol>
+<li>An editable outline</li>
+<li>Collapsable sections</li>
+</ol>
+
+
+<p>That&#8217;s it.  And yet I couldn&#8217;t find anything that worked.  There was really really heavy solutions (I don&#8217;t need anything huge), and then things that didn&#8217;t quite work (like Pages or Word).  I was thinking to myself, <em>you know, Textmate code folding would work great.</em>  So, I started writing a nested outline with textmate, using Ruby for the syntax (though python may have worked too, I know Ruby better and blocks are handy).  As I happily outlined, it occurred to me that it would take very little to make my fake ruby into real ruby that could render into an html page with javascript collapsing.  And there you have it.</p>
+
+<p>It is rough, I should have tests and probably gemify it.  There&#8217;s no reason it couldn&#8217;t be a standalone thing.</p>
+
+<h3><a href="https://github.com/pol/filedrop">FileDrop</a></h3>
+
+<p>Simple file upload application (needs updates badly).  This was a fun small rails app to fit a use-case that was surprisingly unfilled.  Just a simple app that users could log into, upload a big file, and get back a unique link that they could send to someone to download the file.  The file would get deleted in a few days.</p>
+
+<p>It has been used a number of times by people who needed it, so it totally worked.  However, I am not going to develop it into what it should/could be since I found another application that does what I need and better. <a href="http://filesender.org">FileSender</a> is that app.  It&#8217;s heavier weight, but it has the enterprisey things I need.  Plus it has some code that allow much larger files.  I am in the process of creating a <a href="http://www.opscode.com/chef/">Chef</a> recipe for a FileSender server, and will certainly blog about the results.  I expect that we (the <a href="http://rcg.montana.edu">Research Computing Group</a>) will also create and host a VM image for other institutions to use should they need a similar service.</p>
+
+<h2>Not Working On, But Notable</h2>
+
+<h3><a href="https://github.com/yogo/crux">Crux</a></h3>
+
+<p>The Crux Experiment Management system.  Crux is notable in that it is a Yogo Framework application that used experimental protocols as a way to get scientists to describe their data model.  This was done through using the KEfED protocol description system.  KEfED breaks the protocol into variables (independent and dependent), actions, objects, conditionals, forks and branches. Crux then took the protocol graph, and sent it to the Yogo system to build into a database.</p>
+
+<p>Getting scientists to describe their data models is fairly difficult.  Scientists are not DBAs (nor should they be).  However, they do understand their protocol. This turned out to be a powerful way to communicate the data model.  Fun project.  This was funded by Michael J. Fox Foundation for Parkinson&#8217;s Research.</p>
 
 <h3>FAD</h3>
 
-<p>The faculty activity database (being re-designed).</p>
-
-<h3>Outliner</h3>
-
-<p>A simple outliner written in Ruby to make outlining papers easier. I am noodling around with the idea of turning this into a little webapp.</p>
-
-<h3>FileDrop</h3>
-
-<p>Simple file upload application (needs updates badly).</p>
-
-<h3>Dualistic.com</h3>
-
-<p>This website. A small Sinatra application with an embedded weblog. I would like to spin the blog portion off into its own sinatra app that can be included as rack middleware. I think this would be pretty easy, but I haven&#8217;t gotten around to it yet.</p>
+<p>The faculty activity database.  A database for faculty annual review data.  It sorely needs to be redesigned and reimplemented, but I don&#8217;t have the time or bones to do it.  It&#8217;s a straight up Rails app, but it should be a Yogo app (or at the very least use a nosql db like MongoDB).  The problem is totally tractable, but there aren&#8217;t any good products on the market for doing faculty assessment.  There are many half-assed ones, but nothing like a slam-dunk (even in the enterprise market).</p>
 
   
     <footer>
@@ -165,11 +197,11 @@
       </li>
     
       <li class="post">
-        <a href="/blog/2008/10/23/ruby-dbi-and-mysql-drive/">ruby dbi and mysql driver</a>
+        <a href="/blog/2011/01/01/everything-past-here-is-old/">Everything past here is old</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2008/10/06/apache2-mod_rails-recipe/">apache2 mod_rails recipe</a>
+        <a href="/blog/2008/10/23/ruby-dbi-and-mysql-drive/">ruby dbi and mysql driver</a>
       </li>
     
   </ul>

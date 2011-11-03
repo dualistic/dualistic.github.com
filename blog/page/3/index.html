@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Mephisto mongrel cluster (continued) - Dualistic</title>
+  <title>Dualistic</title>
   <meta name="author" content="Pol Llovet">
 
   
-  <meta name="description" content="        Mephisto Mongrel Cluster (Continued)        &laquo;&raquo;Apr 1st, 2008      So, in regards to &#8220;this problem&#8221;:http://pol.llovet...">
+  <meta name="description" content="Whew, that&#8217;s a mouthful of a title, however, I think it&#8217;s a good one.  I wanted to catch as many keywords as I could because I had a he...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued/">
+  <link rel="canonical" href="http://dualistic.com/blog/page/3/">
   <link href="/favicon.png" rel="icon" type="image/png">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -58,63 +58,19 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
-    <h1 class="entry-title">Mephisto Mongrel Cluster (Continued)</h1>
-    <p class="meta">
-
-
-
-
-
-  
-
-
-
-
-
-  <a href="/blog/2008/04/01/redmine-and-mercurial/" title="Previous Post:
-  Redmine and Mercurial">&laquo;</a>
-
-
-<a href="/blog/2008/04/01/mercurial-apache2-and-mod_rewrite/" title="next Post:
-Mercurial, Apache2 and mod_rewrite">&raquo;</a>
-<time datetime="2008-04-01T13:55:00-06:00" pubdate  data-updated="true" >Apr 1<span>st</span>, 2008</time></p>
-  </header>
-  
-  <p>So, in regards to &#8220;this problem&#8221;:http://pol.llovet.name/2008/3/28/mephisto-mongrel-cluster-stops-responding, the server hasn&#8217;t frozen in 10 hours or so, problem solved?</p>
-
-<!--more-->
-
-
-<p>
-Here&#8217;s what I did:</p>
-
-<p>I had to install two packages:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>root@pol:/# apt-get install mysql-client libmysqlclient15-dev</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Then I was able to install the mysql gem with the config parameter:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>root@pol:/# gem install mysql -- --mysql-config=/etc/mysql/my.cnf</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You do have to be root (or use sudo) to run those commands.</p>
-
-<p>Then I restarted the mongrel cluster, and it&#8217;s been running well so far.</p>
-
-<p>Hopefully the problem is fixed!</p>
-
-  
-    <footer>
+    
+      <h1 class="entry-title"><a href="/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto/">Rails, Nginx, OpenVZ, Mongrel Cluster & Mephisto</a></h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
@@ -126,40 +82,36 @@ Here&#8217;s what I did:</p>
 
 
 
-  <a href="/blog/2008/04/01/redmine-and-mercurial/" title="Previous Post:
-  Redmine and Mercurial">&laquo;</a>
-
-
-<a href="/blog/2008/04/01/mercurial-apache2-and-mod_rewrite/" title="next Post:
-Mercurial, Apache2 and mod_rewrite">&raquo;</a>
-<time datetime="2008-04-01T13:55:00-06:00" pubdate  data-updated="true" >Apr 1<span>st</span>, 2008</time>
+<time datetime="2008-03-26T23:05:00-06:00" pubdate  data-updated="true" >Mar 26<span>th</span>, 2008</time>
         
-
-
       </p>
-      
-        <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued/" data-via="_pol" data-counturl="http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-</div>
+    
+  </header>
 
-      
+
+  <div class="entry-content"><p>Whew, that&#8217;s a mouthful of a title, however, I think it&#8217;s a good one.  I wanted to catch as many keywords as I could because I had a heck of a time getting all of my stuff running, I had to piece it together from goo stretched all over the internet.  But you&#8217;re reading it now, and here&#8217;s how I did it.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto/">Continue &rarr;</a>
     </footer>
   
-</article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </article>
+  
+  <nav class="pagination">
+    <div>
+      
+      <a href="/blog/archives">Blog Archives</a>
+      
+      <a class="next" href="/blog/page/2/">Newer &rarr;</a>
+      
+    </div>
+  </nav>
 </div>
-  </section>
-
-</div>
-
 <aside class="sidebar">
   
     <section>
@@ -192,7 +144,7 @@ Mercurial, Apache2 and mod_rewrite">&raquo;</a>
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -209,7 +161,7 @@ Mercurial, Apache2 and mod_rewrite">&raquo;</a>
 <section>
   <h1>Github Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   
   <a href="https://github.com/pol">@pol</a> on Github
@@ -240,7 +192,6 @@ Mercurial, Apache2 and mod_rewrite">&raquo;</a>
   
 </aside>
 
-
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -256,10 +207,7 @@ Mercurial, Apache2 and mod_rewrite">&raquo;</a>
       var disqus_shortname = 'dualistic';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued/';
-        var disqus_url = 'http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued/';
-        var disqus_script = 'embed.js'
+        var disqus_script = 'count.js'
       
 
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

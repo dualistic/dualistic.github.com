@@ -4,7 +4,7 @@
   <title><![CDATA[Dualistic]]></title>
   <link href="http://dualistic.com/atom.xml" rel="self"/>
   <link href="http://dualistic.com/"/>
-  <updated>2011-10-28T13:20:11-06:00</updated>
+  <updated>2011-11-02T22:08:49-06:00</updated>
   <id>http://dualistic.com/</id>
   <author>
     <name><![CDATA[Pol Llovet]]></name>
@@ -650,6 +650,15 @@ The biggest game-changer, I think, is that there is a ridiculous amount of oppor
 <p>During the recent EDUCAUSE conference, I heard this small-but-growing group of self-taught students &#8220;edupunks&#8221;.  The <a href="http://www.educause.edu/E2011/Program/FS04?page=1#tabs--2">presentation was posted online</a> and I think it&#8217;s worth a look if you are interested.</p>
 
 <p>I think the future of education is changing.  I still think academia is important, but the focus needs to change.  I don&#8217;t think that it will make sense to go to university for classes, but for hands-on training and research opportunities.  University is where mentors and students gather and work.  Live lectures are a waste of time, they should be just video.  In the classroom you should be having real-world work experiences with teachers and peers.  This transition will be painful and ugly, but I think it&#8217;s inevitable; the current system isn&#8217;t sustainable.  Learning is about practice and mentorship.  That&#8217;s what tuition should buy you.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Everything past here is old]]></title>
+    <link href="http://dualistic.com/blog/2011/01/01/everything-past-here-is-old/"/>
+    <updated>2011-01-01T01:01:00-07:00</updated>
+    <id>http://dualistic.com/blog/2011/01/01/everything-past-here-is-old</id>
+    <content type="html"><![CDATA[<p>This is just a note.  All of the rest of the posts here on this blog are imported from my old blog and are from 2008.  They are woefully out of date, and I just imported them for posterity and continuity.</p>
 ]]></content>
   </entry>
   
@@ -1532,52 +1541,6 @@ Nginx seems to be motoring along just fine with no problems.</p>
 <p>Then you open up your Mephisto admin and in the settings page, change your theme to the name of the directory for your theme.  In my case it was &#8220;sharp000&#8221;.  I also had to delete the cache files (in the settings area also, click the &#8216;caches&#8217; button) in order for the theme to show up.</p>
 
 <p>Oh, and don&#8217;t forget to update the templates, mine had the template author&#8217;s personal stuff all over it. :)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rails, Nginx, OpenVZ, Mongrel Cluster & Mephisto]]></title>
-    <link href="http://dualistic.com/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto/"/>
-    <updated>2008-03-26T23:05:00-06:00</updated>
-    <id>http://dualistic.com/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto</id>
-    <content type="html"><![CDATA[<p>Whew, that&#8217;s a mouthful of a title, however, I think it&#8217;s a good one.  I wanted to catch as many keywords as I could because I had a heck of a time getting all of my stuff running, I had to piece it together from goo stretched all over the internet.  But you&#8217;re reading it now, and here&#8217;s how I did it.</p>
-
-<!--more-->
-
-
-<p></p>
-
-<h2>Why</h2>
-
-<p>You can skip this if you want, but I thought a bit of &#8220;why&#8221; would be nice.  I am now doing full-time RoR development.  It seemed like a good idea to keep a blog about the problems I was encountering and how I solved them.  It is so often that my own problems are solved by other people doing just that&#8230; it seemed time to give back.</p>
-
-<h2>Getting started</h2>
-
-<p>I started with a Debian Etch LAMPP(Linux Apache Mysql Postgresql Php) server that was running a bunch of vhosts(virtual hosts) with apache2.  I didn&#8217;t want to disrupt anything already there (I had friends who shared the server with me), but Rails apps aren&#8217;t intended to be virtual-hosted, and doing so doesn&#8217;t work very well.</p>
-
-<p>Ideally I wanted OpenVZ installed, then put each rails app in a virtual machine (VM).  Apache2 would proxy to ports 80 and 443 on the VMs.  Then, the VM would run a lightweight webserver and mongrel cluster.  I decided to run Nginx (pronounced engine-x) as the webserver over lighttpd based on this <a href="http://hostingfu.com/article/nginx-vs-lighttpd-for-a-small-vps">a comparison I found</a>.</p>
-
-<p>So, to summarize my steps:</p>
-
-<ol>
-<li>Install OpenVZ</li>
-<li>Create a VM</li>
-<li>Configure Apache2 to proxy to the VM as a vhost</li>
-<li>Install Nginx and Rails on the VM</li>
-<li>Install Mongrel</li>
-</ol>
-
-
-<p>At this point, I have a VM that I can copy to create more rails apps in the future if I want to.</p>
-
-<p>But for this VM, I want a blog, so I will lastly:</p>
-
-<ul>
-<li>Install Mephisto</li>
-</ul>
-
-
-<p>I need to make sure that all of this works, so I am going to post a series of articles and then link to them from this article. Hopefully, at the end of it, it will take you less time than it took me.  Yay for the internet!</p>
 ]]></content>
   </entry>
   
