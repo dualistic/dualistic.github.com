@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Rails, Nginx, OpenVZ, Mongrel Cluster & Mephisto - Dualistic</title>
+  <title>Case What? - Dualistic</title>
   <meta name="author" content="Pol Llovet">
 
   
-  <meta name="description" content="        Rails, Nginx, OpenVZ, Mongrel Cluster & Mephisto      &raquo;Mar 26th, 2008      Whew, that&#8217;s a mouthful of a title, however, I think...">
+  <meta name="description" content="So, I was merging some changes (the postgres chef recipe), and I ran across the following:why would you do this?12345678casewhen platform_version.t...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dualistic.com/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto/">
+  <link rel="canonical" href="http://dualistic.com/blog/2011/12/01/ifcase-what/">
   <link href="/favicon.png" rel="icon" type="image/png">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -59,72 +59,15 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Rails, Nginx, OpenVZ, Mongrel Cluster & Mephisto</h1>
-    <p class="meta">
-
-
-
-
-
-  
-
-
-
-
-
-
-<a href="/blog/2008/03/27/adding-themes-to-mephisto/" title="next Post:
-Adding themes to mephisto">&raquo;</a>
-<time datetime="2008-03-26T23:05:00-06:00" pubdate  data-updated="true" >Mar 26<span>th</span>, 2008</time></p>
-  </header>
-  
-  <p>Whew, that&#8217;s a mouthful of a title, however, I think it&#8217;s a good one.  I wanted to catch as many keywords as I could because I had a heck of a time getting all of my stuff running, I had to piece it together from goo stretched all over the internet.  But you&#8217;re reading it now, and here&#8217;s how I did it.</p>
-
-<!--more-->
-
-
-<p></p>
-
-<h2>Why</h2>
-
-<p>You can skip this if you want, but I thought a bit of &#8220;why&#8221; would be nice.  I am now doing full-time RoR development.  It seemed like a good idea to keep a blog about the problems I was encountering and how I solved them.  It is so often that my own problems are solved by other people doing just that&#8230; it seemed time to give back.</p>
-
-<h2>Getting started</h2>
-
-<p>I started with a Debian Etch LAMPP(Linux Apache Mysql Postgresql Php) server that was running a bunch of vhosts(virtual hosts) with apache2.  I didn&#8217;t want to disrupt anything already there (I had friends who shared the server with me), but Rails apps aren&#8217;t intended to be virtual-hosted, and doing so doesn&#8217;t work very well.</p>
-
-<p>Ideally I wanted OpenVZ installed, then put each rails app in a virtual machine (VM).  Apache2 would proxy to ports 80 and 443 on the VMs.  Then, the VM would run a lightweight webserver and mongrel cluster.  I decided to run Nginx (pronounced engine-x) as the webserver over lighttpd based on this <a href="http://hostingfu.com/article/nginx-vs-lighttpd-for-a-small-vps">a comparison I found</a>.</p>
-
-<p>So, to summarize my steps:</p>
-
-<ol>
-<li>Install OpenVZ</li>
-<li>Create a VM</li>
-<li>Configure Apache2 to proxy to the VM as a vhost</li>
-<li>Install Nginx and Rails on the VM</li>
-<li>Install Mongrel</li>
-</ol>
-
-
-<p>At this point, I have a VM that I can copy to create more rails apps in the future if I want to.</p>
-
-<p>But for this VM, I want a blog, so I will lastly:</p>
-
-<ul>
-<li>Install Mephisto</li>
-</ul>
-
-
-<p>I need to make sure that all of this works, so I am going to post a series of articles and then link to them from this article. Hopefully, at the end of it, it will take you less time than it took me.  Yay for the internet!</p>
-
-  
-    <footer>
+    
+      <h1 class="entry-title">Case What?</h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
@@ -136,27 +79,105 @@ Adding themes to mephisto">&raquo;</a>
 
 
 
+  <a href="/blog/2011/10/27/come-on-ruby/" title="Previous Post:
+  I know we can do better, Ruby (a simple setup in 8 excruciating steps)">&laquo;</a>
 
-<a href="/blog/2008/03/27/adding-themes-to-mephisto/" title="next Post:
-Adding themes to mephisto">&raquo;</a>
-<time datetime="2008-03-26T23:05:00-06:00" pubdate  data-updated="true" >Mar 26<span>th</span>, 2008</time>
+<time datetime="2011-12-01T21:28:00-07:00" pubdate  data-updated="true" >Dec 1<span>st</span>, 2011</time>
         
-
-
       </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>So, I was merging some changes (the postgres chef recipe), and I ran across the following:</p>
+
+<figure class='code'><figcaption><span>why would you do this?</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">case</span>
+</span><span class='line'><span class="k">when</span> <span class="n">platform_version</span><span class="o">.</span><span class="n">to_f</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql-</span><span class="si">#{</span><span class="n">node</span><span class="o">[</span><span class="s1">&#39;postgresql&#39;</span><span class="o">][</span><span class="s1">&#39;version&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">when</span> <span class="n">platform_version</span> <span class="o">=~</span> <span class="sr">/squeeze/</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql&quot;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I am confused.  Why would you do this?  What possible benefit does this have over just using an if/else/elsif block?  So&#8230; I&#8217;m going to just change it to:</p>
+
+<figure class='code'><figcaption><span>why would you do this?</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="n">platform_version</span><span class="o">.</span><span class="n">to_f</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql-</span><span class="si">#{</span><span class="n">node</span><span class="o">[</span><span class="s1">&#39;postgresql&#39;</span><span class="o">][</span><span class="s1">&#39;version&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">elsif</span> <span class="n">platform_version</span> <span class="o">=~</span> <span class="sr">/squeeze/</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql&quot;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Because that seems, you know, sensible&#8230;</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
       
-        <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dualistic.com/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto/" data-via="_pol" data-counturl="http://dualistic.com/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto/" >Tweet</a>
+
+<span class="byline author vcard">Posted by <span class="fn">Pol Llovet</span></span>
+
+      
+
+
+
+
+
+  
+
+
+
+
+
+  <a href="/blog/2011/10/27/come-on-ruby/" title="Previous Post:
+  I know we can do better, Ruby (a simple setup in 8 excruciating steps)">&laquo;</a>
+
+<time datetime="2011-12-01T21:28:00-07:00" pubdate  data-updated="true" >Dec 1<span>st</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/chef/'>chef</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dualistic.com/blog/2011/12/01/ifcase-what/" data-via="_pol" data-counturl="http://dualistic.com/blog/2011/12/01/ifcase-what/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
   
 </div>
 
-      
-    </footer>
-  
+    
+  </footer>
 </article>
 
   <section>
@@ -264,8 +285,8 @@ Adding themes to mephisto">&raquo;</a>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://dualistic.com/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto/';
-        var disqus_url = 'http://dualistic.com/blog/2008/03/26/rails-nginx-openvz-mongrel-cluster-mephisto/';
+        var disqus_identifier = 'http://dualistic.com/blog/2011/12/01/ifcase-what/';
+        var disqus_url = 'http://dualistic.com/blog/2011/12/01/ifcase-what/';
         var disqus_script = 'embed.js'
       
 

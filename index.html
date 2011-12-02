@@ -9,7 +9,7 @@
   <meta name="author" content="Pol Llovet">
 
   
-  <meta name="description" content="I love Ruby, but it can be a total pain in the ass. Not the language, mind you, but the ecosystem.  And the crazy thing is, the Rubygems+RVM setup ...">
+  <meta name="description" content="So, I was merging some changes (the postgres chef recipe), and I ran across the following:why would you do this?12345678casewhen platform_version.t...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -60,6 +60,82 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/12/01/ifcase-what/">Case What?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+
+
+<time datetime="2011-12-01T21:28:00-07:00" pubdate  data-updated="true" >Dec 1<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>So, I was merging some changes (the postgres chef recipe), and I ran across the following:</p>
+
+<figure class='code'><figcaption><span>why would you do this?</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">case</span>
+</span><span class='line'><span class="k">when</span> <span class="n">platform_version</span><span class="o">.</span><span class="n">to_f</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql-</span><span class="si">#{</span><span class="n">node</span><span class="o">[</span><span class="s1">&#39;postgresql&#39;</span><span class="o">][</span><span class="s1">&#39;version&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">when</span> <span class="n">platform_version</span> <span class="o">=~</span> <span class="sr">/squeeze/</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql&quot;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I am confused.  Why would you do this?  What possible benefit does this have over just using an if/else/elsif block?  So&#8230; I&#8217;m going to just change it to:</p>
+
+<figure class='code'><figcaption><span>why would you do this?</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="n">platform_version</span><span class="o">.</span><span class="n">to_f</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql-</span><span class="si">#{</span><span class="n">node</span><span class="o">[</span><span class="s1">&#39;postgresql&#39;</span><span class="o">][</span><span class="s1">&#39;version&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">elsif</span> <span class="n">platform_version</span> <span class="o">=~</span> <span class="sr">/squeeze/</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql&quot;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Because that seems, you know, sensible&#8230;</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -478,47 +554,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/04/17/applications-with-multiple-authn-sources/">Applications With Multiple Authn Sources</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-
-
-<time datetime="2008-04-17T17:11:00-06:00" pubdate  data-updated="true" >Apr 17<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&#8217;ve previously written that I want a system that can handle multiple authentication sources.  After hammering on it a bit, there are some pitfalls that exist with this kind of scenario.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2008/04/17/applications-with-multiple-authn-sources/">Continue &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -536,6 +571,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2011/12/01/ifcase-what/">Case What?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2011/10/27/come-on-ruby/">I know we can do better, Ruby (a simple setup in 8 excruciating steps)</a>
       </li>
     
@@ -549,10 +588,6 @@
     
       <li class="post">
         <a href="/blog/2011/01/01/everything-past-here-is-old/">Everything past here is old</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2008/10/23/ruby-dbi-and-mysql-drive/">ruby dbi and mysql driver</a>
       </li>
     
   </ul>

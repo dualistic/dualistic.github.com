@@ -4,7 +4,7 @@
   <title><![CDATA[Dualistic]]></title>
   <link href="http://dualistic.com/atom.xml" rel="self"/>
   <link href="http://dualistic.com/"/>
-  <updated>2011-11-03T15:11:52-06:00</updated>
+  <updated>2011-12-01T21:38:44-07:00</updated>
   <id>http://dualistic.com/</id>
   <author>
     <name><![CDATA[Pol Llovet]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Case What?]]></title>
+    <link href="http://dualistic.com/blog/2011/12/01/ifcase-what/"/>
+    <updated>2011-12-01T21:28:00-07:00</updated>
+    <id>http://dualistic.com/blog/2011/12/01/ifcase-what</id>
+    <content type="html"><![CDATA[<p>So, I was merging some changes (the postgres chef recipe), and I ran across the following:</p>
+
+<figure class='code'><figcaption><span>why would you do this?</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">case</span>
+</span><span class='line'><span class="k">when</span> <span class="n">platform_version</span><span class="o">.</span><span class="n">to_f</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql-</span><span class="si">#{</span><span class="n">node</span><span class="o">[</span><span class="s1">&#39;postgresql&#39;</span><span class="o">][</span><span class="s1">&#39;version&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">when</span> <span class="n">platform_version</span> <span class="o">=~</span> <span class="sr">/squeeze/</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql&quot;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I am confused.  Why would you do this?  What possible benefit does this have over just using an if/else/elsif block?  So&#8230; I&#8217;m going to just change it to:</p>
+
+<figure class='code'><figcaption><span>why would you do this?</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="n">platform_version</span><span class="o">.</span><span class="n">to_f</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql-</span><span class="si">#{</span><span class="n">node</span><span class="o">[</span><span class="s1">&#39;postgresql&#39;</span><span class="o">][</span><span class="s1">&#39;version&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">elsif</span> <span class="n">platform_version</span> <span class="o">=~</span> <span class="sr">/squeeze/</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql&quot;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Because that seems, you know, sensible&#8230;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[I know we can do better, Ruby (a simple setup in 8 excruciating steps)]]></title>
@@ -1499,48 +1548,6 @@ Nginx seems to be motoring along just fine with no problems.</p>
 <h3>Goal</h3>
 
 <p>I&#8217;m going to make what I want, and then I&#8217;ll stick it somewhere for the world to grab it if they want.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Adding themes to mephisto]]></title>
-    <link href="http://dualistic.com/blog/2008/03/27/adding-themes-to-mephisto/"/>
-    <updated>2008-03-27T00:39:00-06:00</updated>
-    <id>http://dualistic.com/blog/2008/03/27/adding-themes-to-mephisto</id>
-    <content type="html"><![CDATA[<p>Before I got to writing my setup, I wanted to theme my blog.  So, I went hunting for themes.  There seems to be only one good repository of themes at the <a href="http://mephisto-themes.nanorails.com/gallery">Mephisto Themes Gallery</a>, and it doesn&#8217;t really have that many themes.  Still, I found one I liked.</p>
-
-<p>However, I didn&#8217;t find anywhere how to install the themes.</p>
-
-<p><em>UPDATE</em> You can install themes from the Mephisto Design area.  It does seem to be easier if you have a zip file.  Skip down if you want to manually add a theme to Mephisto.</p>
-
-<!--more-->
-
-
-<p></p>
-
-<h3>Installing using the Mephisto admin area</h3>
-
-<p>First, go to the Design section within the admin area.  There is a button at the top called &#8220;Manage Themes&#8221;.  This will show you the currently installed themes.   Click the &#8220;Import new Theme&#8221; button to add another theme.  From there you can upload a zip file of a theme that you got from the <a href="http://mephisto-themes.nanorails.com/gallery">Mephisto Themes Gallery</a> or you can click on the link in the text that takes you to the <a href="http://mephisto.stikipad.com/help/show/Custom+Templates">Custom Templates</a> area of the Mephisto wiki.  There are also a couple more links there that will take you to other repositories of Mephisto themes.  Still, almost all of them are available at the Themes Gallery, and you get a preview there also, which is enormously helpful.</p>
-
-<p>Download a zip file and import it into Mephisto by using the file input box.</p>
-
-<h3>How to install a theme into Mephisto manually</h3>
-
-<p>I decided that I liked the sharp000 theme (UPDATE: I have subsequently decided it was too dark, and I went with &#8220;Beautiful Day&#8221; I&#8217;d link it, but it&#8217;s hard to deep link into the Themes Gallery).  Unfortunately, it&#8217;s hard to get a direct link to the theme, so I have to download it to my desktop, then upload it to my rails server.  Bummer.  Otherwise I would just wget the url to the server directly.</p>
-
-<p>Once you have the theme, navigate to the <code>themes/site-1</code> directory in your mephisto install. This is where all of the themes live.  It doesn&#8217;t appear that the Gallery zips the folder with the files, so create a directory to hold the theme, I think the name is important, so make it the same as the theme, if you can.  In my case, I created a <code>sharp000</code> directory, then unzipped the files into there.</p>
-
-<p>Inside the theme directory there should now be something that looks like this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mongrel@pol:/var/rails/mephisto/themes/site-1/sharp000$ ls
-</span><span class='line'>about.yml  images  javascripts  layouts  preview.png  stylesheets  templates</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Then you open up your Mephisto admin and in the settings page, change your theme to the name of the directory for your theme.  In my case it was &#8220;sharp000&#8221;.  I also had to delete the cache files (in the settings area also, click the &#8216;caches&#8217; button) in order for the theme to show up.</p>
-
-<p>Oh, and don&#8217;t forget to update the templates, mine had the template author&#8217;s personal stuff all over it. :)</p>
 ]]></content>
   </entry>
   
