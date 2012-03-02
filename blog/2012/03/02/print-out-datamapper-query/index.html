@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Dualistic</title>
+  <title>Print out DataMapper Query - Dualistic</title>
   <meta name="author" content="Pol Llovet">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dualistic.com/">
+  <link rel="canonical" href="http://dualistic.com/blog/2012/03/02/print-out-datamapper-query/">
   <link href="/favicon.png" rel="icon" type="image/png">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -58,15 +58,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/03/02/print-out-datamapper-query/">Print Out DataMapper Query</a></h1>
+      <h1 class="entry-title">Print Out DataMapper Query</h1>
     
     
       <p class="meta">
@@ -82,6 +79,9 @@
 
 
 
+  <a href="/blog/2011/12/01/ifcase-what/" title="Previous Post:
+  Case what?">&laquo;</a>
+
 <time datetime="2012-03-02T15:23:00-07:00" pubdate  data-updated="true" >Mar 2<span>nd</span>, 2012</time>
         
       </p>
@@ -89,7 +89,7 @@
   </header>
 
 
-  <div class="entry-content"><p>This has come up a few times and I had to go dredge it up out of IRC logs whenever I forgot it, so I am going to capture it here for posterity.</p>
+<div class="entry-content"><p>This has come up a few times and I had to go dredge it up out of IRC logs whenever I forgot it, so I am going to capture it here for posterity.</p>
 
 <p>The problem is:  How do you see the query that DataMapper would have executed for a particular call?</p>
 
@@ -144,22 +144,16 @@
 
 <p>There, two handy things all at once. ;)</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/12/01/ifcase-what/">Case What?</a></h1>
-    
-    
-      <p class="meta">
-        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Pol Llovet</span></span>
+
+      
 
 
 
@@ -171,428 +165,36 @@
 
 
 
-<time datetime="2011-12-01T21:28:00-07:00" pubdate  data-updated="true" >Dec 1<span>st</span>, 2011</time>
-        
-      </p>
+  <a href="/blog/2011/12/01/ifcase-what/" title="Previous Post:
+  Case what?">&laquo;</a>
+
+<time datetime="2012-03-02T15:23:00-07:00" pubdate  data-updated="true" >Mar 2<span>nd</span>, 2012</time>
+      
+
+
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p>So, I was merging some changes (the postgres chef recipe), and I ran across the following:</p>
-
-<figure class='code'><figcaption><span>why would you do this?</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">case</span>
-</span><span class='line'><span class="k">when</span> <span class="n">platform_version</span><span class="o">.</span><span class="n">to_f</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span>
-</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql-</span><span class="si">#{</span><span class="n">node</span><span class="o">[</span><span class="s1">&#39;postgresql&#39;</span><span class="o">][</span><span class="s1">&#39;version&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="k">when</span> <span class="n">platform_version</span> <span class="o">=~</span> <span class="sr">/squeeze/</span>
-</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql&quot;</span>
-</span><span class='line'><span class="k">else</span>
-</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I am confused.  Why would you do this?  What possible benefit does this have over just using an if/else/elsif block?  So&#8230; I&#8217;m going to just change it to:</p>
-
-<figure class='code'><figcaption><span>this makes more sense</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="n">platform_version</span><span class="o">.</span><span class="n">to_f</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span>
-</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql-</span><span class="si">#{</span><span class="n">node</span><span class="o">[</span><span class="s1">&#39;postgresql&#39;</span><span class="o">][</span><span class="s1">&#39;version&#39;</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="k">elsif</span> <span class="n">platform_version</span> <span class="o">=~</span> <span class="sr">/squeeze/</span>
-</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql&quot;</span>
-</span><span class='line'><span class="k">else</span>
-</span><span class='line'>  <span class="n">service_name</span> <span class="s2">&quot;postgresql&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Because that seems, you know, sensible&#8230;</p>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dualistic.com/blog/2012/03/02/print-out-datamapper-query/" data-via="_pol" data-counturl="http://dualistic.com/blog/2012/03/02/print-out-datamapper-query/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
 </div>
-  
-  
 
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
     
-      <h1 class="entry-title"><a href="/blog/2011/10/27/come-on-ruby/">I Know We Can Do Better, Ruby (a Simple Setup in 8 Excruciating Steps)</a></h1>
-    
-    
-      <p class="meta">
-        
+  </footer>
+</article>
 
-
-
-
-
-  
-
-
-
-
-
-<time datetime="2011-10-27T22:05:00-06:00" pubdate  data-updated="true" >Oct 27<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I love Ruby, but it can be a total pain in the ass. Not the language, mind you, but the ecosystem.  And the crazy thing is, the Rubygems+RVM setup is basically unparalleled in the development world for flexibility and ease of use.  I really can&#8217;t think of any other dev environment that is half as cool. So, what&#8217;s wrong?  Well, let&#8217;s go on a little journey&#8230;</p>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/10/27/come-on-ruby/">Continue &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/10/26/soaping-with-ruby-and-php/">SOAPing With Ruby and PHP</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-
-
-<time datetime="2011-10-26T21:10:00-06:00" pubdate  data-updated="true" >Oct 26<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>So, there are some folks on campus who would like to have their faculty&#8217;s journals listed on their faculty pages. This is certainly doable with some web-scraping, but the Web of Science (Web of Knowledge, actually) has an API, and the folks I have talked to have secured access to said API.</p>
-
-<p>Unfortunately, it is a SOAP API, something which I know nothing about. But, hey, how hard can it be?</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/10/26/soaping-with-ruby-and-php/">Continue &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/">There Has Never Been a Better Time to Be a Self-taught Coder</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-
-
-<time datetime="2011-10-26T21:09:00-06:00" pubdate  data-updated="true" >Oct 26<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I posted this as a response to a <a href="http://www.catherynnemvalente.com/2011/10/post-apocalyptic-undergraduate-zombies/">blog post</a>, and I thought it might be more generally appreciated.  It was in response to a short quote in the post where she was wondering which degrees might be worth the astronomical cost of tuition, &#8220;Computer Science, I guess&#8230;&#8221;</p>
-
-<p>I hate to say it but to be honest, there has never been a better time to <em>not</em> be in the process of getting a computer science degree.  I work in academia, so this is a really tough thing to admit, but I think it&#8217;s true.  It&#8217;s not just the spiraling cost of education, and the cost/benefit analysis of tuition. The whole situation is changing.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/">Continue &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/01/01/everything-past-here-is-old/">Everything Past Here Is Old</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-
-
-<time datetime="2011-01-01T01:01:00-07:00" pubdate  data-updated="true" >Jan 1<span>st</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is just a note.  All of the rest of the posts here on this blog are imported from my old blog and are from 2008.  They are woefully out of date, and I just imported them for posterity and continuity.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/10/23/ruby-dbi-and-mysql-drive/">Ruby Dbi and Mysql Driver</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-
-
-<time datetime="2008-10-23T19:41:00-06:00" pubdate  data-updated="true" >Oct 23<span>rd</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If you want to do direct access to mysql (or other databse) you can use the dbi gem to do it.  But what the docs don&#8217;t tell you is that you need to gem install a database driver also.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2008/10/23/ruby-dbi-and-mysql-drive/">Continue &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/10/06/apache2-mod_rails-recipe/">Apache2 Mod_rails Recipe</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-
-
-<time datetime="2008-10-06T01:12:00-06:00" pubdate  data-updated="true" >Oct 6<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I recently had to write a recipe to set up instances of mod_rails apps for apache2.  The goal of this process is to have a server that has apps hosted at http://server/app1, http://server/app2, etc.</p>
-
-<p>The recipe is going to be used to create a puppet script, but it could also be boiled down to a ruby or shell script to easily create app instances for anyone&#8217;s use.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2008/10/06/apache2-mod_rails-recipe/">Continue &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/06/09/multi-os-password-management/">Multi-OS Password Management</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-
-
-<time datetime="2008-06-09T15:10:00-06:00" pubdate  data-updated="true" >Jun 9<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>It&#8217;s a problem trying to keep track of all of your passwords.  I have a mac laptop, mac workstation at work, and a windows machine at home.  Add to that the myriad of websites, servers and services that I have users and passwords for.  It&#8217;s a mess.  However, I managed to find a perfect solution&#8230;</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2008/06/09/multi-os-password-management/">Continue &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/05/09/openvz-and-mod_rails/">Openvz and Mod_rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-
-
-<time datetime="2008-05-09T16:29:00-06:00" pubdate  data-updated="true" >May 9<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Setting it up was pretty easy, though I had to triple my memory allocation over what I was using with nginx+mongrel.</p>
-
-<ul>
-<li>I created a new virtual machine, but with more memory than usual: <code>PRIVVMPAGES="150000:300000"</code></li>
-<li>I <code>vzctl enter &lt;the new machine&gt;</code></li>
-<li>as root:</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ apt-get ruby ruby1.8-dev rubygems apache2 apache2-mpm-prefork build-essential vim
-</span><span class='line'>$ gem install fastthread 
-</span><span class='line'>$ gem install rake (i have rails frozen into my apps, otherwise I would have installed it also)
-</span><span class='line'>$ gem install passenger</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>for some reason, my binaries were not linked, nor the rubygems path exported, so:</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ln -s /var/lib/gems/1.8/bin/* /usr/bin (heavy handed, but it works)</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>run <code>passenger-install-apache2-module</code> and follow the instructions</li>
-</ul>
-
-
-<p>after starting apache2, i was able to see my site up and running.  yay!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  <nav class="pagination">
-    <div>
-      
-        <a class="prev" href="/blog/page/2/">&larr; Older</a>
-      
-      <a href="/blog/archives">Blog Archives</a>
-      
-    </div>
-  </nav>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -625,7 +227,7 @@
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -642,7 +244,7 @@
 <section>
   <h1>Github Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/pol">@pol</a> on Github
@@ -673,6 +275,7 @@
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -688,7 +291,10 @@
       var disqus_shortname = 'dualistic';
       
         
-        var disqus_script = 'count.js'
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://dualistic.com/blog/2012/03/02/print-out-datamapper-query/';
+        var disqus_url = 'http://dualistic.com/blog/2012/03/02/print-out-datamapper-query/';
+        var disqus_script = 'embed.js'
       
 
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

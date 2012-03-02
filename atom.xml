@@ -4,7 +4,7 @@
   <title><![CDATA[Dualistic]]></title>
   <link href="http://dualistic.com/atom.xml" rel="self"/>
   <link href="http://dualistic.com/"/>
-  <updated>2011-12-01T21:38:44-07:00</updated>
+  <updated>2012-03-02T16:25:40-07:00</updated>
   <id>http://dualistic.com/</id>
   <author>
     <name><![CDATA[Pol Llovet]]></name>
@@ -14,7 +14,69 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Case What?]]></title>
+    <title type="html"><![CDATA[Print out DataMapper Query]]></title>
+    <link href="http://dualistic.com/blog/2012/03/02/print-out-datamapper-query/"/>
+    <updated>2012-03-02T15:23:00-07:00</updated>
+    <id>http://dualistic.com/blog/2012/03/02/print-out-datamapper-query</id>
+    <content type="html"><![CDATA[<p>This has come up a few times and I had to go dredge it up out of IRC logs whenever I forgot it, so I am going to capture it here for posterity.</p>
+
+<p>The problem is:  How do you see the query that DataMapper would have executed for a particular call?</p>
+
+<p>For example:</p>
+
+<figure class='code'><figcaption><span>DataMapper raw pre-executed query</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">q</span> <span class="o">=</span> <span class="no">Yogo</span><span class="o">::</span><span class="no">Project</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">query</span>
+</span><span class='line'><span class="c1"># =&gt; #&lt;DataMapper::Query @repository=:default @model=Yogo::Project @fields=[#&lt;DataMapper::Property::UUID @model=Yogo::Project @name=:id&gt;, #&lt;DataMapper::Property::String @model=Yogo::Project @name=:name&gt;, #&lt;DataMapper::Property::Boolean @model=Yogo::Project @name=:private&gt;] @links=[] @conditions=(deleted_at = nil) @order=[#&lt;DataMapper::Query::Direction @target=#&lt;DataMapper::Property::UUID @model=Yogo::Project @name=:id&gt; @operator=:asc&gt;] @limit=nil @offset=0 @reload=false @unique=false&gt; </span>
+</span><span class='line'>
+</span><span class='line'><span class="no">DataMapper</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">adapter</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:select_statement</span><span class="p">,</span><span class="n">q</span><span class="p">)</span>
+</span><span class='line'><span class="c1"># =&gt; [&quot;SELECT \&quot;id\&quot;, \&quot;name\&quot;, \&quot;private\&quot; FROM \&quot;yogo_projects\&quot; WHERE \&quot;deleted_at\&quot; IS NULL ORDER BY \&quot;id\&quot;&quot;, []] </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Awesome!</p>
+
+<p>However, it is a bit more complicated in that you actually are given an array of values where array[0] is the query, and array[1] is conditional values.  There will be a &#8216;?&#8217; in array[0] for each of the conditionals.</p>
+
+<p>For example:</p>
+
+<figure class='code'><figcaption><span>Query with conditions</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">q</span> <span class="o">=</span> <span class="no">Yogo</span><span class="o">::</span><span class="no">Project</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Test&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">query</span>
+</span><span class='line'><span class="c1"># =&gt; #&lt;DataMapper::Query @repository=:default @model=Yogo::Project @fields=[#&lt;DataMapper::Property::UUID @model=Yogo::Project @name=:id&gt;, #&lt;DataMapper::Property::String @model=Yogo::Project @name=:name&gt;, #&lt;DataMapper::Property::Boolean @model=Yogo::Project @name=:private&gt;] @links=[] @conditions=(deleted_at = nil AND name = &quot;Test&quot;) @order=[#&lt;DataMapper::Query::Direction @target=#&lt;DataMapper::Property::UUID @model=Yogo::Project @name=:id&gt; @operator=:asc&gt;] @limit=nil @offset=0 @reload=false @unique=false&gt; </span>
+</span><span class='line'>
+</span><span class='line'><span class="no">DataMapper</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">adapter</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:select_statement</span><span class="p">,</span><span class="n">q</span><span class="p">)</span>
+</span><span class='line'><span class="c1"># =&gt; [&quot;SELECT \&quot;id\&quot;, \&quot;name\&quot;, \&quot;private\&quot; FROM \&quot;yogo_projects\&quot; WHERE (\&quot;deleted_at\&quot; IS NULL AND \&quot;name\&quot; = ?) ORDER BY \&quot;id\&quot;&quot;, [&quot;Test&quot;]] </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This presents a problem!  We need to join array[0] with array[1] such that the query is reconstructed.  Thanks to a handy &#8220;StackExchange post&#8221;:http://stackoverflow.com/questions/7021835/replace-string-with-array-content-in-ruby, it turns out that ruby is pretty good at this:</p>
+
+<figure class='code'><figcaption><span>Map an array into a string with delimiters</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">query</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;SELECT </span><span class="se">\&quot;</span><span class="s2">id</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">private</span><span class="se">\&quot;</span><span class="s2"> FROM </span><span class="se">\&quot;</span><span class="s2">yogo_projects</span><span class="se">\&quot;</span><span class="s2"> WHERE (</span><span class="se">\&quot;</span><span class="s2">deleted_at</span><span class="se">\&quot;</span><span class="s2"> IS NULL AND </span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2"> = ?) ORDER BY </span><span class="se">\&quot;</span><span class="s2">id</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">[</span><span class="s2">&quot;Test&quot;</span><span class="o">]]</span>
+</span><span class='line'><span class="c1"># =&gt; [&quot;SELECT \&quot;id\&quot;, \&quot;name\&quot;, \&quot;private\&quot; FROM \&quot;yogo_projects\&quot; WHERE (\&quot;deleted_at\&quot; IS NULL AND \&quot;name\&quot; = ?) ORDER BY \&quot;id\&quot;&quot;, [&quot;Test&quot;]] </span>
+</span><span class='line'>
+</span><span class='line'><span class="n">query</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">gsub</span><span class="p">(</span><span class="s2">&quot;?&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each_with_index</span><span class="p">{</span><span class="o">|</span><span class="n">v</span><span class="p">,</span><span class="n">i</span><span class="o">|</span> <span class="n">v</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">query</span><span class="o">[</span><span class="mi">1</span><span class="o">][</span><span class="n">i</span><span class="o">]</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="p">}</span>
+</span><span class='line'><span class="c1"># =&gt; &quot;SELECT \&quot;id\&quot;, \&quot;name\&quot;, \&quot;private\&quot; FROM \&quot;yogo_projects\&quot; WHERE (\&quot;deleted_at\&quot; IS NULL AND \&quot;name\&quot; = \&quot;Test\&quot;) ORDER BY \&quot;id\&quot;&quot; </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There, two handy things all at once. ;)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Case what?]]></title>
     <link href="http://dualistic.com/blog/2011/12/01/ifcase-what/"/>
     <updated>2011-12-01T21:28:00-07:00</updated>
     <id>http://dualistic.com/blog/2011/12/01/ifcase-what</id>
@@ -41,7 +103,7 @@
 
 <p>I am confused.  Why would you do this?  What possible benefit does this have over just using an if/else/elsif block?  So&#8230; I&#8217;m going to just change it to:</p>
 
-<figure class='code'><figcaption><span>why would you do this?</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>this makes more sense</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1499,55 +1561,6 @@ Nginx seems to be motoring along just fine with no problems.</p>
 <p>The next step was installing the mysql gem.  The hitch here is that I don&#8217;t have a mysql server or dev stuff installed, so the gem doesn&#8217;t want to compile.  I&#8217;m also curious how active record can work at all without the mysql gem installed&#8230;  I&#8217;m going to ask around for some more information and post it here when I&#8217;ve figure out where to proceed.</p>
 
 <p>UPDATE: <a href="http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued/">I may have solved the problem here.</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[User authentication and authorization in Ruby on Rails]]></title>
-    <link href="http://dualistic.com/blog/2008/03/27/user-authentication-and-authorization-in-ruby-on-rails/"/>
-    <updated>2008-03-27T19:42:00-06:00</updated>
-    <id>http://dualistic.com/blog/2008/03/27/user-authentication-and-authorization-in-ruby-on-rails</id>
-    <content type="html"><![CDATA[<p>The system I am working on needs a good authentication (authn) and authorization (authz) system.   So far, I can&#8217;t find anything that would work for me, so it looks like I&#8217;ll have to build one.</p>
-
-<!--more-->
-
-
-<p></p>
-
-<h3>What I need</h3>
-
-<p>The ideal system would have the following features:</p>
-
-<ul>
-<li>Authn against multiple sources (LDAP, CAS, Local DB, etc.)
-
-<ul>
-<li>Authn would have an order that it would check the sources.</li>
-</ul>
-</li>
-<li>An interface to set the sources and to set a mapping from Authn source information to local Authz permissions</li>
-<li>Authz at the controller or model level through the use of roles</li>
-<li>The Authz would have an understanding of an &#8220;owner&#8221; of a model item (if it has_one &#8220;owner&#8221;) and be able to set permissions for the &#8220;owner&#8221;.</li>
-<li>Users can be assembled into groups, and the group can be given a role.  User-level permissions trump Group-level permissions</li>
-<li>An interface to assign groups and roles, and to set permissions for the roles</li>
-<li>An interface to import users from the Authn source into the local app (so that an admin can assign roles/rights to users before they&#8217;ve ever logged in)</li>
-<li>An admin interface to allow users to be self-created (register now!) or only manually/authn created.</li>
-</ul>
-
-
-<h3>What&#8217;s out there</h3>
-
-<p>There&#8217;s already an <a href="http://aclsystem.rubyforge.org/">acl_system2</a> plugin out there that does some of this stuff. It does authentication against the local database, and controller-method level permissions.  But it doesn&#8217;t have a concept of &#8220;owner&#8221;.  So you couldn&#8217;t easily set an object to be &#8220;editable by the owner or an admin&#8221;.  It doesn&#8217;t let you set permissions on the model level.  And it doesn&#8217;t let you use any kind of GUI to change the permissions, it&#8217;s all hard-coded.</p>
-
-<p>Next up is <a href="http://agilewebdevelopment.com/plugins/restful_authentication">restful_authentication</a>, it does just authn, and it doesn&#8217;t auth against any external sources.  That doesn&#8217;t mean it couldn&#8217;t, but it would be nice if it did.  Perhaps it makes sense to use it as just the local authn mechanism, and roll other remote authn mechanisms separately and then put them all under an authn system.  Using the <a href="http://code.google.com/p/rolerequirement/">role_requirement</a> plugin, you can also get roles. But it is still statically defined in the code, there&#8217;s no UI for updating the role permissions during program runtime.</p>
-
-<p>Also, <a href="http://redmine.org">Redmine</a> has a pretty good authn/authz system that will authorize against an LDAP directory.  The way that it&#8217;s organized, it looks like adding more Authz sources is possible.  However it only allows one Role per Person per Project.  That&#8217;s not good enough for what I want.  I want a many to many user/role relationship.  It also doesn&#8217;t have groups or an importer.  That is a problem for us, as we constantly want to add people to projects when they haven&#8217;t yet logged in, and so we have to tell them:  log in, then tell us, then we can add you.  An importer from the LDAP server would be ideal.</p>
-
-<p>Finally, there&#8217;s a cool writeup on implementing <a href="http://www.railsforum.com/viewtopic.php?id=14216">restful authentication with all the bells and whistles</a>.  It&#8217;s a great tutorial for getting authn/authz (using OpenID instead of LDAP) running.  However, it&#8217;s not very modular and still has the the problem of grabbing users form the Authn source (that wouldn&#8217;t have been possible with OpenID anyway, but could have been possible with LDAP).</p>
-
-<h3>Goal</h3>
-
-<p>I&#8217;m going to make what I want, and then I&#8217;ll stick it somewhere for the world to grab it if they want.</p>
 ]]></content>
   </entry>
   
