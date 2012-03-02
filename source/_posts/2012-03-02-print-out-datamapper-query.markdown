@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Print_out_datamapper_query"
+title: "Print out DataMapper Query"
 date: 2012-03-02 15:23
 comments: true
 categories: 
