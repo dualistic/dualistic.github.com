@@ -6,9 +6,12 @@ comments: true
 categories: 
 ---
 
-This has come up a few times and I had to go dredge it up out of IRC logs whenever I forgot it, so I am going to capture it here for posterity.
+Have you ever wanted to find out what query DataMapper will use to perform a particular query?  This ends up being useful for a couple of circumstances.  First, it's useful for debugging and checking to see if DM is doing what you think it is.  Second, if you want to remove the overhead of creating ruby objects (this can be very inefficient and slow), but you still want to use DM, then you can build up the query and instead execute it raw (returning structs) instead of running a standard #get, #find, #first, etc.  This is still database agnostic as far as I can tell.
 
-The problem is:  How do you see the query that DataMapper would have executed for a particular call?
+This has come up a few times and I had to go dredge it up out of IRC logs whenever I forgot it, so I am going to capture it here for posterity.
+<!-- more -->
+
+So, how does one do this? In short, you have to call the private #select_statement method on the adapter. 
 
 For example:
 
@@ -34,7 +37,7 @@ DataMapper.repository.adapter.send(:select_statement,q)
 # => ["SELECT \"id\", \"name\", \"private\" FROM \"yogo_projects\" WHERE (\"deleted_at\" IS NULL AND \"name\" = ?) ORDER BY \"id\"", ["Test"]] 
 ```
 
-This presents a problem!  We need to join array[0] with array[1] such that the query is reconstructed.  Thanks to a handy "StackExchange post":http://stackoverflow.com/questions/7021835/replace-string-with-array-content-in-ruby, it turns out that ruby is pretty good at this:
+This presents a problem!  We need to join array[0] with array[1] such that the query is reconstructed.  Thanks to a handy [StackExchange post](http://stackoverflow.com/questions/7021835/replace-string-with-array-content-in-ruby), it turns out that ruby is pretty good at this:
 
 ``` ruby Map an array into a string with delimiters
 query = ["SELECT \"id\", \"name\", \"private\" FROM \"yogo_projects\" WHERE (\"deleted_at\" IS NULL AND \"name\" = ?) ORDER BY \"id\"", ["Test"]] 
