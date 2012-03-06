@@ -9,7 +9,7 @@
   <meta name="author" content="Pol Llovet">
 
   
-  <meta name="description" content="This has come up a few times and I had to go dredge it up out of IRC logs whenever I forgot it, so I am going to capture it here for posterity.The ...">
+  <meta name="description" content="Have you ever wanted to find out what query DataMapper will use to perform a particular query?  This ends up being useful for a couple of circumsta...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -89,9 +89,14 @@
   </header>
 
 
-<div class="entry-content"><p>This has come up a few times and I had to go dredge it up out of IRC logs whenever I forgot it, so I am going to capture it here for posterity.</p>
+<div class="entry-content"><p>Have you ever wanted to find out what query DataMapper will use to perform a particular query?  This ends up being useful for a couple of circumstances.  First, it&#8217;s useful for debugging and checking to see if DM is doing what you think it is.  Second, if you want to remove the overhead of creating ruby objects (this can be very inefficient and slow), but you still want to use DM, then you can build up the query and instead execute it raw (returning structs) instead of running a standard #get, #find, #first, etc.  This is still database agnostic as far as I can tell.</p>
 
-<p>The problem is:  How do you see the query that DataMapper would have executed for a particular call?</p>
+<p>This has come up a few times and I had to go dredge it up out of IRC logs whenever I forgot it, so I am going to capture it here for posterity.</p>
+
+<!-- more -->
+
+
+<p>So, how does one do this? In short, you have to call the private #select_statement method on the adapter.</p>
 
 <p>For example:</p>
 
@@ -127,19 +132,20 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This presents a problem!  We need to join array[0] with array[1] such that the query is reconstructed.  Thanks to a handy &#8220;StackExchange post&#8221;:http://stackoverflow.com/questions/7021835/replace-string-with-array-content-in-ruby, it turns out that ruby is pretty good at this:</p>
+<p>This presents a problem!  We need to join array[0] with array[1] such that the query is reconstructed.  <s>Thanks to a handy <a href="http://stackoverflow.com/questions/7021835/replace-string-with-array-content-in-ruby">StackExchange post</a>, it turns out that ruby is pretty good at this</s> EDIT: As it turns out, while this is handy, the solution is insufficient; it doesn&#8217;t support arrays properly and will only work for the simplest queries.</p>
 
-<figure class='code'><figcaption><span>Map an array into a string with delimiters</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">query</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;SELECT </span><span class="se">\&quot;</span><span class="s2">id</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">private</span><span class="se">\&quot;</span><span class="s2"> FROM </span><span class="se">\&quot;</span><span class="s2">yogo_projects</span><span class="se">\&quot;</span><span class="s2"> WHERE (</span><span class="se">\&quot;</span><span class="s2">deleted_at</span><span class="se">\&quot;</span><span class="s2"> IS NULL AND </span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2"> = ?) ORDER BY </span><span class="se">\&quot;</span><span class="s2">id</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">[</span><span class="s2">&quot;Test&quot;</span><span class="o">]]</span>
-</span><span class='line'><span class="c1"># =&gt; [&quot;SELECT \&quot;id\&quot;, \&quot;name\&quot;, \&quot;private\&quot; FROM \&quot;yogo_projects\&quot; WHERE (\&quot;deleted_at\&quot; IS NULL AND \&quot;name\&quot; = ?) ORDER BY \&quot;id\&quot;&quot;, [&quot;Test&quot;]] </span>
-</span><span class='line'>
-</span><span class='line'><span class="n">query</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">gsub</span><span class="p">(</span><span class="s2">&quot;?&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each_with_index</span><span class="p">{</span><span class="o">|</span><span class="n">v</span><span class="p">,</span><span class="n">i</span><span class="o">|</span> <span class="n">v</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">query</span><span class="o">[</span><span class="mi">1</span><span class="o">][</span><span class="n">i</span><span class="o">]</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="p">}</span>
-</span><span class='line'><span class="c1"># =&gt; &quot;SELECT \&quot;id\&quot;, \&quot;name\&quot;, \&quot;private\&quot; FROM \&quot;yogo_projects\&quot; WHERE (\&quot;deleted_at\&quot; IS NULL AND \&quot;name\&quot; = \&quot;Test\&quot;) ORDER BY \&quot;id\&quot;&quot; </span>
-</span></code></pre></td></tr></table></div></figure>
+<p>I figured that this must be happening somewhere in the DM stack, so let&#8217;s just use the existing code. After doing some hunting and grepping, the method turns out to be <code>#escape_sql</code>, which lives in the DataObjects gem, and it is a method of Command (which is generated by the Connection).</p>
+
+<p>We ended up creating a DataMapper extension to make this work (though we are still #send-ing private methods, there is certainly a cleaner way):</p>
+
+<div><script src='https://gist.github.com/1981347.js?file='></script>
+<noscript><pre><code>module DataMapper
+  def self.raw_select(dm_query)
+    statement, bind_vars = repository.adapter.send(:select_statement, dm_query.query)
+    sql = repository.adapter.send(:open_connection).create_command(statement).send(:escape_sql, bind_vars)
+    repository.adapter.select(sql)
+  end
+end</code></pre></noscript></div>
 
 
 <p>There, two handy things all at once. ;)</p>

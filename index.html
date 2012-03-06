@@ -9,7 +9,7 @@
   <meta name="author" content="Pol Llovet">
 
   
-  <meta name="description" content="This has come up a few times and I had to go dredge it up out of IRC logs whenever I forgot it, so I am going to capture it here for posterity.The ...">
+  <meta name="description" content="Have you ever wanted to find out what query DataMapper will use to perform a particular query?  This ends up being useful for a couple of circumsta...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -89,62 +89,16 @@
   </header>
 
 
-  <div class="entry-content"><p>This has come up a few times and I had to go dredge it up out of IRC logs whenever I forgot it, so I am going to capture it here for posterity.</p>
+  <div class="entry-content"><p>Have you ever wanted to find out what query DataMapper will use to perform a particular query?  This ends up being useful for a couple of circumstances.  First, it&#8217;s useful for debugging and checking to see if DM is doing what you think it is.  Second, if you want to remove the overhead of creating ruby objects (this can be very inefficient and slow), but you still want to use DM, then you can build up the query and instead execute it raw (returning structs) instead of running a standard #get, #find, #first, etc.  This is still database agnostic as far as I can tell.</p>
 
-<p>The problem is:  How do you see the query that DataMapper would have executed for a particular call?</p>
+<p>This has come up a few times and I had to go dredge it up out of IRC logs whenever I forgot it, so I am going to capture it here for posterity.</p>
 
-<p>For example:</p>
-
-<figure class='code'><figcaption><span>DataMapper raw pre-executed query</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">q</span> <span class="o">=</span> <span class="no">Yogo</span><span class="o">::</span><span class="no">Project</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">query</span>
-</span><span class='line'><span class="c1"># =&gt; #&lt;DataMapper::Query @repository=:default @model=Yogo::Project @fields=[#&lt;DataMapper::Property::UUID @model=Yogo::Project @name=:id&gt;, #&lt;DataMapper::Property::String @model=Yogo::Project @name=:name&gt;, #&lt;DataMapper::Property::Boolean @model=Yogo::Project @name=:private&gt;] @links=[] @conditions=(deleted_at = nil) @order=[#&lt;DataMapper::Query::Direction @target=#&lt;DataMapper::Property::UUID @model=Yogo::Project @name=:id&gt; @operator=:asc&gt;] @limit=nil @offset=0 @reload=false @unique=false&gt; </span>
-</span><span class='line'>
-</span><span class='line'><span class="no">DataMapper</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">adapter</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:select_statement</span><span class="p">,</span><span class="n">q</span><span class="p">)</span>
-</span><span class='line'><span class="c1"># =&gt; [&quot;SELECT \&quot;id\&quot;, \&quot;name\&quot;, \&quot;private\&quot; FROM \&quot;yogo_projects\&quot; WHERE \&quot;deleted_at\&quot; IS NULL ORDER BY \&quot;id\&quot;&quot;, []] </span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Awesome!</p>
-
-<p>However, it is a bit more complicated in that you actually are given an array of values where array[0] is the query, and array[1] is conditional values.  There will be a &#8216;?&#8217; in array[0] for each of the conditionals.</p>
-
-<p>For example:</p>
-
-<figure class='code'><figcaption><span>Query with conditions</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">q</span> <span class="o">=</span> <span class="no">Yogo</span><span class="o">::</span><span class="no">Project</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Test&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">query</span>
-</span><span class='line'><span class="c1"># =&gt; #&lt;DataMapper::Query @repository=:default @model=Yogo::Project @fields=[#&lt;DataMapper::Property::UUID @model=Yogo::Project @name=:id&gt;, #&lt;DataMapper::Property::String @model=Yogo::Project @name=:name&gt;, #&lt;DataMapper::Property::Boolean @model=Yogo::Project @name=:private&gt;] @links=[] @conditions=(deleted_at = nil AND name = &quot;Test&quot;) @order=[#&lt;DataMapper::Query::Direction @target=#&lt;DataMapper::Property::UUID @model=Yogo::Project @name=:id&gt; @operator=:asc&gt;] @limit=nil @offset=0 @reload=false @unique=false&gt; </span>
-</span><span class='line'>
-</span><span class='line'><span class="no">DataMapper</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">adapter</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:select_statement</span><span class="p">,</span><span class="n">q</span><span class="p">)</span>
-</span><span class='line'><span class="c1"># =&gt; [&quot;SELECT \&quot;id\&quot;, \&quot;name\&quot;, \&quot;private\&quot; FROM \&quot;yogo_projects\&quot; WHERE (\&quot;deleted_at\&quot; IS NULL AND \&quot;name\&quot; = ?) ORDER BY \&quot;id\&quot;&quot;, [&quot;Test&quot;]] </span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This presents a problem!  We need to join array[0] with array[1] such that the query is reconstructed.  Thanks to a handy &#8220;StackExchange post&#8221;:http://stackoverflow.com/questions/7021835/replace-string-with-array-content-in-ruby, it turns out that ruby is pretty good at this:</p>
-
-<figure class='code'><figcaption><span>Map an array into a string with delimiters</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">query</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;SELECT </span><span class="se">\&quot;</span><span class="s2">id</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">private</span><span class="se">\&quot;</span><span class="s2"> FROM </span><span class="se">\&quot;</span><span class="s2">yogo_projects</span><span class="se">\&quot;</span><span class="s2"> WHERE (</span><span class="se">\&quot;</span><span class="s2">deleted_at</span><span class="se">\&quot;</span><span class="s2"> IS NULL AND </span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2"> = ?) ORDER BY </span><span class="se">\&quot;</span><span class="s2">id</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">[</span><span class="s2">&quot;Test&quot;</span><span class="o">]]</span>
-</span><span class='line'><span class="c1"># =&gt; [&quot;SELECT \&quot;id\&quot;, \&quot;name\&quot;, \&quot;private\&quot; FROM \&quot;yogo_projects\&quot; WHERE (\&quot;deleted_at\&quot; IS NULL AND \&quot;name\&quot; = ?) ORDER BY \&quot;id\&quot;&quot;, [&quot;Test&quot;]] </span>
-</span><span class='line'>
-</span><span class='line'><span class="n">query</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">gsub</span><span class="p">(</span><span class="s2">&quot;?&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each_with_index</span><span class="p">{</span><span class="o">|</span><span class="n">v</span><span class="p">,</span><span class="n">i</span><span class="o">|</span> <span class="n">v</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">query</span><span class="o">[</span><span class="mi">1</span><span class="o">][</span><span class="n">i</span><span class="o">]</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="p">}</span>
-</span><span class='line'><span class="c1"># =&gt; &quot;SELECT \&quot;id\&quot;, \&quot;name\&quot;, \&quot;private\&quot; FROM \&quot;yogo_projects\&quot; WHERE (\&quot;deleted_at\&quot; IS NULL AND \&quot;name\&quot; = \&quot;Test\&quot;) ORDER BY \&quot;id\&quot;&quot; </span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>There, two handy things all at once. ;)</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/03/02/print-out-datamapper-query/">Continue &rarr;</a>
+    </footer>
   
 
 
