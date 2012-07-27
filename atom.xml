@@ -4,7 +4,7 @@
   <title><![CDATA[Dualistic]]></title>
   <link href="http://dualistic.com/atom.xml" rel="self"/>
   <link href="http://dualistic.com/"/>
-  <updated>2012-03-06T11:05:48-07:00</updated>
+  <updated>2012-07-26T18:10:50-06:00</updated>
   <id>http://dualistic.com/</id>
   <author>
     <name><![CDATA[Pol Llovet]]></name>
@@ -12,6 +12,114 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OSX Freeware: My Response to Jason Gilbert's Essential Free Mac Apps Article]]></title>
+    <link href="http://dualistic.com/blog/2012/07/26/my-response-to-jason-gilberts-huffpost-essential-free-mac-apps-article/"/>
+    <updated>2012-07-26T17:15:00-06:00</updated>
+    <id>http://dualistic.com/blog/2012/07/26/my-response-to-jason-gilberts-huffpost-essential-free-mac-apps-article</id>
+    <content type="html"><![CDATA[<p>My Dad asked me what my opinion was on Jason Gilbert&#8217;s  <a href="http://www.huffingtonpost.com/2012/07/19/free-mac-apps_n_1681084.html">11 Free Mac Apps That Every Apple Computer Owner Should Download</a> and my response was way longer than I expected. Long enough, in fact, to be a potentially interesting blog post. So, here goes&#8230;</p>
+
+<!--more-->
+
+
+<p></p>
+
+<h2>My Responses</h2>
+
+<h3>1. <a href="http://www.videolan.org/vlc/index.html">VLC</a></h3>
+
+<p>I absolutely agree, VLC is the best player for playing pretty much every kind of media on the internet.  It does not install nasty stuff, and you only have to use it if you want to.  It&#8217;s one of the first apps I will install on a new operating system.  Seriously, everyone loves the traffic cone.</p>
+
+<h3>2. <a href="http://adium.im/">Adium</a></h3>
+
+<p>I would normally agree, everyone I know on the Mac uses Adium to unify instant messaging accounts.  However&#8230; I don&#8217;t think you use instant messaging (or more quaintly known as &#8220;chat&#8221;).  Basically, if you had a google-chat account, plus yahoo, plus AOL (yes, it does still exist), plus Microsoft, plus&#8230; others, you can use Adium to provide a single interface to all of them.  I used to use it all the time, but something happened within the last year to make it crash.  So, I have been using iChat (which will do Mac, Google and AOL). It&#8217;s ok, but not quite as good as Adium.</p>
+
+<h3>3. <a href="http://chrome.google.com">Chrome</a></h3>
+
+<p>Completely agree.  Chrome is my favorite web browser.</p>
+
+<h3>4. <a href="http://www.avast.com/">Avast!</a></h3>
+
+<p>I have installed Avast! in the past for antivirus, it is a fine free antivirus.  I am using Avira antivirus on my PC at the moment, and it seems to work pretty well.  While I have no data to back it up, I think that the free antivirus software out there is all pretty much the same.  Granted, I have less experience with antivirus on OSX, it is possible that Avast! is the best antivirus for the mac, I don&#8217;t know.  However: In my experience, free antivirus comes with lots of ads. Really, the best thing to do is to go to the <a href="http://www.av-comparatives.org/">AV Comparatives</a> site and do some research and see what you think.  Remember: data you keep in one place is data you don&#8217;t care about. Back up your data!</p>
+
+<h3>5. <a href="http://www.titanium.free.fr/forums.php">Onyx</a></h3>
+
+<p>These free &#8220;cleaners&#8221; are of dubious utility, in my opinion.  They are generally free software that profiles the crap out of your computer and then sells the info about you to vendors. And frankly this one looks a little dicey (no source code available, and is made by anonymous french developers), so I would pass on this one.  For all I know it is totally great, but I would need some more opinions.</p>
+
+<h3>6. <a href="http://openoffice.org">OpenOffice</a></h3>
+
+<p>I disagree with this one. OpenOffice got dumped by Oracle, and then picked up by Apache, but the developers mostly all jumped ship to another project.  This new project is called <a href="http://www.libreoffice.org/">LibreOffice</a>, and if you need microsoft office compatibility and don&#8217;t want to use Google Docs, then LibreOffice is great.</p>
+
+<h3>7. <a href="http://preyproject.com/">Prey</a></h3>
+
+<p>If you have a portable computer Prey is <em>required</em>, in my opinion, they make money by having a three device limit (not with ads), so it&#8217;s awesome.  Yes, highly recommended, but only if your computer might get stolen.</p>
+
+<h3>8. <a href="http://unarchiver.c3.cx/">Unarchiver</a></h3>
+
+<p>Eh, this one is ok.  I think that Unarchiver is old and crusty, the new cool archive tool is <a href="http://www.kekaosx.com/en/">Keka</a>, plus it has a really cool bug icon. :) Really, they are probably equivalent, and having more archive formats available to you is a good thing.  Pick the one you like best.</p>
+
+<h3>9.  <a href="https://www.dropbox.com/">Dropbox</a> (or <a href="https://drive.google.com">GoogleDrive</a>)</h3>
+
+<p>I couldn&#8217;t survive without dropbox, you should install it.  It&#8217;s a great way to share files and collaborate on documents regardless of where everyone is or what operating system they are using. It might be most useful for people on the move with multiple computers (everything stays synched), but I still think it&#8217;s great for sharing/collaboration.  Google drive works the same way as Dropbox but I think is slightly less user-friendly (due to its entanglement with the google apps stuff).</p>
+
+<h3>10. <a href="http://qsapp.com/">Quicksilver</a></h3>
+
+<p>This is touted by many as a must-have thing, and I have installed it a few times, but I always just end up uninstalling it after a while. It is an application launcher that has lots of bells and whistles.  It was much more relevant back in the days when Spotlight was really slow.  But since Snow Leopard, Spotlight is pretty fast. When I want to open an app, I hit command-space, type in the (partial) name of the app, and hit enter.  It is one of my favorite OSX features. That&#8217;s basically what quicksilver does, so it isn&#8217;t necessary for me.  It also can apparently do other things, but I have never managed to make them useful.</p>
+
+<h3>11. <a href="http://metaquark.de/appfresh/mac">AppFresh</a></h3>
+
+<p>Nope, I don&#8217;t like it.  It just grabs info from your computer and sells that profile info to advertisers.  Pretty much every Mac app knows how to update itself, so this is irrelevant.</p>
+
+<h2>Apps he missed:</h2>
+
+<h3><a href="http://lightheadsw.com/caffeine/">Caffeine</a></h3>
+
+<p>I love this little app.  It puts a coffee cup in your menubar that when you click it your mac will not sleep or screensaver or anything.  One click and you make sure that your movie won&#8217;t be interrupted or that your presentation doesn&#8217;t get an accidental screensaver or brightness change.  I love it.</p>
+
+<h3><a href="http://www.skype.com/">Skype</a></h3>
+
+<p>Come on, it&#8217;s skype.  You should have it.</p>
+
+<h3><a href="http://www.symonds.id.au/marcopolo/">Marco Polo</a></h3>
+
+<p>This is really only useful for people with laptops, but it can help your computer figure out where it is located and update settings based on that location.  So it will change your default printer or mount a network drive, or other things.  It&#8217;s nifty if that is something that you do.</p>
+
+<h3><a href="http://www.rescuetime.com/">RescueTime</a></h3>
+
+<p>It&#8217;s a tool that will show you how much time you are spending in different applications so you can evaluate your own productivity. I like it. What you measure, you can manage.</p>
+
+<h3><a href="http://code.google.com/p/formulatepro/">FormulatePro</a></h3>
+
+<p>It lets you scribble on PDFs, which can still (still!) be stupidly hard to edit.  This lets you fill out a form the way you want, save the file, print it, etc.  It&#8217;s great. The interface is kind of clumsy, but it is good enough for most use cases.</p>
+
+<h3><a href="http://www.keepassx.org/">KeepassX</a></h3>
+
+<p>Password database to manage and keep track of your many passwords. This is an essential tool for me.  I keep my database in dropbox (well encrypted, of course), and then can access it from my other machines. It&#8217;s awesome.  It&#8217;s a good way to share admin passwords within a group as well.</p>
+
+<h2>Nerd Stuff:</h2>
+
+<h3><a href="http://www.iterm2.com/">iTerm2</a></h3>
+
+<p>It&#8217;s a better term than the native OSX one. It has an excellent feature set (middle-click paste anyone?) and is still in active development.  If you are in the terminal for more than a few minutes a day, you really should give it a try.</p>
+
+<h3><a href="http://www.sublimetext.com/">Sublime Text</a></h3>
+
+<p>TextMate is dead, long live Sublime Text!  I think it is <em>the</em> text editor for people who just can&#8217;t get into using Vim or Emacs. Plus, Sublime has a &#8220;command&#8221; mode where it acts like Vim!  It&#8217;s the nicest text editor I have ever used, is awash with excellent features, and it is available on all major platforms for free (it will occasionally politely <del>annoy</del> remind you to buy it, which you totally should, but you don&#8217;t have to).</p>
+
+<h3><a href="http://limechat.net/mac/">LimeChat</a></h3>
+
+<p>An excellent IRC client for Mac. If you for some reason aren&#8217;t using Adium, or if you want to keep your IRC out of your IM, then I would recommend LimeChat.  I am not an IRC wizard, I use it to go into developer channels and ask about problems I am having.  Sometimes I even get a chance to answer questions others have, but generally I am there to get help.</p>
+
+<h3><a href="http://gitx.frim.nl/">GitX</a></h3>
+
+<p>This is my preferred git gui on the mac.  I tried the GitHub one and I just don&#8217;t like it as much (it feels slow and overly decorated).  GitX is simple, fast, does exactly what I want, and fits into my workflow (nearly always launching from the command line when I need to do more tricky sub-file commits or break a bunch of changed files into several topical commits).</p>
+
+<h3><a href="http://mxcl.github.com/homebrew/">Homebrew</a></h3>
+
+<p>Awesome package management for OSX.  Compared to MacPorts it is fantastic.  If you don&#8217;t know what package management is, you probably don&#8217;t need it.  If you do, check out homebrew, it is great.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Print out DataMapper Query]]></title>
@@ -1532,41 +1640,6 @@ To add to the problems, I tried running the script from the command-line (it&#82
 <p>About the Mephisto/mongrel cluster problem, it&#8217;s still hanging every few hours.  I am at a loss as to why, and I don&#8217;t want to just install things until it works.  I like my VMs to be lean, that&#8217;s the whole point.  I tried poking the rails IRC channel about it, but didn&#8217;t get any takers.</p>
 
 <p>UPDATE:  <a href="http://dualistic.com/blog/2008/04/01/mercurial-apache2-and-mod_rewrite/">I finish this up here.</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mephisto mongrel cluster stops responding]]></title>
-    <link href="http://dualistic.com/blog/2008/03/28/mephisto-mongrel-cluster-stops-responding/"/>
-    <updated>2008-03-28T14:46:00-06:00</updated>
-    <id>http://dualistic.com/blog/2008/03/28/mephisto-mongrel-cluster-stops-responding</id>
-    <content type="html"><![CDATA[<p>So, this site has only been up for a couple days, but I&#8217;ve had to restart the mongrel cluster twice.  Interestingly, it doesn&#8217;t respond to a mongrel_rails cluster::restart, I have to do a cluster::stop, then a start to get it back up.  Then it works fine for a while.</p>
-
-<!--more-->
-
-
-<p>
-Nginx seems to be motoring along just fine with no problems.</p>
-
-<p>I am going to implement a change recommended <a href="http://groups.google.com/group/MephistoBlog/browse_thread/thread/38d8db08beef1444">by this google code post</a>.  The fix is to re-install the mysql gem with this option:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'> gem install mysql -- --mysql-config<span class="o">=</span>/path/to/mysql_config
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>However, I don&#8217;t have mysql installed on my virtual machine, since I have a centralized mysql server that I use for all of my virtual machines.  As a result, I don&#8217;t have a mysql config to point to.  So, I installed just the mysql client with the following command:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>root@pol:/# apt-get install mysql-client
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This added 23M of extra stuff to the VM, but it also threw a <code>my.cnf</code> into the <code>/etc/mysql</code> dir.</p>
-
-<p>The next step was installing the mysql gem.  The hitch here is that I don&#8217;t have a mysql server or dev stuff installed, so the gem doesn&#8217;t want to compile.  I&#8217;m also curious how active record can work at all without the mysql gem installed&#8230;  I&#8217;m going to ask around for some more information and post it here when I&#8217;ve figure out where to proceed.</p>
-
-<p>UPDATE: <a href="http://dualistic.com/blog/2008/04/01/mephisto-mongrel-cluster-continued/">I may have solved the problem here.</a></p>
 ]]></content>
   </entry>
   

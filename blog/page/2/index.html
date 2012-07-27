@@ -9,7 +9,7 @@
   <meta name="author" content="Pol Llovet">
 
   
-  <meta name="description" content="See Here.1234567891011chem69:ipm pol$ history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head123 cd118 ls97 hg19 vim19 script...">
+  <meta name="description" content="Setting it up was pretty easy, though I had to triple my memory allocation over what I was using with nginx+mongrel.I created a new virtual machine...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -60,6 +60,75 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/05/09/openvz-and-mod_rails/">Openvz and Mod_rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+
+
+<time datetime="2008-05-09T16:29:00-06:00" pubdate  data-updated="true" >May 9<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Setting it up was pretty easy, though I had to triple my memory allocation over what I was using with nginx+mongrel.</p>
+
+<ul>
+<li>I created a new virtual machine, but with more memory than usual: <code>PRIVVMPAGES="150000:300000"</code></li>
+<li>I <code>vzctl enter &lt;the new machine&gt;</code></li>
+<li>as root:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ apt-get ruby ruby1.8-dev rubygems apache2 apache2-mpm-prefork build-essential vim
+</span><span class='line'>$ gem install fastthread 
+</span><span class='line'>$ gem install rake (i have rails frozen into my apps, otherwise I would have installed it also)
+</span><span class='line'>$ gem install passenger</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>for some reason, my binaries were not linked, nor the rubygems path exported, so:</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ln -s /var/lib/gems/1.8/bin/* /usr/bin (heavy handed, but it works)</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>run <code>passenger-install-apache2-module</code> and follow the instructions</li>
+</ul>
+
+
+<p>after starting apache2, i was able to see my site up and running.  yay!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -455,47 +524,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/03/28/mephisto-mongrel-cluster-stops-responding/">Mephisto Mongrel Cluster Stops Responding</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-
-
-<time datetime="2008-03-28T14:46:00-06:00" pubdate  data-updated="true" >Mar 28<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>So, this site has only been up for a couple days, but I&#8217;ve had to restart the mongrel cluster twice.  Interestingly, it doesn&#8217;t respond to a mongrel_rails cluster::restart, I have to do a cluster::stop, then a start to get it back up.  Then it works fine for a while.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2008/03/28/mephisto-mongrel-cluster-stops-responding/">Continue &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -515,6 +543,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/26/my-response-to-jason-gilberts-huffpost-essential-free-mac-apps-article/">OSX Freeware: My Response to Jason Gilbert&#8217;s Essential Free Mac Apps Article</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/03/02/print-out-datamapper-query/">Print out DataMapper Query</a>
       </li>
     
@@ -528,10 +560,6 @@
     
       <li class="post">
         <a href="/blog/2011/10/26/soaping-with-ruby-and-php/">SOAPing With Ruby and PHP</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/">There Has Never Been a Better Time to Be a Self-taught Coder</a>
       </li>
     
   </ul>

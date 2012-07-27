@@ -9,7 +9,7 @@
   <meta name="author" content="Pol Llovet">
 
   
-  <meta name="description" content="Have you ever wanted to find out what query DataMapper will use to perform a particular query?  This ends up being useful for a couple of circumsta...">
+  <meta name="description" content="My Dad asked me what my opinion was on Jason Gilbert&#8217;s  11 Free Mac Apps That Every Apple Computer Owner Should Download and my response was ...">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -60,6 +60,47 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/26/my-response-to-jason-gilberts-huffpost-essential-free-mac-apps-article/">OSX Freeware: My Response to Jason Gilbert&#8217;s Essential Free Mac Apps Article</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+  
+
+
+
+
+
+<time datetime="2012-07-26T17:15:00-06:00" pubdate  data-updated="true" >Jul 26<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>My Dad asked me what my opinion was on Jason Gilbert&#8217;s  <a href="http://www.huffingtonpost.com/2012/07/19/free-mac-apps_n_1681084.html">11 Free Mac Apps That Every Apple Computer Owner Should Download</a> and my response was way longer than I expected. Long enough, in fact, to be a potentially interesting blog post. So, here goes&#8230;</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/07/26/my-response-to-jason-gilberts-huffpost-essential-free-mac-apps-article/">Continue &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -468,75 +509,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/05/09/openvz-and-mod_rails/">Openvz and Mod_rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-  
-
-
-
-
-
-<time datetime="2008-05-09T16:29:00-06:00" pubdate  data-updated="true" >May 9<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Setting it up was pretty easy, though I had to triple my memory allocation over what I was using with nginx+mongrel.</p>
-
-<ul>
-<li>I created a new virtual machine, but with more memory than usual: <code>PRIVVMPAGES="150000:300000"</code></li>
-<li>I <code>vzctl enter &lt;the new machine&gt;</code></li>
-<li>as root:</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ apt-get ruby ruby1.8-dev rubygems apache2 apache2-mpm-prefork build-essential vim
-</span><span class='line'>$ gem install fastthread 
-</span><span class='line'>$ gem install rake (i have rails frozen into my apps, otherwise I would have installed it also)
-</span><span class='line'>$ gem install passenger</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>for some reason, my binaries were not linked, nor the rubygems path exported, so:</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ln -s /var/lib/gems/1.8/bin/* /usr/bin (heavy handed, but it works)</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>run <code>passenger-install-apache2-module</code> and follow the instructions</li>
-</ul>
-
-
-<p>after starting apache2, i was able to see my site up and running.  yay!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <nav class="pagination">
     <div>
       
@@ -554,6 +526,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/07/26/my-response-to-jason-gilberts-huffpost-essential-free-mac-apps-article/">OSX Freeware: My Response to Jason Gilbert&#8217;s Essential Free Mac Apps Article</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/03/02/print-out-datamapper-query/">Print out DataMapper Query</a>
       </li>
     
@@ -567,10 +543,6 @@
     
       <li class="post">
         <a href="/blog/2011/10/26/soaping-with-ruby-and-php/">SOAPing With Ruby and PHP</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/10/26/there-has-never-been-a-better-time-to-be-a-self-taught-coder/">There Has Never Been a Better Time to Be a Self-taught Coder</a>
       </li>
     
   </ul>
