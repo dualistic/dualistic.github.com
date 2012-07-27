@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "My Response to Jason Gilbert's HuffPost Essential Free Mac Apps Article"
+title: "OSX Freeware: My Response to Jason Gilbert's Essential Free Mac Apps Article"
 date: 2012-07-26 17:15
 comments: true
 categories: osx apps
